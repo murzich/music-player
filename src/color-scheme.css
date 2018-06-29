@@ -1,0 +1,23 @@
+:root {
+  /* TODO: Add alpha */
+  --color-primary: #ffffff;
+
+  --bg-body: #38363d;
+  --bg-aside: #1d1c20;
+  --bg-main: #83808d;
+
+  --song-active: #37eb76;
+  --song-inactive: #545354;
+  --song-primary: var(--color-primary);
+
+  --player-track: var(--color-primary);
+  --player-artist: #a599ad;
+
+  --seekbar-pointer: #9087ae;
+  --seekbar-full: #8c84a9;
+  --seekbar-empty: #615c78;
+
+  --controls-primary: var(--color-primary);
+  --controls-secondary: #9192a6;
+  --controls-bg: #707190;
+}
