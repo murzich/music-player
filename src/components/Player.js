@@ -1,5 +1,6 @@
 import React from 'react';
 import './Player.css'
+import PlaybackControlsBar from "./PlaybackControlsBar";
 
 function Player(props) {
   return (
@@ -14,7 +15,7 @@ function Player(props) {
         </div>
         <div>currentTime</div>
         <div>Seekbar</div>
-        <div>controlBar</div>
+        <PlaybackControlsBar />
       </div>
     </div>
   );
