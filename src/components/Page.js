@@ -1,11 +1,14 @@
 import React from 'react';
-import './Page.css'
+import './Page.css';
+import Playlist from './Playlist';
+import Player from './Player';
 
 function Page(props) {
   return (
     <div className="Page-wrapper">
       <div className="Page">
-        Page component
+        <Playlist />
+        <Player />
       </div>
     </div>
   );

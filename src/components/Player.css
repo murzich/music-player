@@ -1,0 +1,11 @@
+.Player-wrapper {
+  display: flex;
+  flex: 1 0 70%;
+  align-items: center;
+  justify-content: center;
+}
+
+.Player {
+  /* TODO: temp */
+  background-color: #234;
+}
