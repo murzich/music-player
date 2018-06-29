@@ -1,0 +1,19 @@
+.Page-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg-body);
+}
+
+.Page {
+  display: flex;
+  flex-direction: row;
+  align-items: stretch;
+  justify-content: center;
+  position: relative;
+  width: 800px;
+  height: 600px;
+  background-color: var(--bg-main);
+  box-shadow: 0 0 3rem black;
+}
