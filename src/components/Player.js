@@ -3,8 +3,7 @@ import './Player.css'
 import PlaybackControlsBar from "./PlaybackControlsBar";
 import Seekbar from "./Seekbar";
 
-function Player({ currentSong, played }) {
-  const playedRate = Math.round(played / currentSong.duration * 100);
+function Player({ currentSong }) {
   return (
     <div className="Player-wrapper">
       <main className="Player">
@@ -13,8 +12,8 @@ function Player({ currentSong, played }) {
           <div className="Player-trackName">{currentSong.title}</div>
           <div className="Player-artistName">{currentSong.artist.name}</div>
         </div>
-        <div>{played}</div>
-        <Seekbar playedRate={playedRate}/>
+        <div>"{"played"}"</div>
+        <Seekbar played={34} duration={currentSong.duration}/>
         <PlaybackControlsBar />
       </main>
     </div>

@@ -1,9 +1,9 @@
 import React from 'react';
 import './Seekbar.css'
 
-function Seekbar(props) {
+function Seekbar({played, duration}) {
   return (
-    <input type="range" className="Seekbar" value={props.playedRate} />
+    <input type="range" min={0} max={duration} className="Seekbar" value={played} />
   );
 }
 

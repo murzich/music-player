@@ -11,7 +11,7 @@ function Page(props) {
     <div className="Page-wrapper">
       <div className="Page">
         <Playlist songs={songsList}/>
-        <Player currentSong={songsList[1]} played={132}/>
+        <Player currentSong={songsList[0]}/>
       </div>
     </div>
   );
