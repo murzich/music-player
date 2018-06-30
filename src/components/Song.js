@@ -1,8 +1,8 @@
 import React from 'react';
 
-function Song(props) {
+function Song({ title, preview, duration }) {
   return (
-    <li>Track Name - 00:00</li>
+    <li>{title} - {duration} <a href={preview}>#</a></li>
   );
 }
 

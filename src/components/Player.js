@@ -3,21 +3,20 @@ import './Player.css'
 import PlaybackControlsBar from "./PlaybackControlsBar";
 import Seekbar from "./Seekbar";
 
-function Player(props) {
+function Player({ currentSong, played }) {
+  const playedRate = Math.round(played / currentSong.duration * 100);
   return (
     <div className="Player-wrapper">
-      <div className="Player">
-        <div className="Player-albumArt">
-          <img src="mock" alt="album-art"/>
-        </div>
+      <main className="Player">
+        <img src={currentSong.album.cover_medium} alt="album-art" className="Player-albumArt" />
         <div className="Player-track">
-          <div className="Player-trackName">trackName</div>
-          <div className="Player-artistName">artistName</div>
+          <div className="Player-trackName">{currentSong.title}</div>
+          <div className="Player-artistName">{currentSong.artist.name}</div>
         </div>
-        <div>currentTime 00:00</div>
-        <Seekbar />
+        <div>{played}</div>
+        <Seekbar playedRate={playedRate}/>
         <PlaybackControlsBar />
-      </div>
+      </main>
     </div>
   );
 }

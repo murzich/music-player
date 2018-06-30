@@ -6,6 +6,12 @@
 }
 
 .Player {
-  /* TODO: temp */
-  background-color: #234;
+  text-align: center;
+}
+
+.Player-albumArt {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
 }

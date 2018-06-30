@@ -3,7 +3,7 @@ import './Seekbar.css'
 
 function Seekbar(props) {
   return (
-    <input type="range" className="Seekbar"></input>
+    <input type="range" className="Seekbar" value={props.playedRate} />
   );
 }
 

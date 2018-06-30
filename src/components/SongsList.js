@@ -1,15 +1,19 @@
 import React from 'react';
 import Song from './Song';
 
-function SongsList(props) {
+function SongsList({ songs }) {
+  const songsElements = songs.map(song => (
+    <Song
+      key={song.id}
+      title={song.title}
+      preview={song.preview}
+      duration={song.duration}
+    />
+  ));
+
   return (
     <ol>
-      <Song />
-      <Song />
-      <Song />
-      <Song />
-      <Song />
-      <Song />
+      {songsElements}
     </ol>
   );
 }

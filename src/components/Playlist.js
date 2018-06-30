@@ -2,11 +2,11 @@ import React from 'react';
 import './Playlist.css'
 import SongsList from "./SongsList";
 
-function Playlist(props) {
+function Playlist({ songs }) {
   return (
     <aside className="Playlist">
       Playlist component
-      <SongsList />
+      <SongsList songs={songs} />
     </aside>
   );
 }
