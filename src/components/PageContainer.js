@@ -19,6 +19,7 @@ class PageContainer extends Component {
       currentTrack: 0,
       songsList: [],
       loading: false,
+      currentPlaying: false,
     };
   }
 
@@ -42,7 +43,7 @@ class PageContainer extends Component {
   }
 
   render() {
-    const { songsList, loading, currentTrack } = this.state;
+    const { songsList, loading, currentTrack, currentPlaying } = this.state;
     return (
       <Page>
         <Playlist
@@ -50,11 +51,13 @@ class PageContainer extends Component {
           loading={loading}
           setSong={this.setCurrentSong}
           currentTrack={currentTrack}
+          currentPlaying={currentPlaying}
         />
         <PlayerContainer
           currentSong={songsList[currentTrack]}
           onNext={this.onNextSong}
           onPrev={this.onPrevSong}
+          onPlay={this.onPlay}
         />
       </Page>
     );
@@ -82,7 +85,10 @@ class PageContainer extends Component {
         currentTrack: (prevTrack < 0) ? 0 : prevTrack,
       }
     })
-  }
+  };
+  onPlay = (status) => {
+    this.setState({currentPlaying: status});
+  };
 }
 
 export default PageContainer;

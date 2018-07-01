@@ -32,6 +32,8 @@ class PlayerContainer extends Component {
           onProgress={this.onProgress}
           onDuration={this.onDuration}
           onEnded={this.onEnded}
+          onPlay={this.onPlay}
+          onPause={this.onPause}
         />
         <img src={currentSong.album.cover_medium} alt="album-art" className="Player-albumArt" />
         <div className="Player-track">
@@ -69,9 +71,11 @@ class PlayerContainer extends Component {
   };
   onPlay = () => {
     this.setState({ playing: true });
+    this.props.onPlay(true);
   };
   onPause = () => {
     this.setState({ playing: false });
+    this.props.onPlay(false);
   };
   onSeekMouseDown = () => {
     this.setState({ seeking: true });
@@ -103,6 +107,9 @@ class PlayerContainer extends Component {
   onEnded = () => {
     this.setState({ playing: this.state.loop });
   //  TODO: Add conditions to play next
+    this.props.onNext();
+    this.setState({ playing: true });
+
   };
   onDuration = (duration) => {
     this.setState({ duration });
