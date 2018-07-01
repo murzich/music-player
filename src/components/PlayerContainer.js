@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FilePlayer from "react-player/lib/players/FilePlayer";
 
-import { format } from '../utils';
+import { formatTime } from '../utils';
 import Player from "./Player";
 import PlaybackControlsBar from "./PlaybackControlsBar";
 import Seekbar from "./Seekbar";
@@ -38,7 +38,7 @@ class PlayerContainer extends Component {
           <div className="Player-trackName">{currentSong.title}</div>
           <div className="Player-artistName">{currentSong.artist.name}</div>
         </div>
-        <div>{format(this.state.playedSeconds)}</div>
+        <div>{formatTime(this.state.playedSeconds)}</div>
         <Seekbar
           played={this.state.played}
         />

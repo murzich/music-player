@@ -1,4 +1,4 @@
-export function format (seconds) {
+export function formatTime (seconds) {
   const date = new Date(seconds * 1000);
   const hh = date.getUTCHours();
   const mm = date.getUTCMinutes();
