@@ -41,6 +41,9 @@ class PlayerContainer extends Component {
         <div>{formatTime(this.state.playedSeconds)}</div>
         <Seekbar
           played={this.state.played}
+          onSeekMouseDown={this.onSeekMouseDown}
+          onSeekChange={this.onSeekChange}
+          onSeekMouseUp={this.onSeekMouseUp}
         />
         <PlaybackControlsBar
           onPlayPause={this.playPause}
