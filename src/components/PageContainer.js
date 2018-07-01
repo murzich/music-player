@@ -20,6 +20,7 @@ class PageContainer extends Component {
       songsList: [],
       loading: false,
       currentPlaying: false,
+      input: '',
     };
   }
 
@@ -46,6 +47,9 @@ class PageContainer extends Component {
     const { songsList, loading, currentTrack, currentPlaying } = this.state;
     return (
       <Page>
+        <input type="text" value={this.state.input} onChange={this.onInputChange}
+          style={{display: 'block', position: 'absolute', top: '0'}}
+        />
         <Playlist
           songs={songsList}
           loading={loading}
@@ -63,6 +67,25 @@ class PageContainer extends Component {
     );
   }
 
+  onInputChange = (e) => {
+    this.setState({input: e.target.value});
+    this.setState({loading: true});
+    axios.get(corsAnywhere+`http://api.deezer.com/search/track?q="${e.target.value}"&limit=15`)
+      .then(response => {
+        this.setState({
+          songsList: response.data.data,
+          loading: false,
+        });
+      })
+      .catch(error => {
+        console.log(error);
+        // TODO: Used if cors-anywhere fails
+        this.setState({
+          songsList: mockResponse.data.data,
+          loading: false,
+        });
+      });
+  };
   setCurrentSong = (i) => {
     this.setState({
       currentTrack: i,
