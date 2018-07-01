@@ -7,6 +7,7 @@ function PlaybackControlsBar(props) {
       name: 'Previous',
       shortName: 'prev',
       img: '',
+      callback: props.onPrev,
     },
     {
       name: 'Back',
@@ -31,6 +32,7 @@ function PlaybackControlsBar(props) {
       name: 'Next',
       shortName: 'next',
       img: '',
+      callback: props.onNext,
     },
   ];
 

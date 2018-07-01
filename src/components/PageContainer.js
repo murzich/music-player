@@ -16,7 +16,7 @@ class PageContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      currentSong: {album: {}, artist: {}},
+      currentTrack: 0,
       songsList: [],
       loading: false,
     };
@@ -28,7 +28,6 @@ class PageContainer extends Component {
       .then(response => {
         this.setState({
           songsList: response.data.data,
-          currentSong: response.data.data[0],
           loading: false,
         });
       })
@@ -37,19 +36,52 @@ class PageContainer extends Component {
         // TODO: Used if cors-anywhere fails
         this.setState({
           songsList: mockResponse.data.data,
-          currentSong: mockResponse.data.data[0],
           loading: false,
         });
       });
   }
 
   render() {
+    const { songsList, loading, currentTrack } = this.state;
     return (
       <Page>
-        <Playlist songs={this.state.songsList} loading={this.state.loading}/>
-        <PlayerContainer currentSong={this.state.currentSong}/>
+        <Playlist
+          songs={songsList}
+          loading={loading}
+          setSong={this.setCurrentSong}
+          currentTrack={currentTrack}
+        />
+        <PlayerContainer
+          currentSong={songsList[currentTrack]}
+          onNext={this.onNextSong}
+          onPrev={this.onPrevSong}
+        />
       </Page>
     );
+  }
+
+  setCurrentSong = (i) => {
+    this.setState({
+      currentTrack: i,
+    });
+  };
+  onNextSong = () => {
+    this.setState(prevState => {
+      const nextTrack = prevState.currentTrack + 1;
+      if (nextTrack < prevState.songsList.length - 1) {
+        return {
+          currentTrack: prevState.currentTrack + 1,
+        };
+      }
+    });
+  };
+  onPrevSong = () => {
+    this.setState(prevState => {
+      const prevTrack = prevState.currentTrack - 1;
+      return {
+        currentTrack: (prevTrack < 0) ? 0 : prevTrack,
+      }
+    })
   }
 }
 

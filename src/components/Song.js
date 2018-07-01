@@ -1,8 +1,12 @@
 import React from 'react';
+import { formatTime } from "../utils";
 
-function Song({ title, preview, duration }) {
+function Song({ title, preview, duration, onClick, i }) {
   return (
-    <li>{title} - {duration} <a href={preview}>#</a></li>
+    <li onClick={onClick.bind(this, i)}>
+      {title} - {formatTime(duration)}
+      <a href={preview}>#</a>
+    </li>
   );
 }
 

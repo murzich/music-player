@@ -21,7 +21,7 @@ class PlayerContainer extends Component {
   }
 
   render() {
-    const { currentSong } = this.props;
+    const { currentSong = {artist: {}, album: {}} } = this.props;
     return (
       <Player>
         <FilePlayer
@@ -49,6 +49,8 @@ class PlayerContainer extends Component {
           onPlayPause={this.playPause}
           onStepForward={this.onStepForward}
           onStepBack={this.onStepBack}
+          onNext={this.props.onNext}
+          onPrev={this.props.onPrev}
           playing={this.state.playing}
         />
       </Player>
