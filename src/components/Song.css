@@ -1,0 +1,11 @@
+.Song {
+  text-decoration: none;
+  color: var(--song-inactive);
+}
+.Song-current {
+  color: var(--song-active);
+}
+.Song-playing::before {
+  display: inline-block;
+  content: "\25BA";
+}

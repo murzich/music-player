@@ -1,11 +1,16 @@
 import React from 'react';
 import { formatTime } from "../utils";
+import './Song.css';
 
-function Song({ title, preview, duration, onClick, i, style }) {
+function Song({ title, duration, onClick, i, className }) {
   return (
-    <li onClick={onClick.bind(this, i)} style={style}>
-      {title} - {formatTime(duration)}
-      <a href={preview}>#</a>
+    <li>
+      <a href=""
+         onClick={onClick.bind(this, i)}
+         className={className}
+      >
+        {title} - {formatTime(duration)}
+      </a>
     </li>
   );
 }

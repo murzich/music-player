@@ -3,17 +3,15 @@ import Song from './Song';
 
 function SongsList({ songs, setSong, currentTrack, currentPlaying }) {
 
-  const setStyle = (i) => {
-    let style = {};
+  const setClassName = (i) => {
+    let className = "Song";
     if (currentTrack === i) {
-      style.fontWeight = 'bold';
+      className += " Song-current";
       if (currentPlaying) {
-        style.background = 'red';
+        className += " Song-playing";
       }
-    } else {
-      style = null;
     }
-    return style;
+    return className;
   };
   const songsElements = songs.map((song, i) => (
     <Song
@@ -23,7 +21,7 @@ function SongsList({ songs, setSong, currentTrack, currentPlaying }) {
       preview={song.preview}
       duration={song.duration}
       onClick={setSong}
-      style={setStyle(i)}
+      className={setClassName(i)}
     />
   ));
 

@@ -86,7 +86,8 @@ class PageContainer extends Component {
         });
       });
   };
-  setCurrentSong = (i) => {
+  setCurrentSong = (i, e) => {
+    e.preventDefault();
     this.setState({
       currentTrack: i,
     });
