@@ -1,6 +1,10 @@
 .Song {
   text-decoration: none;
   color: var(--song-inactive);
+  transition: all 200ms ease;
+}
+.Song:hover {
+  text-shadow: 0 1px 0 var(--bg-body);
 }
 .Song-current {
   color: var(--song-active);
