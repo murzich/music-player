@@ -2,15 +2,15 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import Page from "./Page";
-import Playlist from "./Playlist";
-import PlayerContainer from "./PlayerContainer";
-import * as mockResponse from '../mock';
-import SongsList from "./SongsList";
-import SearchBar from "./SearchBar";
+import Playlist from "./playlist/Playlist";
+import PlayerContainer from "./player/PlayerContainer";
+import SongsList from "./playlist/SongsList";
+import SearchBar from "./playlist/SearchBar";
 
+const deezerSearch = 'http://api.deezer.com/search/track';
 const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
-// const crossOrigin = 'http://crossorigin.me/';
-const mockUrl = 'http://api.deezer.com/search/track?q=artist:"system of a down"&limit=10';
+const mockQuery = 'artist:"system of a down"';
+const baseUrl = corsAnywhere + deezerSearch;
 
 class PageContainer extends Component {
 
@@ -27,22 +27,7 @@ class PageContainer extends Component {
   }
 
   componentDidMount() {
-    this.setState({loading: true});
-    axios.get(corsAnywhere+mockUrl)
-      .then(response => {
-        this.setState({
-          songsList: response.data.data,
-          loading: false,
-        });
-      })
-      .catch(error => {
-        console.log(error);
-        // TODO: Used if cors-anywhere fails
-        this.setState({
-          songsList: mockResponse.data.data,
-          loading: false,
-        });
-      });
+    this.getSongsList(mockQuery);
   }
 
   render() {
@@ -72,24 +57,33 @@ class PageContainer extends Component {
     );
   }
 
-  onInputChange = (e) => {
-    this.setState({input: e.target.value});
+  getSongsList = (searchQuery) => {
     this.setState({loading: true});
-    axios.get(corsAnywhere+`http://api.deezer.com/search/track?q="${e.target.value}"&limit=15`)
+    axios.get(baseUrl, {
+      params: {
+        q: searchQuery,
+        limit: 15,
+      }
+    })
       .then(response => {
         this.setState({
           songsList: response.data.data,
           loading: false,
+          currentTrack: 0,
         });
       })
       .catch(error => {
         console.log(error);
-        // TODO: Used if cors-anywhere fails
         this.setState({
-          songsList: mockResponse.data.data,
           loading: false,
         });
       });
+  };
+
+  onInputChange = (e) => {
+    const searchQuery = e.target.value;
+    this.setState({input: searchQuery});
+    this.getSongsList(searchQuery)
   };
   setCurrentSong = (i, e) => {
     e.preventDefault();

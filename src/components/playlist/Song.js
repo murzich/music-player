@@ -1,5 +1,5 @@
 import React from 'react';
-import { formatTime } from "../utils";
+import { formatTime } from "../../utils";
 import './Song.css';
 
 function Song({ title, duration, onClick, i, className }) {

@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import FilePlayer from "react-player/lib/players/FilePlayer";
 
-import { formatTime } from '../utils';
+import { formatTime } from '../../utils';
 import Player from "./Player";
 import PlaybackControlsBar from "./PlaybackControlsBar";
 import Seekbar from "./Seekbar";
