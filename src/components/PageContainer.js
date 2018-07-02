@@ -52,6 +52,8 @@ class PageContainer extends Component {
           onNext={this.onNextSong}
           onPrev={this.onPrevSong}
           onPlay={this.onPlay}
+          // TODO: ClickToPlay
+          playing={this.state.currentPlaying}
         />
       </Page>
     );
@@ -100,6 +102,8 @@ class PageContainer extends Component {
     e.preventDefault();
     this.setState({
       currentTrack: i,
+      // TODO: ClickToPlay
+      currentPlaying: true,
     });
   };
 

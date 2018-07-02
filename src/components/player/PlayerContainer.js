@@ -28,7 +28,8 @@ class PlayerContainer extends Component {
           style={{display: 'none'}}
           ref={this.ref}
           url={currentSong.preview}
-          playing={this.state.playing}
+           // TODO: Used for an autonomy of the Player component and ClickToPlay in Playlist component
+          playing={ this.state.playing || this.props.playing }
           onProgress={this.onProgress}
           onDuration={this.onDuration}
           onEnded={this.onEnded}
@@ -63,6 +64,8 @@ class PlayerContainer extends Component {
     this.setState(prevState => {
       return {playing: !prevState.playing};
     });
+    // TODO: delete this, if no need to handle clickToPlay in Playlist
+    this.props.onPlay(!this.props.playing)
   };
   onProgress = (state) => {
     if (!this.state.seeking) {
