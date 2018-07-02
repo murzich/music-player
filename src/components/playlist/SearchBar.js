@@ -4,18 +4,18 @@ import './SearchBar.css';
 
 function SearchBar({ value, callback, loading }) {
   return (
-    <React.Fragment>
-    <label className="SearchBar-label">
-      Search songs on Deezer
-      <input
-        type="search"
-        value={value}
-        onChange={callback}
-        className="SearchBar"
-      />
-    </label>
+    <header className="SearchBar">
+      <label className="SearchBar-label">
+        Search songs on Deezer
+        <input
+          type="search"
+          value={value}
+          onChange={callback}
+          className="SearchBar-input"
+        />
+      </label>
       {loading && (<div className="SearchBar-helper">Loading...</div>)}
-    </React.Fragment>
+    </header>
 );
 }
 

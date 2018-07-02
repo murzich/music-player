@@ -2,18 +2,18 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import Page from "./Page";
-import Playlist from "./playlist/Playlist";
 import PlayerContainer from "./player/PlayerContainer";
-import SongsList from "./playlist/SongsList";
+import Playlist from "./playlist/Playlist";
 import SearchBar from "./playlist/SearchBar";
+import SongsList from "./playlist/SongsList";
 
 const deezerSearch = 'http://api.deezer.com/search/track';
 const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
-const mockQuery = 'artist:"system of a down"';
 const baseUrl = corsAnywhere + deezerSearch;
 
-class PageContainer extends Component {
+const startQuery = 'artist:"system of a down"';
 
+class PageContainer extends Component {
 
   constructor(props) {
     super(props);
@@ -27,7 +27,7 @@ class PageContainer extends Component {
   }
 
   componentDidMount() {
-    this.getSongsList(mockQuery);
+    this.getSongsList(startQuery);
   }
 
   render() {
@@ -80,6 +80,9 @@ class PageContainer extends Component {
       });
   };
 
+  /**
+   * Handlers
+   */
   onInputChange = (e) => {
     const searchQuery = e.target.value;
     if (!searchQuery) {
@@ -92,12 +95,14 @@ class PageContainer extends Component {
     this.setState({input: searchQuery});
     this.getSongsList(searchQuery)
   };
+
   setCurrentSong = (i, e) => {
     e.preventDefault();
     this.setState({
       currentTrack: i,
     });
   };
+
   onNextSong = () => {
     this.setState(prevState => {
       const nextTrack = prevState.currentTrack + 1;
@@ -108,6 +113,7 @@ class PageContainer extends Component {
       }
     });
   };
+
   onPrevSong = () => {
     this.setState(prevState => {
       const prevTrack = prevState.currentTrack - 1;
@@ -116,6 +122,7 @@ class PageContainer extends Component {
       }
     })
   };
+
   onPlay = (status) => {
     this.setState({currentPlaying: status});
   };

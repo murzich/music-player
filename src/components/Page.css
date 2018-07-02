@@ -17,3 +17,8 @@
   background-color: var(--bg-main);
   box-shadow: 0 0 3rem black;
 }
+@media screen and (max-width: 568px) {
+  .Page {
+    flex-direction: column-reverse;
+  }
+}
