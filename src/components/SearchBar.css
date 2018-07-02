@@ -1,0 +1,17 @@
+.SearchBar {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: var(--bg-body);
+  padding: 0.25rem;
+  color: var(--color-primary);
+}
+.SearchBar-label {
+  position: relative;
+}
+.SearchBar-helper {
+  position: absolute;
+  right: 15px;
+  padding: .25rem;
+  font-size: .75rem;
+}

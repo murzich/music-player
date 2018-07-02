@@ -1,5 +1,6 @@
 .Playlist {
   display: block;
+  position: relative;
   flex: 0 1 40%;
   background-color: var(--bg-aside);
   padding: 15px;

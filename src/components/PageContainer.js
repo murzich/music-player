@@ -6,6 +6,7 @@ import Playlist from "./Playlist";
 import PlayerContainer from "./PlayerContainer";
 import * as mockResponse from '../mock';
 import SongsList from "./SongsList";
+import SearchBar from "./SearchBar";
 
 const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
 // const crossOrigin = 'http://crossorigin.me/';
@@ -49,10 +50,11 @@ class PageContainer extends Component {
     return (
       <Page>
         <Playlist>
-          <input type="text" value={this.state.input} onChange={this.onInputChange}
-                 style={{display: 'block'}}
+          <SearchBar
+            value={this.state.input}
+            callback={this.onInputChange}
+            loading={loading}
           />
-          {loading && (<div>Loading...</div>)}
           <SongsList
             songs={songsList}
             setSong={this.setCurrentSong}
