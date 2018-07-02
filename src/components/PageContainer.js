@@ -82,6 +82,13 @@ class PageContainer extends Component {
 
   onInputChange = (e) => {
     const searchQuery = e.target.value;
+    if (!searchQuery) {
+      this.setState({
+        input: '',
+        loading: false,
+      });
+      return;
+    }
     this.setState({input: searchQuery});
     this.getSongsList(searchQuery)
   };
