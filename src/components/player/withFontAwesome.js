@@ -5,9 +5,10 @@ import { faPlay, faPause, faForward, faBackward, faFastForward, faFastBackward }
 
 library.add(faPlay, faPause, faForward, faBackward, faFastForward, faFastBackward);
 
-function withFontAwesome(WrappedComponent, callback, icon, extraClass) {
+function withFontAwesome(WrappedComponent, key, callback, icon, extraClass) {
   return (
-    <WrappedComponent callback={callback} extraClass={extraClass}>
+    // TODO: if `icon` is unique, you can use it as `key` prop, but it casts full reload of this component.
+    <WrappedComponent key={key} callback={callback} extraClass={extraClass}>
       <FontAwesomeIcon icon={icon} />
     </WrappedComponent>
   );

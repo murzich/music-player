@@ -8,7 +8,7 @@ function Button({callback, extraClass, children}) {
     <button
       onClick={callback}
       className={className}
-      {/* TODO: for initial testing. Remove after adding CSS classes */}
+      // TODO: for initial testing. Remove after adding CSS classes
       style={{ border: '2px solid grey', color: 'white'}}
     >
       {children || 'default button'}
