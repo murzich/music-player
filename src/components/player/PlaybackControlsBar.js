@@ -5,6 +5,7 @@ import Button from './Button';
 
 function PlaybackControlsBar(props) {
 
+  // Declared inside the component for setting a bound callback.
   const playbackButtons = [
     {
       name: 'Previous',
@@ -34,7 +35,13 @@ function PlaybackControlsBar(props) {
   ];
 
   const buttons = playbackButtons.map(
-    (button) => withFontAwesome(Button, button.name, button.callback, button.icon)
+    (button) => {
+      return withFontAwesome({
+        key: button.name,
+        callback: button.callback,
+        icon: button.icon,
+      })(Button);
+    }
   );
 
   return (
