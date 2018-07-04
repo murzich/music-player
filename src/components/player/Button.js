@@ -1,15 +1,15 @@
 import React from 'react';
 
-function Button({callback, extraClass, children}) {
+import './Button.css';
 
-  const className = "Button" + extraClass;
+function Button({callback, extraClass, children}) {
+  // TODO: clear `||` when defaultProps will be used.
+  const className = `Button ${extraClass || ''}`;
 
   return (
     <button
       onClick={callback}
       className={className}
-      // TODO: for initial testing. Remove after adding CSS classes
-      style={{ border: '2px solid grey', color: 'white'}}
     >
       {children || 'default button'}
     </button>

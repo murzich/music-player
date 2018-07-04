@@ -1,0 +1,9 @@
+.PlaybackControlsBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: .75rem 1.25rem;
+  margin: 1rem 0;
+  border-radius: 2.5rem;
+  background-color: rgba(255,255,255,.2);
+}

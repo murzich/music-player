@@ -2,6 +2,7 @@ import React from 'react';
 
 import withFontAwesome from './withFontAwesome';
 import Button from './Button';
+import './PlaybackControlsBar.css';
 
 function PlaybackControlsBar(props) {
 
@@ -21,6 +22,7 @@ function PlaybackControlsBar(props) {
       name: 'Play/Pause',
       icon: (props.playing) ? 'pause' : 'play',
       callback: props.onPlayPause,
+      extraClass: 'Button-main',
     },
     {
       name: 'Forward',
@@ -40,15 +42,13 @@ function PlaybackControlsBar(props) {
         key: button.name,
         callback: button.callback,
         icon: button.icon,
+        extraClass: button.extraClass,
       })(Button);
     }
   );
 
   return (
-    <div
-       // TODO: temporary styles
-      style={{ backgroundColor: 'rgba(255,255,255,.5)', padding: '1rem', borderRadius: '2rem' }}
-    >
+    <div className="PlaybackControlsBar">
       {buttons}
     </div>
   );
