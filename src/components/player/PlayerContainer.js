@@ -64,7 +64,7 @@ class PlayerContainer extends Component {
 
   playPause = () => {
     this.setState(prevState => {
-      return {playing: !prevState.playing};
+      return { playing: !prevState.playing };
     });
   };
   onProgress = (state) => {
@@ -73,12 +73,14 @@ class PlayerContainer extends Component {
     }
   };
   onPlay = () => {
-    this.setState({ playing: true });
-    this.props.onPlay(true);
+    this.setState({ playing: true }, () => {
+     this.props.onPlay(true);
+    });
   };
   onPause = () => {
-    this.setState({ playing: false });
-    this.props.onPlay(false);
+    this.setState({ playing: false }, () => {
+      this.props.onPlay(false);
+    });
   };
   onSeekMouseDown = () => {
     this.setState({ seeking: true });
@@ -108,10 +110,11 @@ class PlayerContainer extends Component {
     this.onStep(-this.stepSeconds);
   };
   onEnded = () => {
-    this.setState({ playing: this.state.loop });
-  //  TODO: Add conditions to play next
-    this.props.onNext();
-    this.setState({ playing: true });
+    this.setState({ playing: this.state.loop }, () => {
+    //  TODO: Add conditions to play next
+      this.props.onNext();
+      this.setState({ playing: true });
+    });
 
   };
   onDuration = (duration) => {

@@ -61,26 +61,27 @@ class PageContainer extends Component {
   }
 
   getSongsList = (searchQuery) => {
-    this.setState({loading: true});
-    axios.get(baseUrl, {
-      params: {
-        q: searchQuery,
-        limit: 15,
-      }
-    })
-      .then(response => {
-        this.setState({
-          songsList: response.data.data,
-          loading: false,
-          currentTrack: 0,
-        });
+    this.setState({loading: true}, () => {
+      axios.get(baseUrl, {
+        params: {
+          q: searchQuery,
+          limit: 15,
+        }
       })
-      .catch(error => {
-        console.log(error);
-        this.setState({
-          loading: false,
+        .then(response => {
+          this.setState({
+            songsList: response.data.data,
+            loading: false,
+            currentTrack: 0,
+          });
+        })
+        .catch(error => {
+          console.log(error);
+          this.setState({
+            loading: false,
+          });
         });
-      });
+    });
   };
 
   /**
@@ -93,17 +94,16 @@ class PageContainer extends Component {
         input: '',
         loading: false,
       });
-      return;
+    } else {
+      this.setState({ input: searchQuery }, () => {
+        this.getSongsList(searchQuery)
+      });
     }
-    this.setState({input: searchQuery});
-    this.getSongsList(searchQuery)
   };
 
   setCurrentSong = (i, e) => {
     e.preventDefault();
-    this.setState({
-      currentTrack: i,
-    });
+    this.setState({ currentTrack: i });
   };
 
   onNextSong = () => {
@@ -123,7 +123,7 @@ class PageContainer extends Component {
       return {
         currentTrack: (prevTrack < 0) ? 0 : prevTrack,
       }
-    })
+    });
   };
 
   onPlay = (status) => {
