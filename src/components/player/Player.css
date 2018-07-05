@@ -8,8 +8,10 @@
 }
 
 .Player {
+  width: 310px;
   text-align: center;
   padding: 30px;
+  margin: 1rem 0;
 }
 
 .Player-albumArt {
@@ -17,4 +19,25 @@
   width: 100%;
   height: auto;
   border-radius: 15px;
+}
+.Player-track {
+  margin: 1.5rem 0;
+}
+.Player-trackName {
+  margin: .75rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  max-height: 4.75rem;
+  overflow: hidden;
+}
+.Player-artistName {
+  margin: .75rem 0;
+  font-weight: 300;
+  color: var(--player-artist)
+}
+.Player-time {
+  margin: 1.5rem 0;
+  font-weight: 300;
+  font-size: 1.125rem;
 }

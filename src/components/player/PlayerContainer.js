@@ -37,10 +37,12 @@ class PlayerContainer extends Component {
         />
         <img src={currentSong.album.cover_medium} alt="album-art" className="Player-albumArt" />
         <div className="Player-track">
-          <div className="Player-trackName">{currentSong.title}</div>
+          <h2 className="Player-trackName">{currentSong.title}</h2>
           <div className="Player-artistName">{currentSong.artist.name}</div>
         </div>
-        <div>{formatTime(this.state.playedSeconds)}</div>
+        <div className="Player-time">
+          {formatTime(this.state.playedSeconds)}
+        </div>
         <Seekbar
           played={this.state.played}
           onSeekMouseDown={this.onSeekMouseDown}

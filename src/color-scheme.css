@@ -11,7 +11,7 @@
   --song-primary: var(--color-primary);
 
   --player-track: var(--color-primary);
-  --player-artist: #a599ad;
+  --player-artist: rgba(255,255,255,.5);
 
   --seekbar-pointer: #9087ae;
   --seekbar-full: #8c84a9;
