@@ -2,7 +2,9 @@
   text-decoration: none;
   color: var(--song-inactive);
   transition: all 200ms ease;
-  display: flex;
+  /* `flex` in MS Edge creates an empty preceding line in a `li` when it contain block element. */
+  display: inline-flex;
+  width: 100%;
   justify-content: space-between;
   position: relative;
 }
