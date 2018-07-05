@@ -14,8 +14,23 @@
   position: relative;
   width: 800px;
   height: 600px;
-  background-color: var(--bg-main);
   box-shadow: 0 0 3rem black;
+  overflow: hidden;
+}
+.Page::before {
+  /* --bg-art-image is set from the component style prop */
+  background-image: linear-gradient(rgba(15,10,0,0.5),rgba(15,10,0,0.5)), var(--bg-art-image);
+  background-repeat: no-repeat;
+  background-size: cover;
+  content: '';
+  display: block;
+  position: absolute;
+  /* negative position is set for removing a blur halo from the outside */
+  top: -20px;
+  left: -20px;
+  right: -20px;
+  bottom: -20px;
+  filter: blur(20px);
 }
 @media screen and (max-width: 568px) {
   .Page {

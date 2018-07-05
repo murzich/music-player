@@ -3,7 +3,7 @@
   --color-primary: #ffffff;
 
   --bg-body: #38363d;
-  --bg-aside: #1d1c20;
+  --bg-aside: rgba(30,30,30,0.8);
   --bg-main: #83808d;
 
   --song-active: #37eb76;

@@ -3,6 +3,8 @@
   flex: 1 0 60%;
   align-items: center;
   justify-content: center;
+  /* if not set, will be covered by background image */
+  z-index: 0;
 }
 
 .Player {

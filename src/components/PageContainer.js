@@ -31,12 +31,15 @@ class PageContainer extends Component {
   }
 
   render() {
-    const { songsList, loading, currentTrack, currentPlaying } = this.state;
+    const { songsList, loading, currentTrack, currentPlaying, input } = this.state;
+    const currentSong = songsList[currentTrack];
+    const coverArt = (currentSong) ? currentSong.album.cover_medium : undefined;
+
     return (
-      <Page>
+      <Page coverArt={coverArt}>
         <Playlist>
           <SearchBar
-            value={this.state.input}
+            value={input}
             callback={this.onInputChange}
             loading={loading}
           />
@@ -48,7 +51,7 @@ class PageContainer extends Component {
           />
         </Playlist>
         <PlayerContainer
-          currentSong={songsList[currentTrack]}
+          currentSong={currentSong}
           onNext={this.onNextSong}
           onPrev={this.onPrevSong}
           onPlay={this.onPlay}
