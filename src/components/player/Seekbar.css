@@ -1,4 +1,100 @@
+/*
+// Styling Cross-Browser Compatible Range Inputs with Sass
+// Github: https://github.com/darlanrod/input-range-sass
+// Author: Darlan Rod https://github.com/darlanrod
+// Version 1.4.1
+// MIT License
+*/
 .Seekbar {
+  -webkit-appearance: none;
+  margin: 0.5rem 0;
   width: 100%;
-  margin: 0;
+  border-radius: 1rem;
+}
+.Seekbar:focus {
+  outline: 0;
+}
+.Seekbar:focus::-webkit-slider-runnable-track {
+  background-color: var(--seekbar-full);
+}
+.Seekbar:focus::-ms-fill-lower {
+  background-color: rgba(255,255,255,0.5);
+}
+.Seekbar:focus::-ms-fill-upper {
+  background-color: transparent;
+}
+.Seekbar:focus::-ms-track {
+  background-color: rgba(255,255,255,0.2);
+  height: 0.375rem;
+  border-radius: 1rem;
+}
+.Seekbar::-webkit-slider-runnable-track {
+  cursor: pointer;
+  height: 0.375rem;
+  transition: all .2s ease;
+  width: 100%;
+  background: var(--seekbar-empty);
+  border: 0 solid #000;
+  border-radius: 0.5rem;
+}
+.Seekbar::-webkit-slider-thumb {
+  background: var(--seekbar-pointer);
+  border: 0 solid #fff;
+  border-radius: 1rem;
+  cursor: pointer;
+  height: 1rem;
+  width: 1rem;
+  -webkit-appearance: none;
+  margin-top: -0.3125rem;
+}
+.Seekbar::-moz-range-track {
+  cursor: pointer;
+  height: 0.375rem;
+  transition: all .2s ease;
+  width: 100%;
+  background: var(--seekbar-empty);
+  border: 0 solid #000;
+  border-radius: 0.5rem;
+}
+.Seekbar::-moz-range-progress {
+  background-color: var(--seekbar-pointer);
+  height: 0.375rem;
+  border-radius: 0.5rem;
+}
+.Seekbar::-moz-range-thumb {
+  background: var(--seekbar-pointer);
+  border: 0 solid #fff;
+  border-radius: 1rem;
+  cursor: pointer;
+  height: 1rem;
+  width: 1rem;
+}
+.Seekbar::-ms-track {
+  cursor: pointer;
+  height: 0.375rem;
+  transition: all .2s ease;
+  width: 100%;
+  background: rgba(255,255,255,0.2);
+  border-radius: 1rem 1rem;
+}
+.Seekbar::-ms-fill-lower {
+  background: rgba(255,255,255,0.5);
+  border: 0;
+  border-radius: 1rem;
+}
+.Seekbar::-ms-fill-upper {
+  height: .375rem;
+
+  background: transparent;
+  border: 0;
+  border-radius: 0.5rem;
+}
+.Seekbar::-ms-thumb {
+  background: rgba(255,255,255,1);
+  border: 0;
+  border-radius: 1rem;
+  cursor: pointer;
+  height: 1rem;
+  width: 1rem;
+  margin-top: 0;
 }
