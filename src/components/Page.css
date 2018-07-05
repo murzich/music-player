@@ -35,5 +35,6 @@
 @media screen and (max-width: 568px) {
   .Page {
     flex-direction: column-reverse;
+    height: initial;
   }
 }
