@@ -4,6 +4,7 @@ import axios from 'axios';
 import Page from "./Page";
 import Player from "./Player";
 import Playlist, { SearchBar, SongsList } from "./Playlist";
+import * as mockResponse from '../mock';
 
 const deezerSearch = 'http://api.deezer.com/search/track';
 const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
@@ -76,6 +77,7 @@ class PageContainer extends Component {
         .catch(error => {
           console.log(error);
           this.setState({
+            songsList: mockResponse.data,
             loading: false,
           });
         });
