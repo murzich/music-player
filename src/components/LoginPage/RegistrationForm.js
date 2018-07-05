@@ -1,6 +1,14 @@
 import React from 'react';
 
 function RegistrationForm(props) {
+
+  // TODO: move to the container component's handler
+  const handleChange = (e) => {
+    props.handleFormData({
+      [e.target.id]: e.target.value,
+    });
+  };
+
   return (
     <fieldset>
       <legend>Register on Deezer.com</legend>
@@ -10,12 +18,12 @@ function RegistrationForm(props) {
           flexDirection: 'column',
         }}
       >
-        <label htmlFor="new-user-email">Email: </label>
-        <input id="new-user-email" type="email"/>
-        <label htmlFor="new-user-password">Password: </label>
-        <input id="new-user-password" type="password"/>
-        <label htmlFor="confirm-password">Confirm password: </label>
-        <input id="confirm-password" type="password"/>
+        <label htmlFor="email">Email: </label>
+        <input id="email" type="email" value={props.email} onChange={handleChange}/>
+        <label htmlFor="password">Password: </label>
+        <input id="password" type="password" value={props.password} onChange={handleChange}/>
+        <label htmlFor="passwordConfirm">Confirm password: </label>
+        <input id="passwordConfirm" type="password" value={props.passwordConfirm} onChange={handleChange}/>
         <button type="submit">Register</button>
       </div>
     </fieldset>

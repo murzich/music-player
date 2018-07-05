@@ -5,6 +5,20 @@ import RegistrationForm from "./RegistrationForm";
 import SocialLogin from "./SocialLogin";
 
 function LoginPage(props) {
+  const currentFrom = (props.loginTab)
+    // TODO: combine into single component
+    ? <LoginForm
+        handleFormData={props.handleFormData}
+        email={props.email}
+        password={props.password}
+      />
+    : <RegistrationForm
+        handleFormData={props.handleFormData}
+        email={props.email}
+        password={props.password}
+        passwordConfirm={props.passwordConfirm}
+    />;
+
   return (
     <div style={{
       backgroundColor: 'aqua',
@@ -14,11 +28,20 @@ function LoginPage(props) {
       justifyContent: 'center',
       alignItems: 'center',
     }}>
-      <form action="" style={{
-        backgroundColor: 'darkgrey',
-      }}>
-        <LoginForm />
-        <RegistrationForm />
+      <form
+        action=""
+        onSubmit={props.submitCredentials}
+        style={{
+          backgroundColor: 'darkgrey',
+        }}>
+        <div style={{
+          textAlign: 'right',
+        }}>
+          <a href='' onClick={props.changeForm}>
+            {props.loginTab ? 'Sign up' : 'Sign in'}
+          </a>
+        </div>
+        {currentFrom}
         <SocialLogin />
       </form>
     </div>
