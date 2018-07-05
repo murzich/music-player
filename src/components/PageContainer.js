@@ -6,6 +6,10 @@ import Player from "./Player";
 import Playlist, { SearchBar, SongsList } from "./Playlist";
 import * as mockResponse from '../mock';
 
+import fetchSongs from '../actions';
+
+import { connect } from 'react-redux';
+
 const deezerSearch = 'http://api.deezer.com/search/track';
 const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
 const baseUrl = corsAnywhere + deezerSearch;
@@ -26,7 +30,8 @@ class PageContainer extends Component {
   }
 
   componentDidMount() {
-    this.getSongsList(startQuery);
+    this.props.fetchSongs(startQuery);
+    // this.getSongsList(startQuery);
   }
 
   render() {
@@ -34,6 +39,7 @@ class PageContainer extends Component {
     const currentSong = songsList[currentTrack];
     const coverArt = (currentSong) ? currentSong.album.cover_medium : undefined;
 
+    console.log(this.props.songsList);
     return (
       <Page coverArt={coverArt}>
         <Playlist>
@@ -131,4 +137,14 @@ class PageContainer extends Component {
   };
 }
 
-export default PageContainer;
+const mapStateToProps = store => {
+  const { loading, songsList, error } = store;
+  console.log('map', store);
+  return {
+    loading,
+    songsList,
+    error,
+  }
+};
+
+export default connect(mapStateToProps, { fetchSongs })(PageContainer);
