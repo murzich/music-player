@@ -1,4 +1,5 @@
 import React from 'react';
+import { Link } from 'react-router-dom';
 
 import LoginForm from "./LoginForm";
 import RegistrationForm from "./RegistrationForm";
@@ -20,6 +21,7 @@ function LoginPage(props) {
     />;
 
   return (
+    // TODO: remove inline styles.
     <div style={{
       backgroundColor: 'aqua',
       minHeight: '100vh',
@@ -28,6 +30,14 @@ function LoginPage(props) {
       justifyContent: 'center',
       alignItems: 'center',
     }}>
+      <Link to="/" style={{
+        position: 'absolute',
+        right: '10px',
+        top: '10px',
+        backgroundColor: 'red',
+      }}>
+        To Demo Player
+      </Link>
       <form
         action=""
         onSubmit={props.submitCredentials}
