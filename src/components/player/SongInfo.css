@@ -1,0 +1,22 @@
+.SongInfo-albumArt {
+  display: block;
+  width: 100%;
+  height: auto;
+  border-radius: 15px;
+}
+.SongInfo-track {
+  margin: 1.5rem 0;
+}
+.SongInfo-trackName {
+  margin: .75rem 0;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: var(--color-primary);
+  max-height: 4.75rem;
+  overflow: hidden;
+}
+.SongInfo-artistName {
+  margin: .75rem 0;
+  font-weight: 300;
+  color: var(--player-artist)
+}

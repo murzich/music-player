@@ -5,6 +5,7 @@ import { formatTime } from '../../utils';
 import Player from "./Player";
 import PlaybackControlsBar from "./PlaybackControlsBar";
 import Seekbar from "./Seekbar";
+import SongInfo from "./SongInfo";
 
 class PlayerContainer extends Component {
   constructor(props) {
@@ -35,11 +36,11 @@ class PlayerContainer extends Component {
           onPlay={this.onPlay}
           onPause={this.onPause}
         />
-        <img src={currentSong.album.cover_medium} alt="album-art" className="Player-albumArt" />
-        <div className="Player-track">
-          <h2 className="Player-trackName">{currentSong.title}</h2>
-          <div className="Player-artistName">{currentSong.artist.name}</div>
-        </div>
+        <SongInfo
+          cover={currentSong.album.cover_medium}
+          title={currentSong.title}
+          artist={currentSong.artist.name}
+        />
         <div className="Player-time">
           {formatTime(this.state.playedSeconds)}
         </div>
