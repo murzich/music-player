@@ -19,7 +19,7 @@
 .Song-playing::before {
   display: inline-block;
   position: absolute;
-  left: -1rem;
+  left: -0.725rem;
   content: "\25BA";
 }
 .Song-item {

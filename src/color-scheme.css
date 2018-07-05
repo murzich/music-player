@@ -17,7 +17,7 @@
   --seekbar-full: #8c84a9;
   --seekbar-empty: #615c78;
 
-  --controls-primary: var(--color-primary);
-  --controls-secondary: #9192a6;
-  --controls-bg: #707190;
+  --controls-primary: rgba(255,255,255,0.75);
+  --controls-secondary: rgba(255,255,255,0.5);
+  --controls-bg: rgba(255,255,255,0.25);
 }
