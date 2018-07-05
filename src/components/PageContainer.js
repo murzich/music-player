@@ -2,10 +2,8 @@ import React, { Component } from 'react';
 import axios from 'axios';
 
 import Page from "./Page";
-import PlayerContainer from "./player/PlayerContainer";
-import Playlist from "./playlist/Playlist";
-import SearchBar from "./playlist/SearchBar";
-import SongsList from "./playlist/SongsList";
+import Player from "./Player";
+import Playlist, { SearchBar, SongsList } from "./Playlist";
 
 const deezerSearch = 'http://api.deezer.com/search/track';
 const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
@@ -50,7 +48,7 @@ class PageContainer extends Component {
             currentPlaying={currentPlaying}
           />
         </Playlist>
-        <PlayerContainer
+        <Player
           currentSong={currentSong}
           onNext={this.onNextSong}
           onPrev={this.onPrevSong}
