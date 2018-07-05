@@ -5,4 +5,5 @@
   background-color: var(--bg-aside);
   padding: 15px;
   overflow-y: auto;
+  font-size: .75rem;
 }
