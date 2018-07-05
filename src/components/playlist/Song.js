@@ -4,12 +4,13 @@ import './Song.css';
 
 function Song({ title, duration, onClick, i, className }) {
   return (
-    <li>
+    <li className="Song-item">
       <a href=""
          onClick={onClick.bind(this, i)}
          className={className}
       >
-        {title} - {formatTime(duration)}
+        <span>{title}</span>
+        <span>{formatTime(duration)}</span>
       </a>
     </li>
   );

@@ -2,14 +2,27 @@
   text-decoration: none;
   color: var(--song-inactive);
   transition: all 200ms ease;
+  display: flex;
+  justify-content: space-between;
+  position: relative;
+}
+.Song:first-child {
+  flex: 1 1 auto;
 }
 .Song:hover {
   text-shadow: 0 1px 0 var(--bg-body);
+  color: var(--color-primary);
 }
 .Song-current {
   color: var(--song-active);
 }
 .Song-playing::before {
   display: inline-block;
+  position: absolute;
+  left: -1rem;
   content: "\25BA";
+}
+.Song-item {
+  padding: .5rem;
+  color: var(--song-inactive);
 }

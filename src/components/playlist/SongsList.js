@@ -1,5 +1,7 @@
 import React from 'react';
+
 import Song from './Song';
+import './SongsList.css';
 
 function SongsList({ songs, setSong, currentTrack, currentPlaying }) {
 
@@ -26,7 +28,7 @@ function SongsList({ songs, setSong, currentTrack, currentPlaying }) {
   ));
 
   return (
-    <ol>
+    <ol className="SongsList">
       {songsElements}
     </ol>
   );
