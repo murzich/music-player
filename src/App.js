@@ -4,8 +4,7 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import PageContainer from "./components/PageContainer";
 import LoginPageContainer from "./components/LoginPage/LoginPageContainer";
 
-import { Provider } from "react-redux";
-
+import { Provider } from 'react-redux';
 import rootReducer from './reducers';
 import { applyMiddleware, compose, createStore } from 'redux';
 import reduxThunk from 'redux-thunk';
@@ -17,7 +16,6 @@ const store = createStore(rootReducer, compose(
 
 class App extends Component {
   render() {
-    console.log('createStore', store);
     return (
       <Provider store={store}>
         <BrowserRouter>

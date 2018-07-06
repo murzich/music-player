@@ -1,5 +1,8 @@
-import {FETCH_SONGS_FAILURE, FETCH_SONGS_REQUEST, FETCH_SONGS_SUCCESS} from "../actions/types";
-
+import {
+  FETCH_SONGS_FAILURE,
+  FETCH_SONGS_REQUEST,
+  FETCH_SONGS_SUCCESS
+} from "../actions/types";
 
 const initialState = {
   songsList: [],
@@ -7,7 +10,6 @@ const initialState = {
 };
 
 export default function(state = initialState, action) {
-  console.log('reducer', state, 'action', action);
   switch (action.type) {
     case FETCH_SONGS_REQUEST:
       return {
@@ -17,11 +19,13 @@ export default function(state = initialState, action) {
     case FETCH_SONGS_SUCCESS:
       return {
         ...state,
+        songsList: action.payload,
         loading: false,
       };
     case FETCH_SONGS_FAILURE:
       return {
         ...state,
+        error: action.payload,
         loading: false,
       };
     default:

@@ -9,9 +9,7 @@ const deezerSearch = 'http://api.deezer.com/search/track';
 const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
 const baseUrl = corsAnywhere + deezerSearch;
 
-
-export default fetchSongs => query => {
-  console.log('action-query', query);
+const fetchSongs = query => {
   return function (dispatch) {
     dispatch({ type: FETCH_SONGS_REQUEST });
 
@@ -22,7 +20,6 @@ export default fetchSongs => query => {
       }
     })
       .then(response => {
-        console.log('reducer', response);
         dispatch({
           type: FETCH_SONGS_SUCCESS,
           payload: response.data.data,
@@ -35,4 +32,6 @@ export default fetchSongs => query => {
         });
       });
   }
-}
+};
+
+export default fetchSongs;

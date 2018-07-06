@@ -22,8 +22,6 @@ class PageContainer extends Component {
     super(props);
     this.state = {
       currentTrack: 0,
-      songsList: [],
-      loading: false,
       currentPlaying: false,
       input: '',
     };
@@ -35,11 +33,11 @@ class PageContainer extends Component {
   }
 
   render() {
-    const { songsList, loading, currentTrack, currentPlaying, input } = this.state;
+    const { songsList, loading } = this.props;
+    const { currentTrack, currentPlaying, input } = this.state;
     const currentSong = songsList[currentTrack];
     const coverArt = (currentSong) ? currentSong.album.cover_medium : undefined;
 
-    console.log(this.props.songsList);
     return (
       <Page coverArt={coverArt}>
         <Playlist>
@@ -115,10 +113,14 @@ class PageContainer extends Component {
   onNextSong = () => {
     this.setState(prevState => {
       const nextTrack = prevState.currentTrack + 1;
-      if (nextTrack < prevState.songsList.length - 1) {
+      if (nextTrack < this.props.songsList.length) {
         return {
-          currentTrack: prevState.currentTrack + 1,
+          currentTrack: nextTrack,
         };
+      } else {
+        return {
+          currentTrack: 0,
+        }
       }
     });
   };
@@ -139,7 +141,6 @@ class PageContainer extends Component {
 
 const mapStateToProps = store => {
   const { loading, songsList, error } = store;
-  console.log('map', store);
   return {
     loading,
     songsList,
