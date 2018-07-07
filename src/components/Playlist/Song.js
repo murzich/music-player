@@ -1,7 +1,15 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Song.css';
 import { formatTime } from '../../utils';
+
+const propTypes = {
+  title: PropTypes.string.isRequired,
+  duration: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+  className: PropTypes.string.isRequired,
+};
 
 function Song({
   title,
@@ -23,5 +31,7 @@ function Song({
     </li>
   );
 }
+
+Song.propTypes = propTypes;
 
 export default Song;

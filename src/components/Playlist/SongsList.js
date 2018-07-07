@@ -1,7 +1,19 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import Song from './Song';
 import './SongsList.css';
+
+const propTypes = {
+  songs: PropTypes.arrayOf(PropTypes.object).isRequired,
+  setSong: PropTypes.func.isRequired,
+  currentTrack: PropTypes.number,
+  isPlaying: PropTypes.bool,
+};
+const defaultProps = {
+  currentTrack: 0,
+  isPlaying: false,
+};
 
 function SongsList({
   songs,
@@ -37,5 +49,8 @@ function SongsList({
     </ol>
   );
 }
+
+SongsList.propTypes = propTypes;
+SongsList.defaultProps = defaultProps;
 
 export default SongsList;

@@ -1,6 +1,17 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './SearchBar.css';
+
+const propTypes = {
+  value: PropTypes.string,
+  callback: PropTypes.func.isRequired,
+  loading: PropTypes.bool,
+};
+const defaultProps = {
+  value: '',
+  loading: false,
+};
 
 function SearchBar({ value, callback, loading }) {
   return (
@@ -18,5 +29,8 @@ function SearchBar({ value, callback, loading }) {
     </header>
   );
 }
+
+SearchBar.propTypes = propTypes;
+SearchBar.defaultProps = defaultProps;
 
 export default SearchBar;
