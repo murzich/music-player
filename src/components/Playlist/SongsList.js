@@ -31,14 +31,13 @@ function SongsList({
     }
     return className;
   };
-  const songsElements = songs.map((song, i) => (
+
+  const songsElements = songs.map(({ id, title, duration }, i) => (
     <Song
-      key={song.id}
-      i={i}
-      title={song.title}
-      preview={song.preview}
-      duration={song.duration}
-      onClick={setSong}
+      key={id}
+      title={title}
+      duration={duration}
+      onClick={e => setSong(i, e)}
       className={setClassName(i)}
     />
   ));

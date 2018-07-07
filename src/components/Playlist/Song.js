@@ -15,14 +15,13 @@ function Song({
   title,
   duration,
   onClick,
-  i,
   className,
 }) {
   return (
     <li className="Song-item">
       <a
         href={`play: ${title}`}
-        onClick={onClick.bind(this, i)}
+        onClick={onClick}
         className={className}
       >
         <span>{title}</span>
