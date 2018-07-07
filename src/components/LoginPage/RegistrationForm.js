@@ -1,9 +1,27 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function RegistrationForm(props) {
+const propTypes = {
+  handleFormData: PropTypes.func.isRequired,
+  email: PropTypes.string,
+  password: PropTypes.string,
+  passwordConfirm: PropTypes.string,
+};
+const defaultProps = {
+  email: '',
+  password: '',
+  passwordConfirm: '',
+};
+
+function RegistrationForm({
+  handleFormData,
+  email,
+  password,
+  passwordConfirm,
+}) {
   // TODO: move to the container component's handler
   const handleChange = (e) => {
-    props.handleFormData({
+    handleFormData({
       [e.target.id]: e.target.value,
     });
   };
@@ -18,15 +36,18 @@ function RegistrationForm(props) {
         }}
       >
         <label htmlFor="email">Email: </label>
-        <input id="email" type="email" value={props.email} onChange={handleChange} />
+        <input id="email" type="email" value={email} onChange={handleChange} />
         <label htmlFor="password">Password: </label>
-        <input id="password" type="password" value={props.password} onChange={handleChange} />
+        <input id="password" type="password" value={password} onChange={handleChange} />
         <label htmlFor="passwordConfirm">Confirm password: </label>
-        <input id="passwordConfirm" type="password" value={props.passwordConfirm} onChange={handleChange} />
+        <input id="passwordConfirm" type="password" value={passwordConfirm} onChange={handleChange} />
         <button type="submit">Register</button>
       </div>
     </fieldset>
   );
 }
+
+RegistrationForm.propTypes = propTypes;
+RegistrationForm.defaultProps = defaultProps;
 
 export default RegistrationForm;

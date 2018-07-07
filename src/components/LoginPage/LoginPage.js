@@ -1,24 +1,48 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
 import LoginForm from './LoginForm';
 import RegistrationForm from './RegistrationForm';
 import SocialLogin from './SocialLogin';
 
-function LoginPage(props) {
-  const currentFrom = (props.loginTab) ? (
+const propTypes = {
+  loginTab: PropTypes.bool.isRequired,
+  changeForm: PropTypes.func.isRequired,
+  submitCredentials: PropTypes.func.isRequired,
+  handleFormData: PropTypes.func.isRequired,
+  email: PropTypes.string,
+  password: PropTypes.string,
+  passwordConfirm: PropTypes.string,
+};
+const defaultProps = {
+  email: '',
+  password: '',
+  passwordConfirm: '',
+};
+
+function LoginPage({
+  loginTab,
+  changeForm,
+  submitCredentials,
+  handleFormData,
+  email,
+  password,
+  passwordConfirm,
+}) {
+  const currentForm = (loginTab) ? (
     // TODO: combine into single component
     <LoginForm
-      handleFormData={props.handleFormData}
-      email={props.email}
-      password={props.password}
+      handleFormData={handleFormData}
+      email={email}
+      password={password}
     />
   ) : (
     <RegistrationForm
-      handleFormData={props.handleFormData}
-      email={props.email}
-      password={props.password}
-      passwordConfirm={props.passwordConfirm}
+      handleFormData={handleFormData}
+      email={email}
+      password={password}
+      passwordConfirm={passwordConfirm}
     />
   );
 
@@ -36,31 +60,34 @@ function LoginPage(props) {
       <Link
         to="/"
         style={{
-        position: 'absolute',
-        right: '10px',
-        top: '10px',
-        backgroundColor: 'red',
-      }}
+          position: 'absolute',
+          right: '10px',
+          top: '10px',
+          backgroundColor: 'red',
+        }}
       >
         To Demo Player
       </Link>
       <form
         action=""
-        onSubmit={props.submitCredentials}
+        onSubmit={submitCredentials}
         style={{
           backgroundColor: 'darkgrey',
         }}
       >
         <div style={{ textAlign: 'right' }}>
-          <a href="/login" onClick={props.changeForm}>
-            {props.loginTab ? 'Sign up' : 'Sign in'}
+          <a href="/login" onClick={changeForm}>
+            {loginTab ? 'Sign up' : 'Sign in'}
           </a>
         </div>
-        {currentFrom}
+        {currentForm}
         <SocialLogin />
       </form>
     </div>
   );
 }
+
+LoginPage.propTypes = propTypes;
+LoginPage.defaultProps = defaultProps;
 
 export default LoginPage;

@@ -7,12 +7,18 @@ class LoginPageContainer extends Component {
     super(props);
     this.state = {
       loginTab: true,
+      email: '',
+      password: '',
+      passwordConfirm: '',
     };
   }
 
   changeForm = (e) => {
     e.preventDefault();
-    this.setState(prevState => ({ loginTab: !prevState.loginTab }));
+    this.setState(prevState => ({
+      loginTab: !prevState.loginTab,
+      passwordConfirm: '',
+    }));
   };
 
   handleFormData = (state) => {
@@ -27,7 +33,7 @@ class LoginPageContainer extends Component {
   render() {
     return (
       <LoginPage
-        loginTab={this.state.loginTab}
+        {...this.state}
         changeForm={this.changeForm}
         submitCredentials={this.submitCredentials}
         handleFormData={this.handleFormData}

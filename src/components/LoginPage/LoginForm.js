@@ -1,9 +1,24 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function LoginForm(props) {
+const propTypes = {
+  handleFormData: PropTypes.func.isRequired,
+  email: PropTypes.string,
+  password: PropTypes.string,
+};
+const defaultProps = {
+  email: '',
+  password: '',
+};
+
+function LoginForm({
+  handleFormData,
+  email,
+  password,
+}) {
   // TODO: move to the container component's handler
   const handleChange = (e) => {
-    props.handleFormData({
+    handleFormData({
       [e.target.id]: e.target.value,
     });
   };
@@ -18,13 +33,16 @@ function LoginForm(props) {
         }}
       >
         <label htmlFor="email">Email: </label>
-        <input id="email" type="email" value={props.email} onChange={handleChange} />
+        <input id="email" type="email" value={email} onChange={handleChange} />
         <label htmlFor="password">Password: </label>
-        <input id="password" type="password" value={props.password} onChange={handleChange} />
+        <input id="password" type="password" value={password} onChange={handleChange} />
         <button type="submit">Login</button>
       </div>
     </fieldset>
   );
 }
+
+LoginForm.propTypes = propTypes;
+LoginForm.defaultProps = defaultProps;
 
 export default LoginForm;
