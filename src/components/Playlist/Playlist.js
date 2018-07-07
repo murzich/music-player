@@ -1,5 +1,6 @@
 import React from 'react';
-import './Playlist.css'
+
+import './Playlist.css';
 
 function Playlist({ children }) {
   return (

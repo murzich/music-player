@@ -1,16 +1,14 @@
 import React from 'react';
-import SocialButton from "./SocialButton";
 
-function SocialLogin(props) {
+import SocialButton from './SocialButton';
+
+function SocialLogin() {
   return (
     <fieldset>
       <legend>Login via social networks</legend>
-      <div style={{
-        display: 'flex',
-        flexDirection: 'column',
-      }}>
-        <SocialButton name="Google"/>
-        <SocialButton name="Facebook"/>
+      <div style={{ display: 'flex', flexDirection: 'column' }}>
+        <SocialButton name="Google" />
+        <SocialButton name="Facebook" />
       </div>
     </fieldset>
   );

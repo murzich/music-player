@@ -5,7 +5,6 @@ import Button from './Button';
 import './PlaybackControlsBar.css';
 
 function PlaybackControlsBar(props) {
-
   // Declared inside the component for setting a bound callback.
   const playbackButtons = [
     {
@@ -36,16 +35,13 @@ function PlaybackControlsBar(props) {
     },
   ];
 
-  const buttons = playbackButtons.map(
-    (button) => {
-      return withFontAwesome({
-        key: button.name,
-        callback: button.callback,
-        icon: button.icon,
-        extraClass: button.extraClass,
-      })(Button);
-    }
-  );
+  const buttons = playbackButtons.map(button =>
+    withFontAwesome({
+      key: button.name,
+      callback: button.callback,
+      icon: button.icon,
+      extraClass: button.extraClass,
+    })(Button));
 
   return (
     <div className="PlaybackControlsBar">

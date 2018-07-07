@@ -1,18 +1,17 @@
 import React, { Component } from 'react';
-import FilePlayer from "react-player/lib/players/FilePlayer";
+import FilePlayer from 'react-player/lib/players/FilePlayer';
 
 import { formatTime } from '../../utils';
-import Player from "./Player";
-import PlaybackControlsBar from "./PlaybackControlsBar";
-import Seekbar from "./Seekbar";
-import SongInfo from "./SongInfo";
+import Player from './Player';
+import PlaybackControlsBar from './PlaybackControlsBar';
+import Seekbar from './Seekbar';
+import SongInfo from './SongInfo';
 
 class PlayerContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       playing: false,
-      progress: 0,
       played: 0,
       playedSeconds: 0,
       duration: 100,
@@ -21,12 +20,75 @@ class PlayerContainer extends Component {
     this.stepSeconds = 5;
   }
 
+  onProgress = (state) => {
+    if (!this.state.seeking) {
+      this.setState(state);
+    }
+  };
+
+  onPlay = () => {
+    this.setState({ playing: true }, () => {
+      this.props.onPlay(true);
+    });
+  };
+
+  onPause = () => {
+    this.setState({ playing: false }, () => {
+      this.props.onPlay(false);
+    });
+  };
+  onSeekMouseDown = () => {
+    this.setState({ seeking: true });
+  };
+  onSeekChange = (e) => {
+    this.setState({ played: parseFloat(e.target.value) });
+  };
+  onSeekMouseUp = (e) => {
+    this.setState({ seeking: false });
+    this.player.seekTo(parseFloat(e.target.value));
+  };
+  onStep = (step) => {
+    let played = (this.player.getCurrentTime() + step) / this.state.duration;
+    if (played < 0 || played > 1) {
+      played = (played < 0) ? 0 : 1;
+    }
+    this.player.seekTo(played);
+    this.setState({
+      played,
+      playedSeconds: played * this.state.duration,
+    });
+  };
+  onStepForward = () => {
+    this.onStep(this.stepSeconds);
+  };
+  onStepBack = () => {
+    this.onStep(-this.stepSeconds);
+  };
+  onEnded = () => {
+    this.setState({ playing: this.state.loop }, () => {
+      //  TODO: Add conditions to play next
+      this.props.onNext();
+      this.setState({ playing: true });
+    });
+  };
+  onDuration = (duration) => {
+    this.setState({ duration });
+  };
+
+  playPause = () => {
+    this.setState(prevState => ({ playing: !prevState.playing }));
+  };
+
+  ref = (player) => {
+    this.player = player;
+  };
+
   render() {
-    const { currentSong = {artist: {}, album: {}} } = this.props;
+    const { currentSong = { artist: {}, album: {} } } = this.props;
     return (
       <Player>
         <FilePlayer
-          style={{display: 'none'}}
+          style={{ display: 'none' }}
           ref={this.ref}
           url={currentSong.preview}
           playing={this.state.playing}
@@ -60,68 +122,6 @@ class PlayerContainer extends Component {
         />
       </Player>
     );
-  }
-
-  playPause = () => {
-    this.setState(prevState => {
-      return { playing: !prevState.playing };
-    });
-  };
-  onProgress = (state) => {
-    if (!this.state.seeking) {
-      this.setState(state);
-    }
-  };
-  onPlay = () => {
-    this.setState({ playing: true }, () => {
-     this.props.onPlay(true);
-    });
-  };
-  onPause = () => {
-    this.setState({ playing: false }, () => {
-      this.props.onPlay(false);
-    });
-  };
-  onSeekMouseDown = () => {
-    this.setState({ seeking: true });
-  };
-  onSeekChange = e => {
-    this.setState({ played: parseFloat(e.target.value) });
-  };
-  onSeekMouseUp = e => {
-    this.setState({ seeking: false });
-    this.player.seekTo(parseFloat(e.target.value));
-  };
-  onStep = (step) => {
-    let played = (this.player.getCurrentTime() + step) / this.state.duration;
-    if (played < 0 || played > 1) {
-      played = (played < 0) ? 0 : 1;
-    }
-    this.player.seekTo(played);
-    this.setState({
-      played,
-      playedSeconds: played * this.state.duration,
-    });
-  };
-  onStepForward = () => {
-    this.onStep(this.stepSeconds);
-  };
-  onStepBack = () => {
-    this.onStep(-this.stepSeconds);
-  };
-  onEnded = () => {
-    this.setState({ playing: this.state.loop }, () => {
-    //  TODO: Add conditions to play next
-      this.props.onNext();
-      this.setState({ playing: true });
-    });
-
-  };
-  onDuration = (duration) => {
-    this.setState({ duration });
-  };
-  ref = player => {
-    this.player = player;
   }
 }
 

@@ -7,19 +7,16 @@ import {
   faForward,
   faBackward,
   faFastForward,
-  faFastBackward
+  faFastBackward,
 } from '@fortawesome/free-solid-svg-icons';
 
 library.add(faPlay, faPause, faForward, faBackward, faFastForward, faFastBackward);
 
 // Created for practice with HOC.
-const withFontAwesome = ({icon, ...buttonProps}) => WrappedComponent => {
-
-  return (
-    <WrappedComponent {...buttonProps}>
-      <FontAwesomeIcon icon={icon} />
-    </WrappedComponent>
-  );
-};
+const withFontAwesome = ({ icon, ...buttonProps }) => WrappedComponent => (
+  <WrappedComponent {...buttonProps}>
+    <FontAwesomeIcon icon={icon} />
+  </WrappedComponent>
+);
 
 export default withFontAwesome;

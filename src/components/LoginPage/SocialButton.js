@@ -1,8 +1,8 @@
 import React from 'react';
 
-function SocialButton(props) {
+function SocialButton({ name }) {
   return (
-    <button type="button">{props.name}</button>
+    <button type="button">{name}</button>
   );
 }
 

@@ -3,14 +3,18 @@ import React from 'react';
 import Song from './Song';
 import './SongsList.css';
 
-function SongsList({ songs, setSong, currentTrack, currentPlaying }) {
-
+function SongsList({
+  songs,
+  setSong,
+  currentTrack,
+  currentPlaying,
+}) {
   const setClassName = (i) => {
-    let className = "Song";
+    let className = 'Song';
     if (currentTrack === i) {
-      className += " Song-current";
+      className += ' Song-current';
       if (currentPlaying) {
-        className += " Song-playing";
+        className += ' Song-playing';
       }
     }
     return className;

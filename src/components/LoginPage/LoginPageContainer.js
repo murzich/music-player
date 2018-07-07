@@ -1,22 +1,18 @@
 import React, { Component } from 'react';
-import LoginPage from "./LoginPage";
+
+import LoginPage from './LoginPage';
 
 class LoginPageContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
       loginTab: true,
-      email: '',
-      password: '',
-      confirmPassword: '',
     };
   }
 
   changeForm = (e) => {
     e.preventDefault();
-    this.setState( prevState => {
-      return {loginTab: !prevState.loginTab};
-    })
+    this.setState(prevState => ({ loginTab: !prevState.loginTab }));
   };
 
   handleFormData = (state) => {

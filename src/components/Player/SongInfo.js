@@ -2,7 +2,11 @@ import React, { Fragment } from 'react';
 
 import './SongInfo.css';
 
-function SongInfo({cover, title, artist}) {
+function SongInfo({
+  cover,
+  title,
+  artist,
+}) {
   return (
     <Fragment>
       <img src={cover} alt="album-art" className="SongInfo-albumArt" />

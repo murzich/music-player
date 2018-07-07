@@ -16,7 +16,7 @@ function SearchBar({ value, callback, loading }) {
       </label>
       {loading && (<div className="SearchBar-helper">Loading...</div>)}
     </header>
-);
+  );
 }
 
 export default SearchBar;

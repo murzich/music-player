@@ -1,24 +1,26 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 
-import LoginForm from "./LoginForm";
-import RegistrationForm from "./RegistrationForm";
-import SocialLogin from "./SocialLogin";
+import LoginForm from './LoginForm';
+import RegistrationForm from './RegistrationForm';
+import SocialLogin from './SocialLogin';
 
 function LoginPage(props) {
-  const currentFrom = (props.loginTab)
+  const currentFrom = (props.loginTab) ? (
     // TODO: combine into single component
-    ? <LoginForm
-        handleFormData={props.handleFormData}
-        email={props.email}
-        password={props.password}
-      />
-    : <RegistrationForm
-        handleFormData={props.handleFormData}
-        email={props.email}
-        password={props.password}
-        passwordConfirm={props.passwordConfirm}
-    />;
+    <LoginForm
+      handleFormData={props.handleFormData}
+      email={props.email}
+      password={props.password}
+    />
+  ) : (
+    <RegistrationForm
+      handleFormData={props.handleFormData}
+      email={props.email}
+      password={props.password}
+      passwordConfirm={props.passwordConfirm}
+    />
+  );
 
   return (
     // TODO: remove inline styles.
@@ -29,13 +31,17 @@ function LoginPage(props) {
       display: 'flex',
       justifyContent: 'center',
       alignItems: 'center',
-    }}>
-      <Link to="/" style={{
+    }}
+    >
+      <Link
+        to="/"
+        style={{
         position: 'absolute',
         right: '10px',
         top: '10px',
         backgroundColor: 'red',
-      }}>
+      }}
+      >
         To Demo Player
       </Link>
       <form
@@ -43,11 +49,10 @@ function LoginPage(props) {
         onSubmit={props.submitCredentials}
         style={{
           backgroundColor: 'darkgrey',
-        }}>
-        <div style={{
-          textAlign: 'right',
-        }}>
-          <a href='' onClick={props.changeForm}>
+        }}
+      >
+        <div style={{ textAlign: 'right' }}>
+          <a href="/login" onClick={props.changeForm}>
             {props.loginTab ? 'Sign up' : 'Sign in'}
           </a>
         </div>
