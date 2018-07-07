@@ -18,7 +18,7 @@ class PageContainer extends Component {
       currentTrack: 0,
       songsList: [],
       loading: false,
-      currentPlaying: false,
+      isPlaying: false,
       input: '',
     };
   }
@@ -66,7 +66,7 @@ class PageContainer extends Component {
   };
 
   onPlay = (status) => {
-    this.setState({ currentPlaying: status });
+    this.setState({ isPlaying: status });
   };
 
   setCurrentSong = (i, e) => {
@@ -103,7 +103,7 @@ class PageContainer extends Component {
       songsList,
       loading,
       currentTrack,
-      currentPlaying,
+      isPlaying,
       input,
     } = this.state;
     const currentSong = songsList[currentTrack];
@@ -121,7 +121,7 @@ class PageContainer extends Component {
             songs={songsList}
             setSong={this.setCurrentSong}
             currentTrack={currentTrack}
-            currentPlaying={currentPlaying}
+            isPlaying={isPlaying}
           />
         </Playlist>
         <Player

@@ -19,13 +19,13 @@ function SongsList({
   songs,
   setSong,
   currentTrack,
-  currentPlaying,
+  isPlaying,
 }) {
   const setClassName = (i) => {
     let className = 'Song';
     if (currentTrack === i) {
       className += ' Song-current';
-      if (currentPlaying) {
+      if (isPlaying) {
         className += ' Song-playing';
       }
     }
