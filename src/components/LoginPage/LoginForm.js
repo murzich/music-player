@@ -16,13 +16,6 @@ function LoginForm({
   email,
   password,
 }) {
-  // TODO: move to the container component's handler
-  const handleChange = (e) => {
-    handleFormData({
-      [e.target.id]: e.target.value,
-    });
-  };
-
   return (
     <fieldset>
       <legend>Login to Deezer.com</legend>
@@ -33,9 +26,9 @@ function LoginForm({
         }}
       >
         <label htmlFor="email">Email: </label>
-        <input id="email" type="email" value={email} onChange={handleChange} />
+        <input id="email" type="email" value={email} onChange={handleFormData} />
         <label htmlFor="password">Password: </label>
-        <input id="password" type="password" value={password} onChange={handleChange} />
+        <input id="password" type="password" value={password} onChange={handleFormData} />
         <button type="submit">Login</button>
       </div>
     </fieldset>

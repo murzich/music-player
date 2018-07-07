@@ -19,13 +19,6 @@ function RegistrationForm({
   password,
   passwordConfirm,
 }) {
-  // TODO: move to the container component's handler
-  const handleChange = (e) => {
-    handleFormData({
-      [e.target.id]: e.target.value,
-    });
-  };
-
   return (
     <fieldset>
       <legend>Register on Deezer.com</legend>
@@ -36,11 +29,11 @@ function RegistrationForm({
         }}
       >
         <label htmlFor="email">Email: </label>
-        <input id="email" type="email" value={email} onChange={handleChange} />
+        <input id="email" type="email" value={email} onChange={handleFormData} />
         <label htmlFor="password">Password: </label>
-        <input id="password" type="password" value={password} onChange={handleChange} />
+        <input id="password" type="password" value={password} onChange={handleFormData} />
         <label htmlFor="passwordConfirm">Confirm password: </label>
-        <input id="passwordConfirm" type="password" value={passwordConfirm} onChange={handleChange} />
+        <input id="passwordConfirm" type="password" value={passwordConfirm} onChange={handleFormData} />
         <button type="submit">Register</button>
       </div>
     </fieldset>

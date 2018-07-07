@@ -21,8 +21,10 @@ class LoginPageContainer extends Component {
     }));
   };
 
-  handleFormData = (state) => {
-    this.setState(state);
+  handleFormData = (e) => {
+    this.setState({
+      [e.target.id]: e.target.value,
+    });
   };
 
   submitCredentials = (e) => {
