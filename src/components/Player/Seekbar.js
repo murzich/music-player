@@ -1,6 +1,14 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import './Seekbar.css';
+
+const propTypes = {
+  played: PropTypes.number.isRequired,
+  onSeekMouseDown: PropTypes.func.isRequired,
+  onSeekMouseUp: PropTypes.func.isRequired,
+  onSeekChange: PropTypes.func.isRequired,
+};
 
 function Seekbar({
   played,
@@ -22,5 +30,7 @@ function Seekbar({
     />
   );
 }
+
+Seekbar.propTypes = propTypes;
 
 export default Seekbar;

@@ -1,37 +1,57 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
 import withFontAwesome from './withFontAwesome';
 import Button from './Button';
 import './PlaybackControlsBar.css';
 
-function PlaybackControlsBar(props) {
+const propTypes = {
+  onPrev: PropTypes.func.isRequired,
+  onStepBack: PropTypes.func.isRequired,
+  onPlayPause: PropTypes.func.isRequired,
+  onStepForward: PropTypes.func.isRequired,
+  onNext: PropTypes.func.isRequired,
+  playing: PropTypes.bool,
+};
+const defaultProps = {
+  playing: false,
+};
+
+function PlaybackControlsBar({
+  onPrev,
+  onStepBack,
+  onPlayPause,
+  onStepForward,
+  onNext,
+  playing,
+}) {
   // Declared inside the component for setting a bound callback.
   const playbackButtons = [
     {
       name: 'Previous',
       icon: 'fast-backward',
-      callback: props.onPrev,
+      callback: onPrev,
     },
     {
       name: 'Back',
       icon: 'backward',
-      callback: props.onStepBack,
+      callback: onStepBack,
     },
     {
       name: 'Play/Pause',
-      icon: (props.playing) ? 'pause' : 'play',
-      callback: props.onPlayPause,
+      icon: (playing) ? 'pause' : 'play',
+      callback: onPlayPause,
       extraClass: 'Button-main',
     },
     {
       name: 'Forward',
       icon: 'forward',
-      callback: props.onStepForward,
+      callback: onStepForward,
     },
     {
       name: 'Next',
       icon: 'fast-forward',
-      callback: props.onNext,
+      callback: onNext,
     },
   ];
 
@@ -49,5 +69,8 @@ function PlaybackControlsBar(props) {
     </div>
   );
 }
+
+PlaybackControlsBar.propTypes = propTypes;
+PlaybackControlsBar.defaultProps = defaultProps;
 
 export default PlaybackControlsBar;
