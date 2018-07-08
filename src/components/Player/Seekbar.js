@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Seekbar.css';
+import style from './Seekbar.css';
 
 const propTypes = {
   played: PropTypes.number.isRequired,
@@ -21,7 +21,7 @@ function Seekbar({
       type="range"
       min="0"
       max="1"
-      className="Seekbar"
+      className={style.Seekbar}
       step="any"
       value={played}
       onMouseDown={onSeekMouseDown}

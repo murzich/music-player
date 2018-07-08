@@ -1,11 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Playlist.css';
+import style from './Playlist.css';
 
 function Playlist({ children }) {
   return (
-    <aside className="Playlist">
+    <aside className={style.Playlist}>
       {children}
     </aside>
   );

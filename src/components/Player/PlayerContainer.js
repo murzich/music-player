@@ -10,6 +10,8 @@ import Seekbar from './Seekbar';
 import SongInfo from './SongInfo';
 import coverArt from '../../assets/album.svg';
 
+import { PlayerTime } from './Player.css';
+
 const propTypes = {
   onPlay: PropTypes.func.isRequired,
   onNext: PropTypes.func.isRequired,
@@ -134,7 +136,8 @@ class PlayerContainer extends Component {
           title={currentSong.title}
           artist={currentSong.artist.name}
         />
-        <div className="Player-time">
+        {/* TODO: Extract to separate component. */}
+        <div className={PlayerTime}>
           {formatTime(this.state.playedSeconds)}
         </div>
         <Seekbar

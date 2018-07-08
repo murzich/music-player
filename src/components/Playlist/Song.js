@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Song.css';
+import style from './Song.css';
 import { formatTime } from '../../utils';
 
 const propTypes = {
@@ -18,11 +18,11 @@ function Song({
   className,
 }) {
   return (
-    <li className="Song-item">
+    <li className={style.SongItem}>
       <a
         href={`play: ${title}`}
         onClick={onClick}
-        className={className}
+        className={style[className]}
       >
         <span>{title}</span>
         <span>{formatTime(duration)}</span>

@@ -22,14 +22,13 @@ function SongsList({
   isPlaying,
 }) {
   const setClassName = (i) => {
-    let className = 'Song';
     if (currentTrack === i) {
-      className += ' Song-current';
       if (isPlaying) {
-        className += ' Song-playing';
+        return 'SongPlaying';
       }
+      return 'SongCurrent';
     }
-    return className;
+    return 'Song';
   };
 
   const songsElements = songs.map(({ id, title, duration }, i) => (

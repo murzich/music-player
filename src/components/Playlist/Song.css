@@ -15,16 +15,20 @@
   text-shadow: 0 1px 0 var(--bg-body);
   color: var(--color-primary);
 }
-.Song-current {
+.SongCurrent {
+  composes: Song;
   color: var(--song-active);
 }
-.Song-playing::before {
+.SongPlaying {
+  composes: SongCurrent;
+}
+.SongPlaying::before {
   display: inline-block;
   position: absolute;
   left: -0.725rem;
   content: "\25BA";
 }
-.Song-item {
+.SongItem {
   padding: .5rem;
   color: var(--song-inactive);
 }

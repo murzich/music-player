@@ -1,29 +1,27 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Button.css';
+import style from './Button.css';
 
 const propTypes = {
   callback: PropTypes.func.isRequired,
-  extraClass: PropTypes.string,
+  className: PropTypes.string,
   children: PropTypes.node,
 };
 const defaultProps = {
-  extraClass: '',
+  className: 'Button',
   children: 'button',
 };
 
 function Button({
   callback,
-  extraClass,
+  className,
   children,
 }) {
-  const className = `Button ${extraClass}`;
-
   return (
     <button
       onClick={callback}
-      className={className}
+      className={style[className]}
     >
       {children}
     </button>

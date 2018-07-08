@@ -1,12 +1,12 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import './Player.css';
+import style from './Player.css';
 
 function Player({ children }) {
   return (
-    <div className="Player-wrapper">
-      <main className="Player">
+    <div className={style.PlayerWrapper}>
+      <main className={style.Player}>
         {children}
       </main>
     </div>

@@ -2,7 +2,7 @@
   position: sticky;
   top: 0;
 }
-.SearchBar-input {
+.SearchBarInput {
   display: block;
   width: 100%;
   border: none;
@@ -10,10 +10,10 @@
   padding: 0.25rem;
   color: var(--color-primary);
 }
-.SearchBar-label {
+.SearchBarLabel {
   position: relative;
 }
-.SearchBar-helper {
+.SearchBarHelper {
   position: absolute;
   right: 15px;
   padding: .25rem;

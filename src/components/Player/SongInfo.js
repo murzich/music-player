@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
-import './SongInfo.css';
+import style from './SongInfo.css';
 
 const propTypes = {
   cover: PropTypes.string.isRequired,
@@ -17,10 +17,10 @@ function SongInfo({
   return (
     <Fragment>
       {/* TODO: Extract cover image component. */}
-      <img src={cover} alt="album-art" className="SongInfo-albumArt" />
-      <div className="SongInfo-track">
-        <h2 className="SongInfo-trackName">{title}</h2>
-        <div className="SongInfo-artistName">{artist}</div>
+      <img src={cover} alt="album-art" className={style.SongInfoAlbumArt} />
+      <div className={style.SongInfoTrack}>
+        <h2 className={style.SongInfoTrackName}>{title}</h2>
+        <div className={style.SongInfoArtistName}>{artist}</div>
       </div>
     </Fragment>
   );

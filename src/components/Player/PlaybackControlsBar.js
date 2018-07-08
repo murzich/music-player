@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 
 import withFontAwesome from './withFontAwesome';
 import Button from './Button';
-import './PlaybackControlsBar.css';
+import style from './PlaybackControlsBar.css';
 
 const propTypes = {
   onPrev: PropTypes.func.isRequired,
@@ -41,7 +41,7 @@ function PlaybackControlsBar({
       name: 'Play/Pause',
       icon: (playing) ? 'pause' : 'play',
       callback: onPlayPause,
-      extraClass: 'Button-main',
+      className: 'Button-main',
     },
     {
       name: 'Forward',
@@ -60,11 +60,11 @@ function PlaybackControlsBar({
       key: button.name,
       callback: button.callback,
       icon: button.icon,
-      extraClass: button.extraClass,
+      className: button.className,
     })(Button));
 
   return (
-    <div className="PlaybackControlsBar">
+    <div className={style.PlaybackControlsBar}>
       {buttons}
     </div>
   );
