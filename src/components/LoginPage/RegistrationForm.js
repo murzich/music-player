@@ -1,33 +1,62 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-function RegistrationForm(props) {
+import style from './RegistrationForm.css';
+import Button from '../common/Button';
+import InputText from '../common/InputText';
 
-  // TODO: move to the container component's handler
-  const handleChange = (e) => {
-    props.handleFormData({
-      [e.target.id]: e.target.value,
-    });
-  };
+const propTypes = {
+  handleFormData: PropTypes.func.isRequired,
+  email: PropTypes.string,
+  password: PropTypes.string,
+  passwordConfirm: PropTypes.string,
+};
+const defaultProps = {
+  email: '',
+  password: '',
+  passwordConfirm: '',
+};
 
+function RegistrationForm({
+  handleFormData,
+  email,
+  password,
+  passwordConfirm,
+}) {
   return (
-    <fieldset>
-      <legend>Register on Deezer.com</legend>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
-        <label htmlFor="email">Email: </label>
-        <input id="email" type="email" value={props.email} onChange={handleChange}/>
-        <label htmlFor="password">Password: </label>
-        <input id="password" type="password" value={props.password} onChange={handleChange}/>
-        <label htmlFor="passwordConfirm">Confirm password: </label>
-        <input id="passwordConfirm" type="password" value={props.passwordConfirm} onChange={handleChange}/>
-        <button type="submit">Register</button>
+    <fieldset className={style.RegistrationFormFieldset}>
+      <legend>
+        <h1 className={style.RegistrationFormTitle}>Register on Deezer.com</h1>
+      </legend>
+      <div className={style.RegistrationForm}>
+        <InputText
+          id="email"
+          label="Email: "
+          type="email"
+          value={email}
+          onChange={handleFormData}
+        />
+        <InputText
+          id="password"
+          label="Password: "
+          type="password"
+          value={password}
+          onChange={handleFormData}
+        />
+        <InputText
+          id="passwordConfirm"
+          label="Confirm password: "
+          type="password"
+          value={passwordConfirm}
+          onChange={handleFormData}
+        />
+        <Button type="submit">Register</Button>
       </div>
     </fieldset>
   );
 }
+
+RegistrationForm.propTypes = propTypes;
+RegistrationForm.defaultProps = defaultProps;
 
 export default RegistrationForm;

@@ -1,0 +1,11 @@
+.LoginFrom {
+  display: flex;
+  flex-direction: column;
+}
+.LoginFromFieldset {
+  border: thin solid var(--bg-body);
+}
+.LoginFormTitle {
+  font-size: 1.25rem;
+  margin: .5rem;
+}

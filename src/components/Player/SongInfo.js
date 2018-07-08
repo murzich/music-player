@@ -1,17 +1,31 @@
 import React, { Fragment } from 'react';
+import PropTypes from 'prop-types';
 
-import './SongInfo.css';
+import style from './SongInfo.css';
 
-function SongInfo({cover, title, artist}) {
+const propTypes = {
+  cover: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  artist: PropTypes.string.isRequired,
+};
+
+function SongInfo({
+  cover,
+  title,
+  artist,
+}) {
   return (
     <Fragment>
-      <img src={cover} alt="album-art" className="SongInfo-albumArt" />
-      <div className="SongInfo-track">
-        <h2 className="SongInfo-trackName">{title}</h2>
-        <div className="SongInfo-artistName">{artist}</div>
+      {/* TODO: Extract cover image component. */}
+      <img src={cover} alt="album-art" className={style.SongInfoAlbumArt} />
+      <div className={style.SongInfoTrack}>
+        <h2 className={style.SongInfoTrackName}>{title}</h2>
+        <div className={style.SongInfoArtistName}>{artist}</div>
       </div>
     </Fragment>
   );
 }
+
+SongInfo.propTypes = propTypes;
 
 export default SongInfo;

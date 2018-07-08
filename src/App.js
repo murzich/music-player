@@ -1,8 +1,9 @@
-import React, { Component, Fragment } from 'react';
+import React, { Fragment } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 
-import PageContainer from "./components/PageContainer";
-import LoginPageContainer from "./components/LoginPage/LoginPageContainer";
+import PageContainer from './containers/PageContainer';
+import LoginPageContainer from './containers/LoginPageContainer';
+import Button from './components/common/Button';
 
 import { Provider } from 'react-redux';
 import rootReducer from './reducers';
@@ -14,32 +15,37 @@ const store = createStore(rootReducer, compose(
   window.devToolsExtension ? window.devToolsExtension() : f => f,
 ));
 
-class App extends Component {
-  render() {
-    return (
-      <Provider store={store}>
-        <BrowserRouter>
-          <div>
-            <Route exact path="/" render={() => (
+function App() {
+  return (
+    <Provider store={store}>
+      <BrowserRouter>
+        <div>
+          <Route
+            exact
+            path="/"
+            render={() => (
               <Fragment>
-                <Link to="/login" style={{
-                  position: 'absolute',
-                  right: '10px',
-                  top: '10px',
-                  backgroundColor: 'red',
-                }}>
-                  Login/Sign up
+                {/* TODO: Remove inline styles. */}
+                <Link
+                  to="/login"
+                  style={{
+                    position: 'absolute',
+                    right: '10px',
+                    top: '10px',
+                    zIndex: 1,
+                  }}
+                >
+                  <Button>Login/Sign up</Button>
                 </Link>
                 <PageContainer />
               </Fragment>
-            )} />
-            <Route path="/login" component={LoginPageContainer}>
-            </Route>
-          </div>
-        </BrowserRouter>
-      </Provider>
-    );
-  }
+            )}
+          />
+          <Route path="/login" component={LoginPageContainer} />
+        </div>
+      </BrowserRouter>
+    </Provider>
+  );
 }
 
 export default App;

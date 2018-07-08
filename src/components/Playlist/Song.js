@@ -1,13 +1,28 @@
 import React from 'react';
-import { formatTime } from "../../utils";
-import './Song.css';
+import PropTypes from 'prop-types';
 
-function Song({ title, duration, onClick, i, className }) {
+import style from './Song.css';
+import { formatTime } from '../../utils';
+
+const propTypes = {
+  title: PropTypes.string.isRequired,
+  duration: PropTypes.number.isRequired,
+  onClick: PropTypes.func.isRequired,
+  className: PropTypes.string.isRequired,
+};
+
+function Song({
+  title,
+  duration,
+  onClick,
+  className,
+}) {
   return (
-    <li className="Song-item">
-      <a href=""
-         onClick={onClick.bind(this, i)}
-         className={className}
+    <li className={style.SongItem}>
+      <a
+        href={`play: ${title}`}
+        onClick={onClick}
+        className={style[className]}
       >
         <span>{title}</span>
         <span>{formatTime(duration)}</span>
@@ -15,5 +30,7 @@ function Song({ title, duration, onClick, i, className }) {
     </li>
   );
 }
+
+Song.propTypes = propTypes;
 
 export default Song;

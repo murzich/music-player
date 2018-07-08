@@ -1,4 +1,4 @@
-.Page-wrapper {
+.PageWrapper {
   display: flex;
   justify-content: center;
   align-items: center;
@@ -16,6 +16,7 @@
   height: 600px;
   box-shadow: 0 0 3rem black;
   overflow: hidden;
+  border-radius: .5rem;
 }
 .Page::before {
   /* --bg-art-image is set from the component style prop */

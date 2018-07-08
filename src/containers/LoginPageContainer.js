@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
-import LoginPage from "./LoginPage";
+
+import LoginPage from '../components/LoginPage/LoginPage';
 
 class LoginPageContainer extends Component {
   constructor(props) {
@@ -8,21 +9,26 @@ class LoginPageContainer extends Component {
       loginTab: true,
       email: '',
       password: '',
-      confirmPassword: '',
+      passwordConfirm: '',
     };
   }
 
   changeForm = (e) => {
     e.preventDefault();
-    this.setState( prevState => {
-      return {loginTab: !prevState.loginTab};
-    })
+    this.setState(prevState => ({
+      loginTab: !prevState.loginTab,
+      passwordConfirm: '',
+    }));
   };
 
-  handleFormData = (state) => {
-    this.setState(state);
+  handleFormData = (e) => {
+    this.setState({
+      [e.target.id]: e.target.value,
+    });
   };
 
+  // TODO: Remove conosle.log after adding the Submitting.
+  /* eslint-disable no-console */
   submitCredentials = (e) => {
     e.preventDefault();
     console.log(this.state);
@@ -31,7 +37,7 @@ class LoginPageContainer extends Component {
   render() {
     return (
       <LoginPage
-        loginTab={this.state.loginTab}
+        {...this.state}
         changeForm={this.changeForm}
         submitCredentials={this.submitCredentials}
         handleFormData={this.handleFormData}

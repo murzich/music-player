@@ -1,61 +1,78 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import PropTypes from 'prop-types';
 
-import LoginForm from "./LoginForm";
-import RegistrationForm from "./RegistrationForm";
-import SocialLogin from "./SocialLogin";
+import LoginForm from './LoginForm';
+import RegistrationForm from './RegistrationForm';
+import SocialLogin from './SocialLogin';
+import Button from '../common/Button';
 
-function LoginPage(props) {
-  const currentFrom = (props.loginTab)
+import style from './LoginPage.css';
+
+const propTypes = {
+  loginTab: PropTypes.bool.isRequired,
+  changeForm: PropTypes.func.isRequired,
+  submitCredentials: PropTypes.func.isRequired,
+  handleFormData: PropTypes.func.isRequired,
+  email: PropTypes.string,
+  password: PropTypes.string,
+  passwordConfirm: PropTypes.string,
+};
+const defaultProps = {
+  email: '',
+  password: '',
+  passwordConfirm: '',
+};
+
+function LoginPage({
+  loginTab,
+  changeForm,
+  submitCredentials,
+  handleFormData,
+  email,
+  password,
+  passwordConfirm,
+}) {
+  const currentForm = (loginTab) ? (
     // TODO: combine into single component
-    ? <LoginForm
-        handleFormData={props.handleFormData}
-        email={props.email}
-        password={props.password}
-      />
-    : <RegistrationForm
-        handleFormData={props.handleFormData}
-        email={props.email}
-        password={props.password}
-        passwordConfirm={props.passwordConfirm}
-    />;
+    <LoginForm
+      handleFormData={handleFormData}
+      email={email}
+      password={password}
+    />
+  ) : (
+    <RegistrationForm
+      handleFormData={handleFormData}
+      email={email}
+      password={password}
+      passwordConfirm={passwordConfirm}
+    />
+  );
 
   return (
-    // TODO: remove inline styles.
-    <div style={{
-      backgroundColor: 'aqua',
-      minHeight: '100vh',
-      minWidth: '100vw',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}>
-      <Link to="/" style={{
-        position: 'absolute',
-        right: '10px',
-        top: '10px',
-        backgroundColor: 'red',
-      }}>
-        To Demo Player
+    <div className={style.LoginPage}>
+      <Link to="/" className={style.LoginPageLink}>
+        <Button>To Demo Player</Button>
       </Link>
       <form
-        action=""
-        onSubmit={props.submitCredentials}
-        style={{
-          backgroundColor: 'darkgrey',
-        }}>
-        <div style={{
-          textAlign: 'right',
-        }}>
-          <a href='' onClick={props.changeForm}>
-            {props.loginTab ? 'Sign up' : 'Sign in'}
-          </a>
+        onSubmit={submitCredentials}
+        className={style.LoginPageForm}
+      >
+        <div>
+          <div className={style.LoginPageChangeForm}>
+            <a href="/login" onClick={changeForm}>
+              {loginTab ? 'Sign up' : 'Sign in'}
+            </a>
+          </div>
+          {currentForm}
         </div>
-        {currentFrom}
         <SocialLogin />
       </form>
     </div>
   );
 }
+
+LoginPage.propTypes = propTypes;
+LoginPage.defaultProps = defaultProps;
 
 export default LoginPage;

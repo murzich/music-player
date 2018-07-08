@@ -1,19 +1,34 @@
 import React from 'react';
+import PropTypes from 'prop-types';
 
-import './Button.css';
+import style from './Button.css';
 
-function Button({callback, extraClass, children}) {
-  // TODO: clear `||` when defaultProps will be used.
-  const className = `Button ${extraClass || ''}`;
+const propTypes = {
+  callback: PropTypes.func.isRequired,
+  className: PropTypes.string,
+  children: PropTypes.node,
+};
+const defaultProps = {
+  className: 'Button',
+  children: 'button',
+};
 
+function Button({
+  callback,
+  className,
+  children,
+}) {
   return (
     <button
       onClick={callback}
-      className={className}
+      className={style[className]}
     >
-      {children || 'default button'}
+      {children}
     </button>
   );
 }
+
+Button.propTypes = propTypes;
+Button.defaultProps = defaultProps;
 
 export default Button;
