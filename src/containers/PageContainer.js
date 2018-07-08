@@ -1,18 +1,12 @@
 import React, { Component } from 'react';
-import axios from 'axios';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import Page from '../components/layout/Page';
 import Playlist, { SearchBar, SongsList } from '../components/Playlist';
-import * as mockResponse from '../mock.json';
 import PlayerContainer from './PlayerContainer';
-
 import fetchSongs from '../actions';
 
-import { connect } from 'react-redux';
-
-const deezerSearch = 'http://api.deezer.com/search/track';
-const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
-const baseUrl = corsAnywhere + deezerSearch;
 const startQuery = 'artist:"system of a down"';
 
 class PageContainer extends Component {
@@ -37,11 +31,10 @@ class PageContainer extends Component {
     if (!searchQuery) {
       this.setState({
         input: '',
-        loading: false,
       });
     } else {
       this.setState({ input: searchQuery }, () => {
-        this.getSongsList(searchQuery);
+        this.props.fetchSongs(searchQuery);
       });
     }
   };
@@ -76,28 +69,6 @@ class PageContainer extends Component {
   setCurrentSong = (i, e) => {
     e.preventDefault();
     this.setState({ currentTrack: i });
-  };
-
-  getSongsList = (searchQuery) => {
-    this.setState({ loading: true }, () => {
-      axios.get(baseUrl, {
-        params: {
-          q: searchQuery,
-          limit: 15,
-        },
-      }).then((response) => {
-        this.setState({
-          songsList: response.data.data,
-          loading: false,
-          currentTrack: 0,
-        });
-      }).catch(() => {
-        this.setState({
-          songsList: mockResponse.data,
-          loading: false,
-        });
-      });
-    });
   };
 
   render() {
@@ -139,6 +110,16 @@ const mapStateToProps = (store) => {
     songsList,
     error,
   };
+};
+
+PageContainer.propTypes = {
+  fetchSongs: PropTypes.func.isRequired,
+  loading: PropTypes.bool.isRequired,
+  songsList: PropTypes.arrayOf(PropTypes.shape({
+    album: PropTypes.shape({
+      cover_medium: PropTypes.string,
+    }),
+  })).isRequired,
 };
 
 export default connect(mapStateToProps, { fetchSongs })(PageContainer);

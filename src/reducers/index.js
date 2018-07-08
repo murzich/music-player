@@ -1,15 +1,15 @@
 import {
   FETCH_SONGS_FAILURE,
   FETCH_SONGS_REQUEST,
-  FETCH_SONGS_SUCCESS
-} from "../actions/types";
+  FETCH_SONGS_SUCCESS,
+} from '../actions/types';
 
 const initialState = {
   songsList: [],
   loading: false,
 };
 
-export default function(state = initialState, action) {
+export default function (state = initialState, action) {
   switch (action.type) {
     case FETCH_SONGS_REQUEST:
       return {

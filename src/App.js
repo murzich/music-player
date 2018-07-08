@@ -1,14 +1,14 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
+import { Provider } from 'react-redux';
+import { applyMiddleware, compose, createStore } from 'redux';
+import reduxThunk from 'redux-thunk';
 
 import PageContainer from './containers/PageContainer';
 import LoginPageContainer from './containers/LoginPageContainer';
 import Button from './components/common/Button';
 
-import { Provider } from 'react-redux';
 import rootReducer from './reducers';
-import { applyMiddleware, compose, createStore } from 'redux';
-import reduxThunk from 'redux-thunk';
 
 const store = createStore(rootReducer, compose(
   applyMiddleware(reduxThunk),
