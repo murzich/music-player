@@ -1,6 +1,6 @@
 import React, { Component } from 'react';
 
-import LoginPage from './LoginPage';
+import LoginPage from '../components/LoginPage/LoginPage';
 
 class LoginPageContainer extends Component {
   constructor(props) {
@@ -27,6 +27,8 @@ class LoginPageContainer extends Component {
     });
   };
 
+  // TODO: Remove conosle.log after adding the Submitting.
+  /* eslint-disable no-console */
   submitCredentials = (e) => {
     e.preventDefault();
     console.log(this.state);

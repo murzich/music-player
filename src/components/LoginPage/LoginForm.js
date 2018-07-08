@@ -1,6 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import Button from '../common/Button';
+import InputText from '../common/InputText';
+
+import style from './LoginForm.css';
+
 const propTypes = {
   handleFormData: PropTypes.func.isRequired,
   email: PropTypes.string,
@@ -17,19 +22,14 @@ function LoginForm({
   password,
 }) {
   return (
-    <fieldset>
-      <legend>Login to Deezer.com</legend>
-      <div
-        style={{
-          display: 'flex',
-          flexDirection: 'column',
-        }}
-      >
-        <label htmlFor="email">Email: </label>
-        <input id="email" type="email" value={email} onChange={handleFormData} />
-        <label htmlFor="password">Password: </label>
-        <input id="password" type="password" value={password} onChange={handleFormData} />
-        <button type="submit">Login</button>
+    <fieldset className={style.LoginFromFieldset}>
+      <legend>
+        <h1 className={style.LoginFormTitle}>Login to Deezer.com</h1>
+      </legend>
+      <div className={style.LoginFrom}>
+        <InputText id="email" label="Email: " type="email" value={email} onChange={handleFormData} />
+        <InputText id="password" label="Password: " type="password" value={password} onChange={handleFormData} />
+        <Button type="submit">Login</Button>
       </div>
     </fieldset>
   );

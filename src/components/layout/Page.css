@@ -16,9 +16,9 @@
   height: 600px;
   box-shadow: 0 0 3rem black;
   overflow: hidden;
+  border-radius: .5rem;
 }
 .Page::before {
-  --bg-art-image: '';
   /* --bg-art-image is set from the component style prop */
   background-image: linear-gradient(rgba(15,10,0,0.5),rgba(15,10,0,0.5)), var(--bg-art-image);
   background-repeat: no-repeat;

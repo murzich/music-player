@@ -1,0 +1,9 @@
+.SocialLogin {
+  display: flex;
+  flex-direction: column;
+}
+.SocialLoginTitle {
+  font-size: 1.25rem;
+  margin: .5rem;
+  font-weight: 700;
+}

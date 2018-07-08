@@ -1,16 +1,12 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-
 import FilePlayer from 'react-player/lib/players/FilePlayer';
 
-import { formatTime } from '../../utils';
-import Player from './Player';
-import PlaybackControlsBar from './PlaybackControlsBar';
-import Seekbar from './Seekbar';
-import SongInfo from './SongInfo';
-import coverArt from '../../assets/album.svg';
+import { formatTime } from '../utils';
+import { Player, PlaybackControlsBar, SongInfo, Seekbar } from '../components/Player';
 
-import { PlayerTime } from './Player.css';
+import coverArt from '../assets/album.svg';
+import { PlayerTime } from '../components/layout/Player.css';
 
 const propTypes = {
   onPlay: PropTypes.func.isRequired,

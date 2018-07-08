@@ -1,8 +1,10 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 
-import PageContainer from './components/PageContainer';
-import LoginPageContainer from './components/LoginPage/LoginPageContainer';
+import PageContainer from './containers/PageContainer';
+import LoginPageContainer from './containers/LoginPageContainer';
+
+import Button from './components/common/Button';
 
 function App() {
   return (
@@ -13,16 +15,17 @@ function App() {
           path="/"
           render={() => (
             <Fragment>
+              {/* TODO: Remove inline styles. */}
               <Link
                 to="/login"
                 style={{
                   position: 'absolute',
                   right: '10px',
                   top: '10px',
-                  backgroundColor: 'red',
+                  zIndex: 1,
                 }}
               >
-                Login/Sign up
+                <Button>Login/Sign up</Button>
               </Link>
               <PageContainer />
             </Fragment>

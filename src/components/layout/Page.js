@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import style from './Page.css';
 
 function Page({ children, coverArt }) {
-  const backgroundImage = (coverArt) ? { '--bg-art-image': `url(${coverArt})` } : undefined;
+  const backgroundImage = (coverArt) ? { '--bg-art-image': `url("${coverArt}")` } : undefined;
 
   return (
     <div className={style.PageWrapper}>

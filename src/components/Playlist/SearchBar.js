@@ -1,6 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
+import InputText from '../common/InputText';
 import style from './SearchBar.css';
 
 const propTypes = {
@@ -16,17 +17,16 @@ const defaultProps = {
 function SearchBar({ value, callback, loading }) {
   return (
     <header className={style.SearchBar}>
-      <label className={style.SearchBarLabel} htmlFor="search">
-        Search songs on Deezer
-        <input
-          id="search"
-          type="search"
-          value={value}
-          onChange={callback}
-          className={style.SearchBarInput}
-        />
-      </label>
-      {loading && (<div className={style.SearchBarHelper}>Loading...</div>)}
+      <InputText
+        id="search"
+        label="Search songs on Deezer"
+        type="search"
+        value={value}
+        onChange={callback}
+      >
+        {loading && (<div className={style.SearchBarHelper}>Loading...</div>)}
+      </InputText>
+
     </header>
   );
 }

@@ -1,0 +1,22 @@
+.InputText {
+  display: inline-block;
+  width: 100%;
+  border: thin solid transparent;
+  -webkit-appearance: none;
+  border-radius: 2px;
+  background-color: var(--bg-body);
+  padding: 0.25rem;
+  color: var(--color-primary);
+  transition: all 200ms ease;
+}
+.InputText:hover {
+  border-color: var(--bg-main);
+}
+.InputText:focus {
+  outline: none;
+  border-color: var(--song-active);
+}
+.InputTextLabel {
+  position: relative;
+  font-size: .75rem;
+}

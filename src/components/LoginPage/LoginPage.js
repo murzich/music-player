@@ -5,6 +5,9 @@ import PropTypes from 'prop-types';
 import LoginForm from './LoginForm';
 import RegistrationForm from './RegistrationForm';
 import SocialLogin from './SocialLogin';
+import Button from '../common/Button';
+
+import style from './LoginPage.css';
 
 const propTypes = {
   loginTab: PropTypes.bool.isRequired,
@@ -47,40 +50,22 @@ function LoginPage({
   );
 
   return (
-    // TODO: remove inline styles.
-    <div style={{
-      backgroundColor: 'aqua',
-      minHeight: '100vh',
-      minWidth: '100vw',
-      display: 'flex',
-      justifyContent: 'center',
-      alignItems: 'center',
-    }}
-    >
-      <Link
-        to="/"
-        style={{
-          position: 'absolute',
-          right: '10px',
-          top: '10px',
-          backgroundColor: 'red',
-        }}
-      >
-        To Demo Player
+    <div className={style.LoginPage}>
+      <Link to="/" className={style.LoginPageLink}>
+        <Button>To Demo Player</Button>
       </Link>
       <form
-        action=""
         onSubmit={submitCredentials}
-        style={{
-          backgroundColor: 'darkgrey',
-        }}
+        className={style.LoginPageForm}
       >
-        <div style={{ textAlign: 'right' }}>
-          <a href="/login" onClick={changeForm}>
-            {loginTab ? 'Sign up' : 'Sign in'}
-          </a>
+        <div>
+          <div className={style.LoginPageChangeForm}>
+            <a href="/login" onClick={changeForm}>
+              {loginTab ? 'Sign up' : 'Sign in'}
+            </a>
+          </div>
+          {currentForm}
         </div>
-        {currentForm}
         <SocialLogin />
       </form>
     </div>
