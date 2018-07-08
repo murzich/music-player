@@ -2,17 +2,11 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 
 import './SongInfo.css';
-import albumArt from '../../assets/album.svg';
 
 const propTypes = {
-  cover: PropTypes.string,
-  title: PropTypes.string,
-  artist: PropTypes.string,
-};
-const defaultProps = {
-  cover: albumArt,
-  title: 'Song Name',
-  artist: 'Artist',
+  cover: PropTypes.string.isRequired,
+  title: PropTypes.string.isRequired,
+  artist: PropTypes.string.isRequired,
 };
 
 function SongInfo({
@@ -33,6 +27,5 @@ function SongInfo({
 }
 
 SongInfo.propTypes = propTypes;
-SongInfo.defaultProps = defaultProps;
 
 export default SongInfo;

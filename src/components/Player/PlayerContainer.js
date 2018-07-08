@@ -1,4 +1,6 @@
 import React, { Component } from 'react';
+import PropTypes from 'prop-types';
+
 import FilePlayer from 'react-player/lib/players/FilePlayer';
 
 import { formatTime } from '../../utils';
@@ -6,6 +8,35 @@ import Player from './Player';
 import PlaybackControlsBar from './PlaybackControlsBar';
 import Seekbar from './Seekbar';
 import SongInfo from './SongInfo';
+import coverArt from '../../assets/album.svg';
+
+const propTypes = {
+  onPlay: PropTypes.func.isRequired,
+  onNext: PropTypes.func.isRequired,
+  onPrev: PropTypes.func.isRequired,
+  currentSong: PropTypes.shape({
+    title: PropTypes.string,
+    preview: PropTypes.string,
+    artist: PropTypes.shape({
+      name: PropTypes.string,
+    }),
+    album: PropTypes.shape({
+      cover_medium: PropTypes.string,
+    }),
+  }),
+};
+const defaultProps = {
+  currentSong: {
+    title: 'Title',
+    preview: '',
+    artist: {
+      name: 'Artist name',
+    },
+    album: {
+      cover_medium: coverArt,
+    },
+  },
+};
 
 class PlayerContainer extends Component {
   constructor(props) {
@@ -124,5 +155,8 @@ class PlayerContainer extends Component {
     );
   }
 }
+
+PlayerContainer.propTypes = propTypes;
+PlayerContainer.defaultProps = defaultProps;
 
 export default PlayerContainer;

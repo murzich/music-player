@@ -16,9 +16,10 @@ const defaultProps = {
 function SearchBar({ value, callback, loading }) {
   return (
     <header className="SearchBar">
-      <label className="SearchBar-label">
+      <label className="SearchBar-label" htmlFor="search">
         Search songs on Deezer
         <input
+          id="search"
           type="search"
           value={value}
           onChange={callback}
