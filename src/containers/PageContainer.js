@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Page from '../components/layout/Page';
 import Playlist, { SearchBar, SongsList } from '../components/Playlist';
 import PlayerContainer from './PlayerContainer';
-import fetchSongs from '../actions';
+import fetchSongs, { setPlayStatus, setSearchQuery } from '../actions';
 
 const startQuery = 'artist:"system of a down"';
 
@@ -15,7 +15,6 @@ class PageContainer extends Component {
     this.state = {
       currentTrack: 0,
       isPlaying: false,
-      input: '',
     };
   }
 
@@ -28,17 +27,13 @@ class PageContainer extends Component {
    */
   onInputChange = (e) => {
     const searchQuery = e.target.value;
-    if (!searchQuery) {
-      this.setState({
-        input: '',
-      });
-    } else {
-      this.setState({ input: searchQuery }, () => {
-        this.props.fetchSongs(searchQuery);
-      });
+    this.props.setSearchQuery(searchQuery);
+    if (searchQuery) {
+      this.props.fetchSongs(searchQuery);
     }
   };
 
+  // TODO: Move this handlers to playbackControl component
   onNextSong = () => {
     this.setState((prevState) => {
       const nextTrack = prevState.currentTrack + 1;
@@ -69,11 +64,12 @@ class PageContainer extends Component {
   setCurrentSong = (i, e) => {
     e.preventDefault();
     this.setState({ currentTrack: i });
+    this.props.setPlayStatus(true);
   };
 
   render() {
-    const { songsList, loading } = this.props;
-    const { currentTrack, isPlaying, input } = this.state;
+    const { songsList, isLoading, searchQuery } = this.props;
+    const { currentTrack, isPlaying } = this.state;
     const currentSong = songsList[currentTrack];
     const coverArt = (currentSong) ? currentSong.album.cover_medium : undefined;
 
@@ -81,9 +77,10 @@ class PageContainer extends Component {
       <Page coverArt={coverArt}>
         <Playlist>
           <SearchBar
-            value={input}
+            value={searchQuery}
             callback={this.onInputChange}
-            loading={loading}
+            // TODO: change to isLoading after refactoring SearchBar.
+            loading={isLoading}
           />
           <SongsList
             songs={songsList}
@@ -104,17 +101,28 @@ class PageContainer extends Component {
 }
 
 const mapStateToProps = (store) => {
-  const { loading, songsList, error } = store.player;
-  return {
-    loading,
+  const {
+    isLoading,
     songsList,
     error,
+    isPlaying,
+    searchQuery,
+  } = store.player;
+  return {
+    isLoading,
+    songsList,
+    error,
+    isPlaying,
+    searchQuery,
   };
 };
 
 PageContainer.propTypes = {
+  searchQuery: PropTypes.string.isRequired,
   fetchSongs: PropTypes.func.isRequired,
-  loading: PropTypes.bool.isRequired,
+  setPlayStatus: PropTypes.func.isRequired,
+  setSearchQuery: PropTypes.func.isRequired,
+  isLoading: PropTypes.bool.isRequired,
   songsList: PropTypes.arrayOf(PropTypes.shape({
     album: PropTypes.shape({
       cover_medium: PropTypes.string,
@@ -122,4 +130,8 @@ PageContainer.propTypes = {
   })).isRequired,
 };
 
-export default connect(mapStateToProps, { fetchSongs })(PageContainer);
+export default connect(mapStateToProps, {
+  fetchSongs,
+  setPlayStatus,
+  setSearchQuery,
+})(PageContainer);

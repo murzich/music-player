@@ -4,6 +4,14 @@ import {
   FETCH_SONGS_FAILURE,
   FETCH_SONGS_REQUEST,
 } from '../actions/types';
+import {
+  // SET_CURRENT_SONG,
+  // SET_TIME_POSITION,
+  // UPDATE_TIME_POSITION,
+  SET_SEARCH_QUERY,
+  SET_PLAY_STATUS,
+  TOGGLE_PLAY,
+} from '../types/player';
 
 const deezerSearch = 'http://api.deezer.com/search/track';
 const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';
@@ -31,5 +39,19 @@ const fetchSongs = query => (dispatch) => {
       });
     });
 };
+
+export const togglePlay = () => ({
+  type: TOGGLE_PLAY,
+});
+
+export const setPlayStatus = status => ({
+  type: SET_PLAY_STATUS,
+  payload: status,
+});
+
+export const setSearchQuery = searchQuery => ({
+  type: SET_SEARCH_QUERY,
+  payload: searchQuery,
+});
 
 export default fetchSongs;

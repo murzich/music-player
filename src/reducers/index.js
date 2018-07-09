@@ -3,10 +3,33 @@ import {
   FETCH_SONGS_REQUEST,
   FETCH_SONGS_SUCCESS,
 } from '../actions/types';
+import {
+  // SET_CURRENT_SONG,
+  // SET_TIME_POSITION,
+  // UPDATE_TIME_POSITION,
+  SET_PLAY_STATUS, SET_SEARCH_QUERY,
+  TOGGLE_PLAY,
+} from '../types/player';
 
 const initialState = {
   songsList: [],
-  loading: false,
+  isLoading: false,
+  searchQuery: '',
+  currentTrack: 0,
+  isPlaying: false,
+  played: 0,
+  previewDuration: 0,
+};
+
+const setPlayStatus = (state = false, action) => {
+  switch (action.type) {
+    case SET_PLAY_STATUS:
+      return action.payload;
+    case TOGGLE_PLAY:
+      return !state;
+    default:
+      return state;
+  }
 };
 
 export default function (state = initialState, action) {
@@ -14,19 +37,30 @@ export default function (state = initialState, action) {
     case FETCH_SONGS_REQUEST:
       return {
         ...state,
-        loading: true,
+        isLoading: true,
       };
     case FETCH_SONGS_SUCCESS:
       return {
         ...state,
         songsList: action.payload,
-        loading: false,
+        isLoading: false,
       };
     case FETCH_SONGS_FAILURE:
       return {
         ...state,
         error: action.payload,
-        loading: false,
+        isLoading: false,
+      };
+    case SET_SEARCH_QUERY:
+      return {
+        ...state,
+        searchQuery: action.payload,
+      };
+    case TOGGLE_PLAY:
+    case SET_PLAY_STATUS:
+      return {
+        ...state,
+        isPlaying: setPlayStatus(state.isPlaying, action),
       };
     default:
       return state;
