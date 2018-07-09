@@ -27,8 +27,22 @@ function LoginForm({
         <h1 className={style.LoginFormTitle}>Login to Deezer.com</h1>
       </legend>
       <div className={style.LoginFrom}>
-        <InputText id="email" label="Email: " type="email" value={email} onChange={handleFormData} />
-        <InputText id="password" label="Password: " type="password" value={password} onChange={handleFormData} />
+        <InputText
+          id="email"
+          label="Email: "
+          type="email"
+          value={email}
+          onChange={handleFormData}
+          required
+        />
+        <InputText
+          id="password"
+          label="Password: "
+          type="password"
+          value={password}
+          onChange={handleFormData}
+          required
+        />
         <Button type="submit">Login</Button>
       </div>
     </fieldset>

@@ -5,7 +5,7 @@ import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import reduxThunk from 'redux-thunk';
 
 import PageContainer from './containers/PageContainer';
-import LoginPageContainer from './containers/LoginPageContainer';
+import LoginPage from './components/LoginPage/LoginPage';
 import Button from './components/common/Button';
 
 import rootReducer from './reducers';
@@ -42,7 +42,7 @@ function App() {
               </Fragment>
             )}
           />
-          <Route path="/login" component={LoginPageContainer} />
+          <Route path="/login" component={LoginPage} />
         </div>
       </BrowserRouter>
     </Provider>

@@ -1,19 +1,21 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
+import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
+import { switchForm, updateCredentials } from '../../actions/login';
 import LoginForm from './LoginForm';
 import RegistrationForm from './RegistrationForm';
 import SocialLogin from './SocialLogin';
+
 import Button from '../common/Button';
 
 import style from './LoginPage.css';
 
 const propTypes = {
-  loginTab: PropTypes.bool.isRequired,
-  changeForm: PropTypes.func.isRequired,
-  submitCredentials: PropTypes.func.isRequired,
-  handleFormData: PropTypes.func.isRequired,
+  isCurrentFormLogin: PropTypes.bool.isRequired,
+  switchForm: PropTypes.func.isRequired,
+  updateCredentials: PropTypes.func.isRequired,
   email: PropTypes.string,
   password: PropTypes.string,
   passwordConfirm: PropTypes.string,
@@ -25,24 +27,35 @@ const defaultProps = {
 };
 
 function LoginPage({
-  loginTab,
-  changeForm,
-  submitCredentials,
-  handleFormData,
+  isCurrentFormLogin,
+  // eslint-disable-next-line no-shadow
+  switchForm,
+  // eslint-disable-next-line no-shadow
+  updateCredentials,
   email,
   password,
   passwordConfirm,
 }) {
-  const currentForm = (loginTab) ? (
+  // TODO: Remove conosle.log after adding the Submitting.
+  const submitCredentials = (e) => {
+    e.preventDefault();
+    // eslint-disable-next-line no-console
+    console.log({
+      email,
+      password,
+    });
+  };
+
+  const currentForm = (isCurrentFormLogin) ? (
     // TODO: combine into single component
     <LoginForm
-      handleFormData={handleFormData}
+      handleFormData={updateCredentials}
       email={email}
       password={password}
     />
   ) : (
     <RegistrationForm
-      handleFormData={handleFormData}
+      handleFormData={updateCredentials}
       email={email}
       password={password}
       passwordConfirm={passwordConfirm}
@@ -60,8 +73,8 @@ function LoginPage({
       >
         <div>
           <div className={style.LoginPageChangeForm}>
-            <a href="/login" onClick={changeForm}>
-              {loginTab ? 'Sign up' : 'Sign in'}
+            <a href="/login" onClick={switchForm}>
+              {isCurrentFormLogin ? 'Sign up' : 'Sign in'}
             </a>
           </div>
           {currentForm}
@@ -75,4 +88,19 @@ function LoginPage({
 LoginPage.propTypes = propTypes;
 LoginPage.defaultProps = defaultProps;
 
-export default LoginPage;
+const mapStateToProps = (store) => {
+  const {
+    email,
+    password,
+    passwordConfirm,
+    isCurrentFormLogin,
+  } = store.login;
+  return {
+    email,
+    password,
+    passwordConfirm,
+    isCurrentFormLogin,
+  };
+};
+
+export default connect(mapStateToProps, { switchForm, updateCredentials })(LoginPage);
