@@ -104,7 +104,7 @@ class PageContainer extends Component {
 }
 
 const mapStateToProps = (store) => {
-  const { loading, songsList, error } = store;
+  const { loading, songsList, error } = store.player;
   return {
     loading,
     songsList,

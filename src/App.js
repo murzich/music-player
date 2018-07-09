@@ -1,7 +1,7 @@
 import React, { Fragment } from 'react';
 import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
-import { applyMiddleware, compose, createStore } from 'redux';
+import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import reduxThunk from 'redux-thunk';
 
 import PageContainer from './containers/PageContainer';
@@ -9,8 +9,9 @@ import LoginPageContainer from './containers/LoginPageContainer';
 import Button from './components/common/Button';
 
 import rootReducer from './reducers';
+import loginReducer from './reducers/login';
 
-const store = createStore(rootReducer, compose(
+const store = createStore(combineReducers({ player: rootReducer, login: loginReducer }), compose(
   applyMiddleware(reduxThunk),
   window.devToolsExtension ? window.devToolsExtension() : f => f,
 ));

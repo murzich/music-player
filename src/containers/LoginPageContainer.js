@@ -1,28 +1,18 @@
 import React, { Component } from 'react';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import LoginPage from '../components/LoginPage/LoginPage';
+import { switchForm, updateCredentials } from '../actions/login';
 
 class LoginPageContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      loginTab: true,
-      email: '',
-      password: '',
-      passwordConfirm: '',
-    };
-  }
-
   changeForm = (e) => {
     e.preventDefault();
-    this.setState(prevState => ({
-      loginTab: !prevState.loginTab,
-      passwordConfirm: '',
-    }));
+    this.props.switchForm();
   };
 
   handleFormData = (e) => {
-    this.setState({
+    this.props.updateCredentials({
       [e.target.id]: e.target.value,
     });
   };
@@ -35,9 +25,16 @@ class LoginPageContainer extends Component {
   };
 
   render() {
+    const { email, password, passwordConfirm } = this.props;
+    const trownProps = {
+      loginTab: this.props.isCurrentFormLogin,
+      email,
+      password,
+      passwordConfirm,
+    };
     return (
       <LoginPage
-        {...this.state}
+        {...trownProps}
         changeForm={this.changeForm}
         submitCredentials={this.submitCredentials}
         handleFormData={this.handleFormData}
@@ -46,4 +43,28 @@ class LoginPageContainer extends Component {
   }
 }
 
-export default LoginPageContainer;
+LoginPageContainer.propTypes = {
+  email: PropTypes.string.isRequired,
+  password: PropTypes.string.isRequired,
+  passwordConfirm: PropTypes.string.isRequired,
+  switchForm: PropTypes.func.isRequired,
+  updateCredentials: PropTypes.func.isRequired,
+  isCurrentFormLogin: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = (store) => {
+  const {
+    email,
+    password,
+    passwordConfirm,
+    isCurrentFormLogin,
+  } = store.login;
+  return {
+    email,
+    password,
+    passwordConfirm,
+    isCurrentFormLogin,
+  };
+};
+
+export default connect(mapStateToProps, { switchForm, updateCredentials })(LoginPageContainer);
