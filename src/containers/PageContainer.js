@@ -85,8 +85,7 @@ class PageContainer extends Component {
           <SearchBar
             value={searchQuery}
             callback={this.onInputChange}
-            // TODO: change to isLoading after refactoring SearchBar.
-            loading={isLoading}
+            isLoading={isLoading}
           />
           <SongsList
             songs={songsList}

@@ -7,14 +7,14 @@ import style from './SearchBar.css';
 const propTypes = {
   value: PropTypes.string,
   callback: PropTypes.func.isRequired,
-  loading: PropTypes.bool,
+  isLoading: PropTypes.bool,
 };
 const defaultProps = {
   value: '',
-  loading: false,
+  isLoading: false,
 };
 
-function SearchBar({ value, callback, loading }) {
+function SearchBar({ value, callback, isLoading }) {
   return (
     <header className={style.SearchBar}>
       <InputText
@@ -24,7 +24,7 @@ function SearchBar({ value, callback, loading }) {
         value={value}
         onChange={callback}
       >
-        {loading && (<div className={style.SearchBarHelper}>Loading...</div>)}
+        {isLoading && (<div className={style.SearchBarHelper}>Loading...</div>)}
       </InputText>
 
     </header>
