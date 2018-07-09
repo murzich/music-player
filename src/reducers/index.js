@@ -4,10 +4,11 @@ import {
   FETCH_SONGS_SUCCESS,
 } from '../actions/types';
 import {
-  // SET_CURRENT_SONG,
+  SET_CURRENT_TRACK,
   // SET_TIME_POSITION,
   // UPDATE_TIME_POSITION,
-  SET_PLAY_STATUS, SET_SEARCH_QUERY,
+  SET_PLAY_STATUS,
+  SET_SEARCH_QUERY,
   TOGGLE_PLAY,
 } from '../types/player';
 
@@ -61,6 +62,11 @@ export default function (state = initialState, action) {
       return {
         ...state,
         isPlaying: setPlayStatus(state.isPlaying, action),
+      };
+    case SET_CURRENT_TRACK:
+      return {
+        ...state,
+        currentTrack: action.payload,
       };
     default:
       return state;

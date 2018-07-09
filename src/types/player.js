@@ -1,6 +1,6 @@
 const identifier = '@@PLAYER/';
 
-export const SET_CURRENT_SONG = `${identifier}SET_CURRENT_SONG`;
+export const SET_CURRENT_TRACK = `${identifier}SET_CURRENT_SONG`;
 export const SET_TIME_POSITION = `${identifier}SET_TIME_POSITION`;
 export const UPDATE_TIME_POSITION = `${identifier}UPDATE_TIME_POSITION`;
 export const TOGGLE_PLAY = `${identifier}TOGGLE_PLAY`;

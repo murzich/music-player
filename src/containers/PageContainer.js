@@ -5,7 +5,7 @@ import PropTypes from 'prop-types';
 import Page from '../components/layout/Page';
 import Playlist, { SearchBar, SongsList } from '../components/Playlist';
 import PlayerContainer from './PlayerContainer';
-import fetchSongs, { setPlayStatus, setSearchQuery } from '../actions';
+import fetchSongs, { setPlayStatus, setSearchQuery, setCurrentTrack } from '../actions';
 
 const startQuery = 'artist:"system of a down"';
 
@@ -13,6 +13,7 @@ class PageContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
+      // eslint-disable-next-line react/no-unused-state
       currentTrack: 0,
       isPlaying: false,
     };
@@ -57,22 +58,27 @@ class PageContainer extends Component {
     });
   };
 
+  // TODO: Remove after refactoring FilePlayer, only it should cast isPlaying.
   onPlay = (status) => {
     this.setState({ isPlaying: status });
   };
 
   setCurrentSong = (i, e) => {
     e.preventDefault();
-    this.setState({ currentTrack: i });
+    this.props.setCurrentTrack(i);
     this.props.setPlayStatus(true);
   };
 
   render() {
-    const { songsList, isLoading, searchQuery } = this.props;
-    const { currentTrack, isPlaying } = this.state;
+    const {
+      songsList,
+      isLoading,
+      searchQuery,
+      currentTrack,
+    } = this.props;
+    const { isPlaying } = this.state;
     const currentSong = songsList[currentTrack];
     const coverArt = (currentSong) ? currentSong.album.cover_medium : undefined;
-
     return (
       <Page coverArt={coverArt}>
         <Playlist>
@@ -107,6 +113,7 @@ const mapStateToProps = (store) => {
     error,
     isPlaying,
     searchQuery,
+    currentTrack,
   } = store.player;
   return {
     isLoading,
@@ -114,6 +121,7 @@ const mapStateToProps = (store) => {
     error,
     isPlaying,
     searchQuery,
+    currentTrack,
   };
 };
 
@@ -122,6 +130,8 @@ PageContainer.propTypes = {
   fetchSongs: PropTypes.func.isRequired,
   setPlayStatus: PropTypes.func.isRequired,
   setSearchQuery: PropTypes.func.isRequired,
+  setCurrentTrack: PropTypes.func.isRequired,
+  currentTrack: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
   songsList: PropTypes.arrayOf(PropTypes.shape({
     album: PropTypes.shape({
@@ -134,4 +144,5 @@ export default connect(mapStateToProps, {
   fetchSongs,
   setPlayStatus,
   setSearchQuery,
+  setCurrentTrack,
 })(PageContainer);

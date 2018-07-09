@@ -5,7 +5,7 @@ import {
   FETCH_SONGS_REQUEST,
 } from '../actions/types';
 import {
-  // SET_CURRENT_SONG,
+  SET_CURRENT_TRACK,
   // SET_TIME_POSITION,
   // UPDATE_TIME_POSITION,
   SET_SEARCH_QUERY,
@@ -52,6 +52,11 @@ export const setPlayStatus = status => ({
 export const setSearchQuery = searchQuery => ({
   type: SET_SEARCH_QUERY,
   payload: searchQuery,
+});
+
+export const setCurrentTrack = id => ({
+  type: SET_CURRENT_TRACK,
+  payload: id,
 });
 
 export default fetchSongs;
