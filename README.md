@@ -1,6 +1,8 @@
 # Music player app
-
 Music player is based on Deezer API and is built with ReactJS.
+
+## The `master` branch is intended for review.
+The repository may contain other newer branches, but they contain an uncompleted work and a lot of things would change.
 
 ## Default ReactJS boilerplate guide
 
