@@ -7,20 +7,20 @@ import InputText from '../common/InputText';
 
 const propTypes = {
   handleFormData: PropTypes.func.isRequired,
-  email: PropTypes.string,
-  password: PropTypes.string,
+  // email: PropTypes.string,
+  // password: PropTypes.string,
   passwordConfirm: PropTypes.string,
 };
 const defaultProps = {
-  email: '',
-  password: '',
+  // email: '',
+  // password: '',
   passwordConfirm: '',
 };
 
 function RegistrationForm({
   handleFormData,
-  email,
-  password,
+  // email,
+  // password,
   passwordConfirm,
 }) {
   return (
@@ -33,14 +33,14 @@ function RegistrationForm({
           id="email"
           label="Email: "
           type="email"
-          value={email}
+          // value={email}
           onChange={handleFormData}
         />
         <InputText
           id="password"
           label="Password: "
           type="password"
-          value={password}
+          // value={password}
           onChange={handleFormData}
         />
         <InputText

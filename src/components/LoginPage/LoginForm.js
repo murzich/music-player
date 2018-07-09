@@ -1,3 +1,4 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -5,21 +6,22 @@ import Button from '../common/Button';
 import InputText from '../common/InputText';
 
 import style from './LoginForm.css';
+import {email, minLength, required} from "./validators";
 
 const propTypes = {
   handleFormData: PropTypes.func.isRequired,
-  email: PropTypes.string,
-  password: PropTypes.string,
+  // email: PropTypes.string,
+  // password: PropTypes.string,
 };
 const defaultProps = {
-  email: '',
-  password: '',
+  // email: '',
+  // password: '',
 };
 
 function LoginForm({
-  handleFormData,
-  email,
-  password,
+  // handleFormData,
+  // email,
+  // password,
 }) {
   return (
     <fieldset className={style.LoginFromFieldset}>
@@ -31,16 +33,18 @@ function LoginForm({
           id="email"
           label="Email: "
           type="email"
-          value={email}
-          onChange={handleFormData}
+          validate={email}
+          // value={email}
+          // onChange={handleFormData}
           required
         />
         <InputText
           id="password"
           label="Password: "
           type="password"
-          value={password}
-          onChange={handleFormData}
+          validate={[required, minLength(6)]}
+          // value={password}
+          // onChange={handleFormData}
           required
         />
         <Button type="submit">Login</Button>

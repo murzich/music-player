@@ -3,6 +3,8 @@ import { BrowserRouter, Route, Link } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import reduxThunk from 'redux-thunk';
+import { reducer as formReducer } from 'redux-form';
+import httpServer from './interceptor';
 
 import PageContainer from './containers/PageContainer';
 import LoginPage from './components/LoginPage/LoginPage';
@@ -11,7 +13,11 @@ import Button from './components/common/Button';
 import rootReducer from './reducers';
 import loginReducer from './reducers/login';
 
-const store = createStore(combineReducers({ player: rootReducer, login: loginReducer }), compose(
+const store = createStore(combineReducers({
+  player: rootReducer,
+  login: loginReducer,
+  form: formReducer,
+}), compose(
   applyMiddleware(reduxThunk),
   window.devToolsExtension ? window.devToolsExtension() : f => f,
 ));
@@ -50,3 +56,4 @@ function App() {
 }
 
 export default App;
+httpServer.setupInterceptors(store);
