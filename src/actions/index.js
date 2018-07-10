@@ -8,6 +8,7 @@ import {
   SET_CURRENT_TRACK,
   // SET_TIME_POSITION,
   // UPDATE_TIME_POSITION,
+  SET_DURATION,
   SET_SEARCH_QUERY,
   SET_PLAY_STATUS,
   TOGGLE_PLAY,
@@ -64,5 +65,10 @@ export const gotoTrack = {
     payload: id,
   }),
 };
+
+export const setDuration = duration => ({
+  type: SET_DURATION,
+  payload: duration,
+});
 
 export default fetchSongs;

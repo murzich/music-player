@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import FilePlayer from 'react-player/lib/players/FilePlayer';
 import { formatTime } from '../utils';
 import { Player, PlaybackControlsBar, SongInfo, Seekbar } from '../components/Player';
-import { gotoTrack, setPlayStatus, togglePlay } from '../actions';
+import { gotoTrack, setDuration, setPlayStatus, togglePlay } from '../actions';
 
 import coverArt from '../assets/album.svg';
 import { PlayerTime } from '../components/layout/Player.css';
@@ -17,6 +17,8 @@ const propTypes = {
   setPlayStatus: PropTypes.func.isRequired,
   onNext: PropTypes.func.isRequired,
   onPrev: PropTypes.func.isRequired,
+  duration: PropTypes.number.isRequired,
+  setDuration: PropTypes.func.isRequired,
   currentSong: PropTypes.shape({
     title: PropTypes.string,
     preview: PropTypes.string,
@@ -47,7 +49,7 @@ class PlayerContainer extends Component {
     this.state = {
       played: 0,
       playedSeconds: 0,
-      duration: 100,
+      // duration: 100,
       seeking: false,
     };
     this.stepSeconds = 5;
@@ -69,14 +71,14 @@ class PlayerContainer extends Component {
     this.player.seekTo(parseFloat(e.target.value));
   };
   onStep = (step) => {
-    let played = (this.player.getCurrentTime() + step) / this.state.duration;
+    let played = (this.player.getCurrentTime() + step) / this.props.duration;
     if (played < 0 || played > 1) {
       played = (played < 0) ? 0 : 1;
     }
     this.player.seekTo(played);
     this.setState({
       played,
-      playedSeconds: played * this.state.duration,
+      playedSeconds: played * this.props.duration,
     });
   };
   onStepForward = () => {
@@ -94,9 +96,9 @@ class PlayerContainer extends Component {
       this.setState({ playing: true });
     });
   };
-  onDuration = (duration) => {
-    this.setState({ duration });
-  };
+  // onDuration = (duration) => {
+  //   this.setState({ duration });
+  // };
 
   // playPause = () => {
   //   this.setState(prevState => ({ playing: !prevState.playing }));
@@ -107,8 +109,14 @@ class PlayerContainer extends Component {
   };
 
   render() {
-    // eslint-disable-next-line no-shadow
-    const { currentSong, setPlayStatus, isPlaying } = this.props;
+    const {
+      currentSong,
+      // eslint-disable-next-line no-shadow
+      setPlayStatus,
+      isPlaying,
+      // eslint-disable-next-line no-shadow
+      setDuration,
+    } = this.props;
     return (
       <Player>
         <FilePlayer
@@ -117,7 +125,7 @@ class PlayerContainer extends Component {
           url={currentSong.preview}
           playing={isPlaying}
           onProgress={this.onProgress}
-          onDuration={this.onDuration}
+          onDuration={setDuration}
           onEnded={this.onEnded}
           onPlay={() => setPlayStatus(true)}
           onPause={() => setPlayStatus(false)}
@@ -157,11 +165,13 @@ const mapStateToProps = state => ({
   // TODO: Replace by Destructuring assignment.
   isPlaying: state.player.isPlaying,
   currentSong: getCurrentSong(state),
+  duration: state.player.duration,
 });
 
 const mapDispatchToProps = {
   togglePlay,
   setPlayStatus,
+  setDuration,
   onNext: gotoTrack.next,
   onPrev: gotoTrack.prev,
 };

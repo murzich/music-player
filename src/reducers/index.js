@@ -7,6 +7,7 @@ import {
   GOTO_NEXT_TRACK,
   GOTO_PREV_TRACK,
   SET_CURRENT_TRACK,
+  SET_DURATION,
   // SET_TIME_POSITION,
   // UPDATE_TIME_POSITION,
   SET_PLAY_STATUS,
@@ -22,6 +23,7 @@ const initialState = {
   isPlaying: false,
   played: 0,
   previewDuration: 0,
+  duration: 100,
 };
 
 const setPlayStatus = (state = false, action) => {
@@ -92,6 +94,11 @@ export default function (state = initialState, action) {
           state.songsList.length,
         ),
         isPlaying: true,
+      };
+    case SET_DURATION:
+      return {
+        ...state,
+        duration: action.payload,
       };
     default:
       return state;
