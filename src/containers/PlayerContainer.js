@@ -9,6 +9,7 @@ import { gotoTrack, setPlayStatus } from '../actions';
 
 import coverArt from '../assets/album.svg';
 import { PlayerTime } from '../components/layout/Player.css';
+import { getCurrentSong } from '../reducers';
 
 const propTypes = {
   setPlayStatus: PropTypes.func.isRequired,
@@ -149,10 +150,14 @@ class PlayerContainer extends Component {
 PlayerContainer.propTypes = propTypes;
 PlayerContainer.defaultProps = defaultProps;
 
+const mapStateToProps = state => ({
+  currentSong: getCurrentSong(state),
+});
+
 const mapDispatchToProps = {
   setPlayStatus,
   onNext: gotoTrack.next,
   onPrev: gotoTrack.prev,
 };
 
-export default connect(undefined, mapDispatchToProps)(PlayerContainer);
+export default connect(mapStateToProps, mapDispatchToProps)(PlayerContainer);

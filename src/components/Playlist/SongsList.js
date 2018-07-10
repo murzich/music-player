@@ -36,7 +36,7 @@ function SongsList({
       key={id}
       title={title}
       duration={duration}
-      onClick={e => setSong(i, e)}
+      onClick={setSong(i)}
       className={setClassName(i)}
     />
   ));

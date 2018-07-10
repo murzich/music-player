@@ -6,6 +6,7 @@ import Page from '../components/layout/Page';
 import Playlist, { SearchBar, SongsList } from '../components/Playlist';
 import PlayerContainer from './PlayerContainer';
 import fetchSongs, { setSearchQuery, gotoTrack } from '../actions';
+import { getCurrentCover } from '../reducers';
 
 const startQuery = 'artist:"system of a down"';
 
@@ -25,7 +26,7 @@ class PageContainer extends Component {
     }
   };
 
-  setCurrentSong = (i, e) => {
+  setCurrentFromPlaylist = i => (e) => {
     e.preventDefault();
     this.props.setCurrentTrack(i);
   };
@@ -37,11 +38,10 @@ class PageContainer extends Component {
       searchQuery,
       currentTrack,
       isPlaying,
+      currentCover,
     } = this.props;
-    const currentSong = songsList[currentTrack];
-    const coverArt = (currentSong) ? currentSong.album.cover_medium : undefined;
     return (
-      <Page coverArt={coverArt}>
+      <Page coverArt={currentCover}>
         <Playlist>
           <SearchBar
             value={searchQuery}
@@ -50,14 +50,12 @@ class PageContainer extends Component {
           />
           <SongsList
             songs={songsList}
-            setSong={this.setCurrentSong}
+            setSong={this.setCurrentFromPlaylist}
             currentTrack={currentTrack}
             isPlaying={isPlaying}
           />
         </Playlist>
-        <PlayerContainer
-          currentSong={currentSong}
-        />
+        <PlayerContainer />
       </Page>
     );
   }
@@ -79,6 +77,7 @@ const mapStateToProps = (store) => {
     isPlaying,
     searchQuery,
     currentTrack,
+    currentCover: getCurrentCover(store),
   };
 };
 
@@ -90,6 +89,7 @@ PageContainer.propTypes = {
   setCurrentTrack: PropTypes.func.isRequired,
   currentTrack: PropTypes.number.isRequired,
   isLoading: PropTypes.bool.isRequired,
+  currentCover: PropTypes.string.isRequired,
   songsList: PropTypes.arrayOf(PropTypes.shape({
     album: PropTypes.shape({
       cover_medium: PropTypes.string,
