@@ -91,6 +91,7 @@ export default function (state = initialState, action) {
           action,
           state.songsList.length,
         ),
+        isPlaying: true,
       };
     default:
       return state;
