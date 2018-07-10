@@ -9,7 +9,7 @@ import {
   SET_CURRENT_TRACK,
   SET_DURATION,
   // SET_TIME_POSITION,
-  // UPDATE_TIME_POSITION,
+  UPDATE_TIME_POSITION,
   SET_PLAY_STATUS,
   SET_SEARCH_QUERY,
   TOGGLE_PLAY,
@@ -22,6 +22,7 @@ const initialState = {
   currentTrack: 0,
   isPlaying: false,
   played: 0,
+  playedSeconds: 0,
   previewDuration: 0,
   duration: 100,
 };
@@ -94,11 +95,17 @@ export default function (state = initialState, action) {
           state.songsList.length,
         ),
         isPlaying: true,
+        played: 0,
       };
     case SET_DURATION:
       return {
         ...state,
         duration: action.payload,
+      };
+    case UPDATE_TIME_POSITION:
+      return {
+        ...state,
+        played: action.payload,
       };
     default:
       return state;
@@ -118,4 +125,9 @@ export const getCurrentCover = (state) => {
   } catch (e) {
     return undefined;
   }
+};
+
+export const getPlayedTimeSeconds = (state) => {
+  const { played, duration } = state;
+  return Math.floor(duration * played);
 };

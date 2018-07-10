@@ -7,7 +7,7 @@ import {
 import {
   SET_CURRENT_TRACK,
   // SET_TIME_POSITION,
-  // UPDATE_TIME_POSITION,
+  UPDATE_TIME_POSITION,
   SET_DURATION,
   SET_SEARCH_QUERY,
   SET_PLAY_STATUS,
@@ -69,6 +69,11 @@ export const gotoTrack = {
 export const setDuration = duration => ({
   type: SET_DURATION,
   payload: duration,
+});
+
+export const updatePlayedTime = timeFraction => ({
+  type: UPDATE_TIME_POSITION,
+  payload: timeFraction,
 });
 
 export default fetchSongs;

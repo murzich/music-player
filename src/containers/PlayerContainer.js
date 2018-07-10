@@ -5,13 +5,16 @@ import { connect } from 'react-redux';
 import FilePlayer from 'react-player/lib/players/FilePlayer';
 import { formatTime } from '../utils';
 import { Player, PlaybackControlsBar, SongInfo, Seekbar } from '../components/Player';
-import { gotoTrack, setDuration, setPlayStatus, togglePlay } from '../actions';
+import { gotoTrack, setDuration, setPlayStatus, togglePlay, updatePlayedTime } from '../actions';
 
 import coverArt from '../assets/album.svg';
 import { PlayerTime } from '../components/layout/Player.css';
-import { getCurrentSong } from '../reducers';
+import { getCurrentSong, getPlayedTimeSeconds } from '../reducers';
 
 const propTypes = {
+  played: PropTypes.number.isRequired,
+  playedSeconds: PropTypes.number.isRequired,
+  updatePlayedTime: PropTypes.func.isRequired,
   togglePlay: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   setPlayStatus: PropTypes.func.isRequired,
@@ -47,24 +50,27 @@ class PlayerContainer extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      played: 0,
-      playedSeconds: 0,
-      // duration: 100,
       seeking: false,
     };
     this.stepSeconds = 5;
   }
 
-  onProgress = (state) => {
-    if (!this.state.seeking) {
-      this.setState(state);
+  onPause = () => {
+    this.props.updatePlayedTime(this.player.getCurrentTime() / this.props.duration);
+    this.props.setPlayStatus(false);
+  };
+  onProgress = ({ played }) => {
+    if (!this.state.seeking && this.props.isPlaying) {
+      this.props.updatePlayedTime(played);
     }
   };
   onSeekMouseDown = () => {
     this.setState({ seeking: true });
   };
   onSeekChange = (e) => {
-    this.setState({ played: parseFloat(e.target.value) });
+    const { value } = e.target;
+    return value + 1;
+    // this.setState({ played: parseFloat(e.target.value) });
   };
   onSeekMouseUp = (e) => {
     this.setState({ seeking: false });
@@ -75,11 +81,9 @@ class PlayerContainer extends Component {
     if (played < 0 || played > 1) {
       played = (played < 0) ? 0 : 1;
     }
+    // TODO: This code do seeking.
     this.player.seekTo(played);
-    this.setState({
-      played,
-      playedSeconds: played * this.props.duration,
-    });
+    this.props.updatePlayedTime(played);
   };
   onStepForward = () => {
     this.onStep(this.stepSeconds);
@@ -96,13 +100,6 @@ class PlayerContainer extends Component {
       this.setState({ playing: true });
     });
   };
-  // onDuration = (duration) => {
-  //   this.setState({ duration });
-  // };
-
-  // playPause = () => {
-  //   this.setState(prevState => ({ playing: !prevState.playing }));
-  // };
 
   ref = (player) => {
     this.player = player;
@@ -116,6 +113,8 @@ class PlayerContainer extends Component {
       isPlaying,
       // eslint-disable-next-line no-shadow
       setDuration,
+      playedSeconds,
+      played,
     } = this.props;
     return (
       <Player>
@@ -128,7 +127,7 @@ class PlayerContainer extends Component {
           onDuration={setDuration}
           onEnded={this.onEnded}
           onPlay={() => setPlayStatus(true)}
-          onPause={() => setPlayStatus(false)}
+          onPause={this.onPause}
         />
         <SongInfo
           cover={currentSong.album.cover_medium}
@@ -137,10 +136,10 @@ class PlayerContainer extends Component {
         />
         {/* TODO: Extract to separate component. */}
         <div className={PlayerTime}>
-          {formatTime(this.state.playedSeconds)}
+          {formatTime(playedSeconds)}
         </div>
         <Seekbar
-          played={this.state.played}
+          played={played}
           onSeekMouseDown={this.onSeekMouseDown}
           onSeekChange={this.onSeekChange}
           onSeekMouseUp={this.onSeekMouseUp}
@@ -166,12 +165,15 @@ const mapStateToProps = state => ({
   isPlaying: state.player.isPlaying,
   currentSong: getCurrentSong(state),
   duration: state.player.duration,
+  played: state.player.played,
+  playedSeconds: getPlayedTimeSeconds(state.player),
 });
 
 const mapDispatchToProps = {
   togglePlay,
   setPlayStatus,
   setDuration,
+  updatePlayedTime,
   onNext: gotoTrack.next,
   onPrev: gotoTrack.prev,
 };
