@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
-import FilePlayer from 'react-player/lib/players/FilePlayer';
+import { connect } from 'react-redux';
 
+import FilePlayer from 'react-player/lib/players/FilePlayer';
 import { formatTime } from '../utils';
 import { Player, PlaybackControlsBar, SongInfo, Seekbar } from '../components/Player';
+import { setPlayStatus } from '../actions';
 
 import coverArt from '../assets/album.svg';
 import { PlayerTime } from '../components/layout/Player.css';
 
 const propTypes = {
-  onPlay: PropTypes.func.isRequired,
+  setPlayStatus: PropTypes.func.isRequired,
   onNext: PropTypes.func.isRequired,
   onPrev: PropTypes.func.isRequired,
   currentSong: PropTypes.shape({
@@ -53,18 +55,6 @@ class PlayerContainer extends Component {
     if (!this.state.seeking) {
       this.setState(state);
     }
-  };
-
-  onPlay = () => {
-    this.setState({ playing: true }, () => {
-      this.props.onPlay(true);
-    });
-  };
-
-  onPause = () => {
-    this.setState({ playing: false }, () => {
-      this.props.onPlay(false);
-    });
   };
   onSeekMouseDown = () => {
     this.setState({ seeking: true });
@@ -113,7 +103,8 @@ class PlayerContainer extends Component {
   };
 
   render() {
-    const { currentSong = { artist: {}, album: {} } } = this.props;
+    // eslint-disable-next-line no-shadow
+    const { currentSong, setPlayStatus } = this.props;
     return (
       <Player>
         <FilePlayer
@@ -124,8 +115,8 @@ class PlayerContainer extends Component {
           onProgress={this.onProgress}
           onDuration={this.onDuration}
           onEnded={this.onEnded}
-          onPlay={this.onPlay}
-          onPause={this.onPause}
+          onPlay={() => setPlayStatus(true)}
+          onPause={() => setPlayStatus(false)}
         />
         <SongInfo
           cover={currentSong.album.cover_medium}
@@ -158,4 +149,8 @@ class PlayerContainer extends Component {
 PlayerContainer.propTypes = propTypes;
 PlayerContainer.defaultProps = defaultProps;
 
-export default PlayerContainer;
+const mapDispatchToProps = dispatch => ({
+  setPlayStatus: status => dispatch(setPlayStatus(status)),
+});
+
+export default connect(undefined, mapDispatchToProps)(PlayerContainer);
