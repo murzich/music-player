@@ -4,6 +4,8 @@ import {
   FETCH_SONGS_SUCCESS,
 } from '../actions/types';
 import {
+  GOTO_NEXT_TRACK,
+  GOTO_PREV_TRACK,
   SET_CURRENT_TRACK,
   // SET_TIME_POSITION,
   // UPDATE_TIME_POSITION,
@@ -28,6 +30,22 @@ const setPlayStatus = (state = false, action) => {
       return action.payload;
     case TOGGLE_PLAY:
       return !state;
+    default:
+      return state;
+  }
+};
+
+const setTrack = (state = 0, action, count = 0) => {
+  switch (action.type) {
+    case GOTO_NEXT_TRACK:
+      if (state + 1 < count) {
+        return state + 1;
+      }
+      return 0;
+    case GOTO_PREV_TRACK:
+      return (state <= 0) ? 0 : state - 1;
+    case SET_CURRENT_TRACK:
+      return action.payload;
     default:
       return state;
   }
@@ -63,10 +81,16 @@ export default function (state = initialState, action) {
         ...state,
         isPlaying: setPlayStatus(state.isPlaying, action),
       };
+    case GOTO_NEXT_TRACK:
+    case GOTO_PREV_TRACK:
     case SET_CURRENT_TRACK:
       return {
         ...state,
-        currentTrack: action.payload,
+        currentTrack: setTrack(
+          state.currentTrack,
+          action,
+          state.songsList.length,
+        ),
       };
     default:
       return state;

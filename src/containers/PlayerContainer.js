@@ -5,7 +5,7 @@ import { connect } from 'react-redux';
 import FilePlayer from 'react-player/lib/players/FilePlayer';
 import { formatTime } from '../utils';
 import { Player, PlaybackControlsBar, SongInfo, Seekbar } from '../components/Player';
-import { setPlayStatus } from '../actions';
+import { gotoTrack, setPlayStatus } from '../actions';
 
 import coverArt from '../assets/album.svg';
 import { PlayerTime } from '../components/layout/Player.css';
@@ -149,8 +149,10 @@ class PlayerContainer extends Component {
 PlayerContainer.propTypes = propTypes;
 PlayerContainer.defaultProps = defaultProps;
 
-const mapDispatchToProps = dispatch => ({
-  setPlayStatus: status => dispatch(setPlayStatus(status)),
-});
+const mapDispatchToProps = {
+  setPlayStatus,
+  onNext: gotoTrack.next,
+  onPrev: gotoTrack.prev,
+};
 
 export default connect(undefined, mapDispatchToProps)(PlayerContainer);

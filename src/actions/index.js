@@ -11,6 +11,8 @@ import {
   SET_SEARCH_QUERY,
   SET_PLAY_STATUS,
   TOGGLE_PLAY,
+  GOTO_NEXT_TRACK,
+  GOTO_PREV_TRACK,
 } from '../types/player';
 
 const deezerSearch = 'http://api.deezer.com/search/track';
@@ -54,9 +56,13 @@ export const setSearchQuery = searchQuery => ({
   payload: searchQuery,
 });
 
-export const setCurrentTrack = id => ({
-  type: SET_CURRENT_TRACK,
-  payload: id,
-});
+export const gotoTrack = {
+  next: () => ({ type: GOTO_NEXT_TRACK }),
+  prev: () => ({ type: GOTO_PREV_TRACK }),
+  id: id => ({
+    type: SET_CURRENT_TRACK,
+    payload: id,
+  }),
+};
 
 export default fetchSongs;
