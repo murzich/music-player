@@ -66,6 +66,8 @@ export default function (state = initialState, action) {
         ...state,
         songsList: action.payload,
         isLoading: false,
+        currentTrack: 0,
+        isPlaying: false,
       };
     case FETCH_SONGS_FAILURE:
       return {
