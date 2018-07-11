@@ -9,9 +9,12 @@ const propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   onNext: PropTypes.func.isRequired,
   onPrev: PropTypes.func.isRequired,
-  playerRef: PropTypes.node.isRequired,
+  playerRef: PropTypes.objectOf(PropTypes.any),
   togglePlay: PropTypes.func.isRequired,
   updatePlayedTime: PropTypes.func.isRequired,
+};
+const defaultProps = {
+  playerRef: {},
 };
 
 const defaultStepSeconds = 5;
@@ -70,6 +73,7 @@ function ControlsBarContainer({
 }
 
 ControlsBarContainer.propTypes = propTypes;
+ControlsBarContainer.defaultProps = defaultProps;
 
 const mapStateToProps = state => ({
   isPlaying: state.player.isPlaying,

@@ -39,7 +39,10 @@ const mapStateToProps = state => ({
 
 PageContainer.propTypes = {
   fetchSongs: PropTypes.func.isRequired,
-  currentCover: PropTypes.string.isRequired,
+  currentCover: PropTypes.string,
+};
+PageContainer.defaultProps = {
+  currentCover: '',
 };
 
 export default connect(mapStateToProps, { fetchSongs })(PageContainer);

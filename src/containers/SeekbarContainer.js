@@ -4,6 +4,8 @@ import { connect } from 'react-redux';
 
 import { setSeeking, updatePlayedTime } from '../actions';
 import Seekbar from '../components/player/Seekbar';
+import { formatTime } from '../utils';
+import { PlayerTime } from '../components/layout/Player.css';
 
 
 const propTypes = {
@@ -11,7 +13,10 @@ const propTypes = {
   updatePlayedTime: PropTypes.func.isRequired,
   duration: PropTypes.number.isRequired,
   setSeeking: PropTypes.func.isRequired,
-  playerRef: PropTypes.node.isRequired,
+  playerRef: PropTypes.objectOf(PropTypes.any),
+};
+const defaultProps = {
+  playerRef: {},
 };
 
 function SeekbarContainer({
@@ -34,6 +39,9 @@ function SeekbarContainer({
 
   return (
     <div>
+      <div className={PlayerTime}>
+        {formatTime(playedSeconds)}
+      </div>
       <Seekbar
         played={playedSeconds}
         duration={duration}
@@ -44,6 +52,7 @@ function SeekbarContainer({
 }
 
 SeekbarContainer.propTypes = propTypes;
+SeekbarContainer.defaultProps = defaultProps;
 
 const mapStateToProps = (state) => {
   const {
