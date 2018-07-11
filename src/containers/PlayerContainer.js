@@ -4,22 +4,21 @@ import { connect } from 'react-redux';
 
 import FilePlayer from 'react-player/lib/players/FilePlayer';
 import { formatTime } from '../utils';
-import { Player, PlaybackControlsBar, SongInfo } from '../components/player';
-import { gotoTrack, setDuration, setPlayStatus, setSeeking, togglePlay, updatePlayedTime } from '../actions';
+import { Player, SongInfo } from '../components/player';
+import { gotoTrack, setDuration, setPlayStatus, updatePlayedTime } from '../actions';
 
 import coverArt from '../assets/album.svg';
 import { PlayerTime } from '../components/layout/Player.css';
 import { getCurrentSong } from '../reducers';
 import SeekbarContainer from './SeekbarContainer';
+import ControlsBarContainer from './ControlsBarContainer';
 
 const propTypes = {
   playedSeconds: PropTypes.number.isRequired,
   updatePlayedTime: PropTypes.func.isRequired,
-  togglePlay: PropTypes.func.isRequired,
   isPlaying: PropTypes.bool.isRequired,
   setPlayStatus: PropTypes.func.isRequired,
   onNext: PropTypes.func.isRequired,
-  onPrev: PropTypes.func.isRequired,
   setDuration: PropTypes.func.isRequired,
   seeking: PropTypes.bool.isRequired,
   currentSong: PropTypes.shape({
@@ -46,31 +45,14 @@ const defaultProps = {
   },
 };
 
-const defaultStepSeconds = 5;
-
 class PlayerContainer extends Component {
   onProgress = ({ playedSeconds }) => {
     if (!this.props.seeking && this.props.isPlaying) {
       this.props.updatePlayedTime(playedSeconds);
     }
   };
-  onStep = (step) => {
-    let playedSeconds = (this.player.getCurrentTime() + step);
-    if (playedSeconds < 1) {
-      playedSeconds = 0;
-    }
-    // TODO: This code do seeking.
-    this.player.seekTo(playedSeconds);
-    this.props.updatePlayedTime(playedSeconds);
-  };
-  onStepForward = () => {
-    this.onStep(defaultStepSeconds);
-  };
-  onStepBack = () => {
-    this.onStep(-defaultStepSeconds);
-  };
   onSongEnded = () => {
-    //  TODO: Add conditions to play next if loop will be implemented.
+    // TODO: Add conditions to play next if loop will be implemented.
     this.props.onNext();
   };
 
@@ -110,14 +92,7 @@ class PlayerContainer extends Component {
           {formatTime(playedSeconds)}
         </div>
         <SeekbarContainer playerRef={this.player} />
-        <PlaybackControlsBar
-          onPlayPause={this.props.togglePlay}
-          onStepForward={this.onStepForward}
-          onStepBack={this.onStepBack}
-          onNext={this.props.onNext}
-          onPrev={this.props.onPrev}
-          playing={isPlaying}
-        />
+        <ControlsBarContainer playerRef={this.player} />
       </Player>
     );
   }
@@ -129,15 +104,11 @@ PlayerContainer.defaultProps = defaultProps;
 const mapStateToProps = (state) => {
   const {
     isPlaying,
-    duration,
-    played,
     playedSeconds,
     seeking,
   } = state.player;
   return {
     isPlaying,
-    duration,
-    played,
     playedSeconds,
     seeking,
     currentSong: getCurrentSong(state.player),
@@ -145,13 +116,10 @@ const mapStateToProps = (state) => {
 };
 
 const mapDispatchToProps = {
-  togglePlay,
   setPlayStatus,
   setDuration,
   updatePlayedTime,
-  setSeeking,
   onNext: gotoTrack.next,
-  onPrev: gotoTrack.prev,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(PlayerContainer);
