@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Song from '../SongsListItem';
+import SongListItem from '../SongsListItem';
 import './SongsList.css';
 
 const propTypes = {
@@ -32,7 +32,7 @@ function SongsList({
   };
 
   const songsElements = songs.map(({ id, title, duration }, i) => (
-    <Song
+    <SongListItem
       key={id}
       title={title}
       duration={duration}

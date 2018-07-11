@@ -1,22 +1,21 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import withFontAwesome from './withFontAwesome';
-import Button from './Button';
+import ControlButton, { withFontAwesome } from '../ControlButton';
 import style from './ControlsBar.css';
 
 function ControlsBar({ buttonsConfig }) {
-  const buttons = buttonsConfig.map(button =>
+  const controlButtons = buttonsConfig.map(button =>
     withFontAwesome({
       key: button.name,
       callback: button.callback,
       icon: button.icon,
       className: button.className,
-    })(Button));
+    })(ControlButton));
 
   return (
     <div className={style.ControlsBar}>
-      {buttons}
+      {controlButtons}
     </div>
   );
 }

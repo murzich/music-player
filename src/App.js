@@ -1,12 +1,11 @@
-import React, { Fragment } from 'react';
-import { BrowserRouter, Route, Link } from 'react-router-dom';
+import React from 'react';
+import { BrowserRouter, Route } from 'react-router-dom';
 import { Provider } from 'react-redux';
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
 import reduxThunk from 'redux-thunk';
 
 import PageContainer from './containers/PageContainer';
 import LoginPage from './components/LoginPage/LoginPage';
-import Button from './components/common/Button';
 
 import rootReducer from './reducers';
 import loginReducer from './reducers/login';
@@ -21,27 +20,7 @@ function App() {
     <Provider store={store}>
       <BrowserRouter>
         <div>
-          <Route
-            exact
-            path="/"
-            render={() => (
-              <Fragment>
-                {/* TODO: Remove inline styles. */}
-                <Link
-                  to="/login"
-                  style={{
-                    position: 'absolute',
-                    right: '10px',
-                    top: '10px',
-                    zIndex: 1,
-                  }}
-                >
-                  <Button>Login/Sign up</Button>
-                </Link>
-                <PageContainer />
-              </Fragment>
-            )}
-          />
+          <Route exact path="/" component={PageContainer} />
           <Route path="/login" component={LoginPage} />
         </div>
       </BrowserRouter>

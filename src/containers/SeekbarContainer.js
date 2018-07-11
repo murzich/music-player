@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -5,8 +6,7 @@ import { connect } from 'react-redux';
 import { setSeeking, updatePlayedTime } from '../actions';
 import Seekbar from '../components/player/Seekbar';
 import { formatTime } from '../utils';
-import { PlayerTime } from '../components/layout/Player.css';
-
+import TimeDisplay from '../components/player/TimeDisplay';
 
 const propTypes = {
   playedSeconds: PropTypes.number.isRequired,
@@ -20,13 +20,11 @@ const defaultProps = {
 };
 
 function SeekbarContainer({
-  playedSeconds,
   duration,
-  // eslint-disable-next-line no-shadow
-  setSeeking,
-  // eslint-disable-next-line no-shadow
-  updatePlayedTime,
+  playedSeconds,
   playerRef,
+  setSeeking,
+  updatePlayedTime,
 }) {
   const eventCallbacks = {
     onMouseDown: () => setSeeking(true),
@@ -39,9 +37,7 @@ function SeekbarContainer({
 
   return (
     <Fragment>
-      <div className={PlayerTime}>
-        {formatTime(playedSeconds)}
-      </div>
+      <TimeDisplay time={formatTime(playedSeconds)} />
       <Seekbar
         played={playedSeconds}
         duration={duration}

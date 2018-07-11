@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import style from './Button.css';
+import style from './ControlButton.css';
 
 const propTypes = {
   callback: PropTypes.func.isRequired,
@@ -9,11 +9,11 @@ const propTypes = {
   children: PropTypes.node,
 };
 const defaultProps = {
-  className: 'Button',
+  className: 'ControlButton',
   children: 'button',
 };
 
-function Button({
+function ControlButton({
   callback,
   className,
   children,
@@ -28,7 +28,9 @@ function Button({
   );
 }
 
-Button.propTypes = propTypes;
-Button.defaultProps = defaultProps;
+ControlButton.propTypes = propTypes;
+ControlButton.defaultProps = defaultProps;
 
-export default Button;
+export default ControlButton;
+
+export { default as withFontAwesome } from './withFontAwesome';

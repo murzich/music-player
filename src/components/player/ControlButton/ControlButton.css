@@ -1,4 +1,4 @@
-.Button {
+.ControlButton {
   background: none;
   border: none;
   color: var(--controls-secondary);
@@ -7,14 +7,14 @@
   margin: 0;
   transition: all 200ms ease;
 }
-.Button:hover {
+.ControlButton:hover {
   color: var(--color-primary);
 }
-.Button:focus {
+.ControlButton:focus {
   outline: 0;
 }
-.Button-main {
-  composes: Button;
+.ControlButtonMain {
+  composes: ControlButton;
   margin: 0 1.5rem;
   font-size: 2rem;
   color: var(--controls-primary);

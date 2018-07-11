@@ -2,15 +2,15 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
-
 import FilePlayer from 'react-player/lib/players/FilePlayer';
-import { Player, SongInfo } from '../components/player';
-import { gotoTrack, setDuration, setPlayStatus, updatePlayedTime } from '../actions';
 
-import coverArt from '../assets/album.svg';
-import { getCurrentSong } from '../reducers';
 import SeekbarContainer from './SeekbarContainer';
 import ControlsBarContainer from './ControlsBarContainer';
+import Player from '../components/layout/Player';
+import SongInfo from '../components/player/SongInfo';
+import coverArt from '../assets/album.svg';
+import { gotoTrack, setDuration, setPlayStatus, updatePlayedTime } from '../actions';
+import { getCurrentSong } from '../reducers';
 
 const propTypes = {
   updatePlayedTime: PropTypes.func.isRequired,

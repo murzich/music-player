@@ -1,4 +1,10 @@
 export { default as Player } from '../layout/Player';
-export { ControlsBar as PlaybackControlsBar } from './ControlsBar';
+export { deafult as ControlButton } from './ControlButton';
+export { default as withFontAwesome } from './ControlButton/withFontAwesome';
+export { default as PlaybackControlsBar } from './ControlsBar';
+export { default as SearchBar } from './SearchBar';
 export { default as Seekbar } from './Seekbar';
 export { default as SongInfo } from './SongInfo';
+export { default as SongsList } from './SongsList';
+export { default as SongsListItem } from './SongsListItem';
+export { default as TimeDisplay } from './TimeDisplay';

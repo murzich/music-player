@@ -1,9 +1,11 @@
+/* eslint-disable no-shadow */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { gotoTrack, togglePlay, updatePlayedTime } from '../actions';
 import ControlsBar from '../components/player/ControlsBar';
+import { defaultStepSeconds } from '../config';
 
 const propTypes = {
   isPlaying: PropTypes.bool.isRequired,
@@ -17,16 +19,12 @@ const defaultProps = {
   playerRef: {},
 };
 
-const defaultStepSeconds = 5;
-
 function ControlsBarContainer({
   isPlaying,
   onNext,
   onPrev,
   playerRef,
-  // eslint-disable-next-line no-shadow
   togglePlay,
-  // eslint-disable-next-line no-shadow
   updatePlayedTime,
 }) {
   const onStep = step => () => {
@@ -55,7 +53,7 @@ function ControlsBarContainer({
       name: 'Play/Pause',
       icon: (isPlaying) ? 'pause' : 'play',
       callback: togglePlay,
-      className: 'Button-main',
+      className: 'ControlButtonMain',
     },
     {
       name: 'Forward',
