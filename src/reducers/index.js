@@ -95,7 +95,7 @@ export default function (state = initialState, action) {
           state.songsList.length,
         ),
         isPlaying: true,
-        playedSeconds: 0,
+        playedSeconds: (action.payload !== state.currentTrack) ? 0 : state.playedSeconds,
       };
     case SET_DURATION:
       return {
