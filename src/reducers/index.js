@@ -22,7 +22,6 @@ const initialState = {
   currentTrack: 0,
   isPlaying: false,
   playedSeconds: 0,
-  previewDuration: 0,
   duration: 0,
   seeking: false,
 };
