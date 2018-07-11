@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import Song from './Song';
+import Song from '../SongsListItem';
 import './SongsList.css';
 
 const propTypes = {

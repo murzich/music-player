@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import fetchSongs, { setSearchQuery } from '../actions';
-import { SearchBar } from '../components/Playlist';
+import SearchBar from '../components/player/SearchBar';
 
 function SearchBarContainer({
   isLoading,

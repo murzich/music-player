@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import InputText from '../common/InputText';
+import InputText from '../../common/InputText';
 import style from './SearchBar.css';
 
 const propTypes = {

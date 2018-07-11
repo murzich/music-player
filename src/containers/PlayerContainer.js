@@ -4,7 +4,7 @@ import { connect } from 'react-redux';
 
 import FilePlayer from 'react-player/lib/players/FilePlayer';
 import { formatTime } from '../utils';
-import { Player, PlaybackControlsBar, SongInfo, Seekbar } from '../components/Player';
+import { Player, PlaybackControlsBar, SongInfo, Seekbar } from '../components/player';
 import { gotoTrack, setDuration, setPlayStatus, setSeeking, togglePlay, updatePlayedTime } from '../actions';
 
 import coverArt from '../assets/album.svg';

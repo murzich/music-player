@@ -1,8 +1,10 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
+
 import { gotoTrack } from '../actions';
-import { SongsList } from '../components/Playlist';
+
+import SongsList from '../components/player/SongsList';
 
 function SongsListContainer({
   songsList,

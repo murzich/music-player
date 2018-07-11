@@ -6,7 +6,7 @@ import fetchSongs from '../actions';
 import { getCurrentCover } from '../reducers';
 
 import Page from '../components/layout/Page';
-import Playlist from '../components/Playlist';
+import Playlist from '../components/layout/Playlist';
 import PlayerContainer from './PlayerContainer';
 import SongsListContainer from './SongsListContainer';
 import SearchBarContainer from './SearchBarContainer';

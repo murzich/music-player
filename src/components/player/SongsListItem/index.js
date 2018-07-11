@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import style from './Song.css';
-import { formatTime } from '../../utils';
+import { formatTime } from '../../../utils';
 
 const propTypes = {
   title: PropTypes.string.isRequired,
@@ -11,7 +11,7 @@ const propTypes = {
   className: PropTypes.string.isRequired,
 };
 
-function Song({
+function SongsListItem({
   title,
   duration,
   onClick,
@@ -31,6 +31,6 @@ function Song({
   );
 }
 
-Song.propTypes = propTypes;
+SongsListItem.propTypes = propTypes;
 
-export default Song;
+export default SongsListItem;
