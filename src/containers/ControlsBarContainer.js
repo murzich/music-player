@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
 import { gotoTrack, togglePlay, updatePlayedTime } from '../actions';
-import PlaybackControlsBar from '../components/player/PlaybackControlsBar';
+import ControlsBar from '../components/player/ControlsBar';
 
 const propTypes = {
   isPlaying: PropTypes.bool.isRequired,
@@ -65,7 +65,7 @@ function ControlsBarContainer({
   ];
 
   return (
-    <PlaybackControlsBar buttonsConfig={buttonsConfig} />
+    <ControlsBar buttonsConfig={buttonsConfig} />
   );
 }
 

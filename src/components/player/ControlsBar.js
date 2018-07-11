@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 
 import withFontAwesome from './withFontAwesome';
 import Button from './Button';
-import style from './PlaybackControlsBar.css';
+import style from './ControlsBar.css';
 
-function PlaybackControlsBar({ buttonsConfig }) {
+function ControlsBar({ buttonsConfig }) {
   const buttons = buttonsConfig.map(button =>
     withFontAwesome({
       key: button.name,
@@ -15,14 +15,14 @@ function PlaybackControlsBar({ buttonsConfig }) {
     })(Button));
 
   return (
-    <div className={style.PlaybackControlsBar}>
+    <div className={style.ControlsBar}>
       {buttons}
     </div>
   );
 }
 
-PlaybackControlsBar.propTypes = {
+ControlsBar.propTypes = {
   buttonsConfig: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
-export default PlaybackControlsBar;
+export default ControlsBar;
