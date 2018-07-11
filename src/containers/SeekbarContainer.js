@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
@@ -38,7 +38,7 @@ function SeekbarContainer({
   };
 
   return (
-    <div>
+    <Fragment>
       <div className={PlayerTime}>
         {formatTime(playedSeconds)}
       </div>
@@ -47,7 +47,7 @@ function SeekbarContainer({
         duration={duration}
         eventCallbacks={eventCallbacks}
       />
-    </div>
+    </Fragment>
   );
 }
 

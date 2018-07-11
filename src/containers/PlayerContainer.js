@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -61,10 +62,8 @@ class PlayerContainer extends Component {
   render() {
     const {
       currentSong,
-      // eslint-disable-next-line no-shadow
       setPlayStatus,
       isPlaying,
-      // eslint-disable-next-line no-shadow
       setDuration,
     } = this.props;
     return (
@@ -84,8 +83,10 @@ class PlayerContainer extends Component {
           title={currentSong.title}
           artist={currentSong.artist.name}
         />
-        <SeekbarContainer playerRef={this.player} />
-        <ControlsBarContainer playerRef={this.player} />
+        <div>
+          <SeekbarContainer playerRef={this.player} />
+          <ControlsBarContainer playerRef={this.player} />
+        </div>
       </Player>
     );
   }

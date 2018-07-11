@@ -1,3 +1,4 @@
+/* eslint-disable no-shadow */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
@@ -8,9 +9,7 @@ import SearchBar from '../components/player/SearchBar';
 function SearchBarContainer({
   isLoading,
   searchQuery,
-  // eslint-disable-next-line no-shadow
   setSearchQuery,
-  // eslint-disable-next-line no-shadow
   fetchSongs,
 }) {
   const onInputChange = (e) => {

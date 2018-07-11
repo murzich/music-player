@@ -33,10 +33,6 @@ class PageContainer extends Component {
   }
 }
 
-const mapStateToProps = state => ({
-  currentCover: getCurrentCover(state.player),
-});
-
 PageContainer.propTypes = {
   fetchSongs: PropTypes.func.isRequired,
   currentCover: PropTypes.string,
@@ -44,5 +40,9 @@ PageContainer.propTypes = {
 PageContainer.defaultProps = {
   currentCover: '',
 };
+
+const mapStateToProps = state => ({
+  currentCover: getCurrentCover(state.player),
+});
 
 export default connect(mapStateToProps, { fetchSongs })(PageContainer);

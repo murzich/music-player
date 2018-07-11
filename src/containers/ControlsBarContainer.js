@@ -38,6 +38,8 @@ function ControlsBarContainer({
     updatePlayedTime(currentTime);
   };
 
+  // In the icon prop use a correct icon name of the FontAwesome free icon set.
+  // Callback prop will assign to onClick event of control button.
   const buttonsConfig = [
     {
       name: 'Previous',
