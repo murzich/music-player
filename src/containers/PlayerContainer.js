@@ -4,12 +4,13 @@ import { connect } from 'react-redux';
 
 import FilePlayer from 'react-player/lib/players/FilePlayer';
 import { formatTime } from '../utils';
-import { Player, PlaybackControlsBar, SongInfo, Seekbar } from '../components/player';
+import { Player, PlaybackControlsBar, SongInfo } from '../components/player';
 import { gotoTrack, setDuration, setPlayStatus, setSeeking, togglePlay, updatePlayedTime } from '../actions';
 
 import coverArt from '../assets/album.svg';
 import { PlayerTime } from '../components/layout/Player.css';
 import { getCurrentSong } from '../reducers';
+import SeekbarContainer from './SeekbarContainer';
 
 const propTypes = {
   playedSeconds: PropTypes.number.isRequired,
@@ -19,10 +20,8 @@ const propTypes = {
   setPlayStatus: PropTypes.func.isRequired,
   onNext: PropTypes.func.isRequired,
   onPrev: PropTypes.func.isRequired,
-  duration: PropTypes.number.isRequired,
   setDuration: PropTypes.func.isRequired,
   seeking: PropTypes.bool.isRequired,
-  setSeeking: PropTypes.func.isRequired,
   currentSong: PropTypes.shape({
     title: PropTypes.string,
     preview: PropTypes.string,
@@ -54,16 +53,6 @@ class PlayerContainer extends Component {
     if (!this.props.seeking && this.props.isPlaying) {
       this.props.updatePlayedTime(playedSeconds);
     }
-  };
-  onSeekMouseDown = () => {
-    this.props.setSeeking(true);
-  };
-  onSeekChange = (e) => {
-    this.props.updatePlayedTime(parseFloat(e.target.value));
-  };
-  onSeekMouseUp = (e) => {
-    this.props.setSeeking(false);
-    this.player.seekTo(parseFloat(e.target.value));
   };
   onStep = (step) => {
     let playedSeconds = (this.player.getCurrentTime() + step);
@@ -120,13 +109,7 @@ class PlayerContainer extends Component {
         <div className={PlayerTime}>
           {formatTime(playedSeconds)}
         </div>
-        <Seekbar
-          played={playedSeconds}
-          duration={this.props.duration}
-          onSeekMouseDown={this.onSeekMouseDown}
-          onSeekChange={this.onSeekChange}
-          onSeekMouseUp={this.onSeekMouseUp}
-        />
+        <SeekbarContainer playerRef={this.player} />
         <PlaybackControlsBar
           onPlayPause={this.props.togglePlay}
           onStepForward={this.onStepForward}

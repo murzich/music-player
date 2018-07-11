@@ -23,7 +23,7 @@ const initialState = {
   isPlaying: false,
   playedSeconds: 0,
   previewDuration: 0,
-  duration: 100,
+  duration: 0,
   seeking: false,
 };
 

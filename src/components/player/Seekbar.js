@@ -4,19 +4,15 @@ import PropTypes from 'prop-types';
 import style from './Seekbar.css';
 
 const propTypes = {
-  played: PropTypes.number.isRequired,
-  onSeekMouseDown: PropTypes.func.isRequired,
-  onSeekMouseUp: PropTypes.func.isRequired,
-  onSeekChange: PropTypes.func.isRequired,
   duration: PropTypes.number.isRequired,
+  eventCallbacks: PropTypes.objectOf(PropTypes.func).isRequired,
+  played: PropTypes.number.isRequired,
 };
 
 function Seekbar({
-  played,
-  onSeekMouseDown,
-  onSeekMouseUp,
-  onSeekChange,
   duration,
+  eventCallbacks,
+  played,
 }) {
   return (
     <input
@@ -26,9 +22,7 @@ function Seekbar({
       className={style.Seekbar}
       step="any"
       value={played}
-      onMouseDown={onSeekMouseDown}
-      onChange={onSeekChange}
-      onMouseUp={onSeekMouseUp}
+      {...eventCallbacks}
     />
   );
 }
