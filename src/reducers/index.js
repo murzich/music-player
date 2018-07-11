@@ -8,11 +8,11 @@ import {
   GOTO_PREV_TRACK,
   SET_CURRENT_TRACK,
   SET_DURATION,
-  // SET_TIME_POSITION,
   UPDATE_TIME_POSITION,
   SET_PLAY_STATUS,
   SET_SEARCH_QUERY,
   TOGGLE_PLAY,
+  SET_SEEKING_STATUS,
 } from '../types/player';
 
 const initialState = {
@@ -21,10 +21,10 @@ const initialState = {
   searchQuery: '',
   currentTrack: 0,
   isPlaying: false,
-  played: 0,
   playedSeconds: 0,
   previewDuration: 0,
   duration: 100,
+  seeking: false,
 };
 
 const setPlayStatus = (state = false, action) => {
@@ -95,7 +95,7 @@ export default function (state = initialState, action) {
           state.songsList.length,
         ),
         isPlaying: true,
-        played: 0,
+        playedSeconds: 0,
       };
     case SET_DURATION:
       return {
@@ -105,7 +105,12 @@ export default function (state = initialState, action) {
     case UPDATE_TIME_POSITION:
       return {
         ...state,
-        played: action.payload,
+        playedSeconds: action.payload,
+      };
+    case SET_SEEKING_STATUS:
+      return {
+        ...state,
+        seeking: action.payload,
       };
     default:
       return state;
@@ -113,7 +118,7 @@ export default function (state = initialState, action) {
 }
 
 export const getCurrentSong = (state) => {
-  const { songsList, currentTrack } = state.player;
+  const { songsList, currentTrack } = state;
   return songsList[currentTrack];
 };
 
@@ -125,9 +130,4 @@ export const getCurrentCover = (state) => {
   } catch (e) {
     return undefined;
   }
-};
-
-export const getPlayedTimeSeconds = (state) => {
-  const { played, duration } = state;
-  return Math.floor(duration * played);
 };

@@ -6,7 +6,6 @@ import {
 } from '../actions/types';
 import {
   SET_CURRENT_TRACK,
-  // SET_TIME_POSITION,
   UPDATE_TIME_POSITION,
   SET_DURATION,
   SET_SEARCH_QUERY,
@@ -14,6 +13,7 @@ import {
   TOGGLE_PLAY,
   GOTO_NEXT_TRACK,
   GOTO_PREV_TRACK,
+  SET_SEEKING_STATUS,
 } from '../types/player';
 
 const deezerSearch = 'http://api.deezer.com/search/track';
@@ -71,9 +71,14 @@ export const setDuration = duration => ({
   payload: duration,
 });
 
-export const updatePlayedTime = timeFraction => ({
+export const updatePlayedTime = timeSeconds => ({
   type: UPDATE_TIME_POSITION,
-  payload: timeFraction,
+  payload: timeSeconds,
+});
+
+export const setSeeking = status => ({
+  type: SET_SEEKING_STATUS,
+  payload: status,
 });
 
 export default fetchSongs;

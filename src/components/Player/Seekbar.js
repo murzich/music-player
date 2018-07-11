@@ -8,6 +8,7 @@ const propTypes = {
   onSeekMouseDown: PropTypes.func.isRequired,
   onSeekMouseUp: PropTypes.func.isRequired,
   onSeekChange: PropTypes.func.isRequired,
+  duration: PropTypes.number.isRequired,
 };
 
 function Seekbar({
@@ -15,12 +16,13 @@ function Seekbar({
   onSeekMouseDown,
   onSeekMouseUp,
   onSeekChange,
+  duration,
 }) {
   return (
     <input
       type="range"
       min="0"
-      max="1"
+      max={duration}
       className={style.Seekbar}
       step="any"
       value={played}

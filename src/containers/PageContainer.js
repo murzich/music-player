@@ -61,7 +61,7 @@ class PageContainer extends Component {
   }
 }
 
-const mapStateToProps = (store) => {
+const mapStateToProps = (state) => {
   const {
     isLoading,
     songsList,
@@ -69,7 +69,7 @@ const mapStateToProps = (store) => {
     isPlaying,
     searchQuery,
     currentTrack,
-  } = store.player;
+  } = state.player;
   return {
     isLoading,
     songsList,
@@ -77,7 +77,7 @@ const mapStateToProps = (store) => {
     isPlaying,
     searchQuery,
     currentTrack,
-    currentCover: getCurrentCover(store),
+    currentCover: getCurrentCover(state.player),
   };
 };
 

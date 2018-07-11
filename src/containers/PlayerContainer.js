@@ -5,14 +5,13 @@ import { connect } from 'react-redux';
 import FilePlayer from 'react-player/lib/players/FilePlayer';
 import { formatTime } from '../utils';
 import { Player, PlaybackControlsBar, SongInfo, Seekbar } from '../components/Player';
-import { gotoTrack, setDuration, setPlayStatus, togglePlay, updatePlayedTime } from '../actions';
+import { gotoTrack, setDuration, setPlayStatus, setSeeking, togglePlay, updatePlayedTime } from '../actions';
 
 import coverArt from '../assets/album.svg';
 import { PlayerTime } from '../components/layout/Player.css';
-import { getCurrentSong, getPlayedTimeSeconds } from '../reducers';
+import { getCurrentSong } from '../reducers';
 
 const propTypes = {
-  played: PropTypes.number.isRequired,
   playedSeconds: PropTypes.number.isRequired,
   updatePlayedTime: PropTypes.func.isRequired,
   togglePlay: PropTypes.func.isRequired,
@@ -22,6 +21,8 @@ const propTypes = {
   onPrev: PropTypes.func.isRequired,
   duration: PropTypes.number.isRequired,
   setDuration: PropTypes.func.isRequired,
+  seeking: PropTypes.bool.isRequired,
+  setSeeking: PropTypes.func.isRequired,
   currentSong: PropTypes.shape({
     title: PropTypes.string,
     preview: PropTypes.string,
@@ -46,59 +47,42 @@ const defaultProps = {
   },
 };
 
-class PlayerContainer extends Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      seeking: false,
-    };
-    this.stepSeconds = 5;
-  }
+const defaultStepSeconds = 5;
 
-  onPause = () => {
-    this.props.updatePlayedTime(this.player.getCurrentTime() / this.props.duration);
-    this.props.setPlayStatus(false);
-  };
-  onProgress = ({ played }) => {
-    if (!this.state.seeking && this.props.isPlaying) {
-      this.props.updatePlayedTime(played);
+class PlayerContainer extends Component {
+  onProgress = ({ playedSeconds }) => {
+    if (!this.props.seeking && this.props.isPlaying) {
+      this.props.updatePlayedTime(playedSeconds);
     }
   };
   onSeekMouseDown = () => {
-    this.setState({ seeking: true });
+    this.props.setSeeking(true);
   };
   onSeekChange = (e) => {
-    const { value } = e.target;
-    return value + 1;
-    // this.setState({ played: parseFloat(e.target.value) });
+    this.props.updatePlayedTime(parseFloat(e.target.value));
   };
   onSeekMouseUp = (e) => {
-    this.setState({ seeking: false });
+    this.props.setSeeking(false);
     this.player.seekTo(parseFloat(e.target.value));
   };
   onStep = (step) => {
-    let played = (this.player.getCurrentTime() + step) / this.props.duration;
-    if (played < 0 || played > 1) {
-      played = (played < 0) ? 0 : 1;
+    let playedSeconds = (this.player.getCurrentTime() + step);
+    if (playedSeconds < 1) {
+      playedSeconds = 0;
     }
     // TODO: This code do seeking.
-    this.player.seekTo(played);
-    this.props.updatePlayedTime(played);
+    this.player.seekTo(playedSeconds);
+    this.props.updatePlayedTime(playedSeconds);
   };
   onStepForward = () => {
-    this.onStep(this.stepSeconds);
+    this.onStep(defaultStepSeconds);
   };
   onStepBack = () => {
-    this.onStep(-this.stepSeconds);
+    this.onStep(-defaultStepSeconds);
   };
-  onEnded = () => {
-    // eslint-disable-next-line react/no-unused-state
-    this.setState({ playing: this.state.loop }, () => {
-      //  TODO: Add conditions to play next
-      this.props.onNext();
-      // eslint-disable-next-line react/no-unused-state
-      this.setState({ playing: true });
-    });
+  onSongEnded = () => {
+    //  TODO: Add conditions to play next if loop will be implemented.
+    this.props.onNext();
   };
 
   ref = (player) => {
@@ -114,7 +98,6 @@ class PlayerContainer extends Component {
       // eslint-disable-next-line no-shadow
       setDuration,
       playedSeconds,
-      played,
     } = this.props;
     return (
       <Player>
@@ -125,21 +108,21 @@ class PlayerContainer extends Component {
           playing={isPlaying}
           onProgress={this.onProgress}
           onDuration={setDuration}
-          onEnded={this.onEnded}
+          onEnded={this.onSongEnded}
           onPlay={() => setPlayStatus(true)}
-          onPause={this.onPause}
         />
         <SongInfo
           cover={currentSong.album.cover_medium}
           title={currentSong.title}
           artist={currentSong.artist.name}
         />
-        {/* TODO: Extract to separate component. */}
+        {/* TODO: Extract to separate component. Use memorized selector */}
         <div className={PlayerTime}>
           {formatTime(playedSeconds)}
         </div>
         <Seekbar
-          played={played}
+          played={playedSeconds}
+          duration={this.props.duration}
           onSeekMouseDown={this.onSeekMouseDown}
           onSeekChange={this.onSeekChange}
           onSeekMouseUp={this.onSeekMouseUp}
@@ -160,20 +143,30 @@ class PlayerContainer extends Component {
 PlayerContainer.propTypes = propTypes;
 PlayerContainer.defaultProps = defaultProps;
 
-const mapStateToProps = state => ({
-  // TODO: Replace by Destructuring assignment.
-  isPlaying: state.player.isPlaying,
-  currentSong: getCurrentSong(state),
-  duration: state.player.duration,
-  played: state.player.played,
-  playedSeconds: getPlayedTimeSeconds(state.player),
-});
+const mapStateToProps = (state) => {
+  const {
+    isPlaying,
+    duration,
+    played,
+    playedSeconds,
+    seeking,
+  } = state.player;
+  return {
+    isPlaying,
+    duration,
+    played,
+    playedSeconds,
+    seeking,
+    currentSong: getCurrentSong(state.player),
+  };
+};
 
 const mapDispatchToProps = {
   togglePlay,
   setPlayStatus,
   setDuration,
   updatePlayedTime,
+  setSeeking,
   onNext: gotoTrack.next,
   onPrev: gotoTrack.prev,
 };
