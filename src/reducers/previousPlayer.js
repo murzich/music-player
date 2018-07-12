@@ -1,8 +1,16 @@
+/**
+ * Previous version of player reducer. Later this one was refactored &
+ * split onto separate playerControls & playlist files with reducing functions,
+ * which combines onto full reducer with createReducer function.
+ * This approach was chosen to simplify saving playlist & moving through it by
+ * controls. This required to keep their parts of store in common scope.
+ */
 import {
   FETCH_SONGS_FAILURE,
   FETCH_SONGS_REQUEST,
   FETCH_SONGS_SUCCESS,
-} from '../actions/types';
+  SET_SEARCH_QUERY,
+} from '../types/playlist';
 import {
   GOTO_NEXT_TRACK,
   GOTO_PREV_TRACK,
@@ -10,10 +18,9 @@ import {
   SET_DURATION,
   UPDATE_TIME_POSITION,
   SET_PLAY_STATUS,
-  SET_SEARCH_QUERY,
   TOGGLE_PLAY,
   SET_SEEKING_STATUS,
-} from '../types/player';
+} from '../types/playerControls';
 
 const initialState = {
   songsList: [],

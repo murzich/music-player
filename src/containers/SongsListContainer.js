@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { gotoTrack } from '../actions';
+import { gotoTrack } from '../actions/playerControls';
 
 import SongsList from '../components/player/SongsList';
 

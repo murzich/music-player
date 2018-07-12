@@ -3,7 +3,7 @@ import React, { Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { setSeeking, updatePlayedTime } from '../actions';
+import { setSeeking, updatePlayedTime } from '../actions/playerControls';
 import Seekbar from '../components/player/Seekbar';
 import { formatTime } from '../utils';
 import TimeDisplay from '../components/player/TimeDisplay';

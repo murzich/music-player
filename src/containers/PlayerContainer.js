@@ -9,7 +9,7 @@ import ControlsBarContainer from './ControlsBarContainer';
 import Player from '../components/layout/Player';
 import SongInfo from '../components/player/SongInfo';
 import coverArt from '../assets/album.svg';
-import { gotoTrack, setDuration, setPlayStatus, updatePlayedTime } from '../actions';
+import { gotoTrack, setDuration, setPlayStatus, updatePlayedTime } from '../actions/playerControls';
 import { getCurrentSong } from '../selectors';
 
 const propTypes = {

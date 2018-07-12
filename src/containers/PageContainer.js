@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import fetchSongs from '../actions';
+import { fetchSongs } from '../actions/playlist';
 import { getCurrentCover } from '../selectors';
 
 import Page from '../components/layout/Page';

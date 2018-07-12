@@ -3,7 +3,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { gotoTrack, togglePlay, updatePlayedTime } from '../actions';
+import { gotoTrack, togglePlay, updatePlayedTime } from '../actions/playerControls';
 import ControlsBar from '../components/player/ControlsBar';
 import { defaultStepSeconds } from '../config';
 
