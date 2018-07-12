@@ -9,17 +9,14 @@ function OAuthLogin() {
   };
 
   return (
-    <fieldset>
-      <legend className={style.OAuthLoginTitle}>Login via social networks</legend>
-      <div className={style.OAuthLogin}>
-        <Button
-          type="button"
-          onClick={onClick}
-        >
-          Sign in by Deezer
-        </Button>
-      </div>
-    </fieldset>
+    <div className={style.OAuthLogin}>
+      <Button
+        type="button"
+        onClick={onClick}
+      >
+        Sign in by Deezer
+      </Button>
+    </div>
   );
 }
 
