@@ -7,6 +7,7 @@ import Button from '../../common/Button';
 import InputText from '../../common/InputText';
 
 import style from './LoginForm.css';
+import { required, email, minLength } from '../../../validators/validators';
 
 const renderTextField = ({
   input,
@@ -63,12 +64,14 @@ function LoginForm({
           label="Email: "
           type="email"
           component={renderTextField}
+          validate={[required, email]}
         />
         <Field
           name="password"
           label="Password: "
           type="password"
           component={renderTextField}
+          validate={[required, minLength(6)]}
         />
         { doRegister &&
           <Field
@@ -76,6 +79,7 @@ function LoginForm({
             label="Confirm password: "
             type="password"
             component={renderTextField}
+            validate={[required, minLength(6)]}
           /> }
         <Button type="submit">
           { doRegister ? 'Sign up' : 'Sign in' }
