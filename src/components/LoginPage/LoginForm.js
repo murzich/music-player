@@ -8,17 +8,6 @@ import InputText from '../common/InputText';
 
 import style from './LoginForm.css';
 
-const propTypes = {
-  handleFormData: PropTypes.func,
-  email: PropTypes.string,
-  password: PropTypes.string,
-};
-const defaultProps = {
-  handleFormData: e => console.log(e),
-  email: '',
-  password: '',
-};
-
 const renderTextField = ({
   input,
   name,
@@ -30,7 +19,7 @@ const renderTextField = ({
   ...custom
 }) => (
   <InputText
-    id={name}
+    name={name}
     label={label}
     errorText={touched && error}
     {...input}
@@ -40,23 +29,33 @@ const renderTextField = ({
 
 renderTextField.propTypes = {
   input: PropTypes.objectOf(PropTypes.any).isRequired,
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   label: PropTypes.string.isRequired,
   meta: PropTypes.shape({
     touched: PropTypes.bool.isRequired,
     error: PropTypes.string,
   }).isRequired,
 };
+renderTextField.defaultProps = {
+  name: '',
+};
+
+const propTypes = {
+  doRegister: PropTypes.bool,
+};
+const defaultProps = {
+  doRegister: false,
+};
 
 function LoginForm({
-  handleFormData,
-  email,
-  password,
+  doRegister,
 }) {
   return (
     <fieldset className={style.LoginFromFieldset}>
       <legend>
-        <h1 className={style.LoginFormTitle}>Login to Deezer.com</h1>
+        <h1 className={style.LoginFormTitle}>
+          { doRegister ? 'Register on Deezer.com' : 'Login to Deezer.com' }
+        </h1>
       </legend>
       <div className={style.LoginFrom}>
         <Field
@@ -65,29 +64,22 @@ function LoginForm({
           type="email"
           component={renderTextField}
         />
-        {/* <InputText
-          id="email"
-          label="Email: "
-          type="email"
-          value={email}
-          onChange={handleFormData}
-          required
-        /> */}
         <Field
           name="password"
           label="Password: "
           type="password"
           component={renderTextField}
         />
-        {/* <InputText
-          id="password"
-          label="Password: "
-          type="password"
-          value={password}
-          onChange={handleFormData}
-          required
-        /> */}
-        <Button type="submit">Login</Button>
+        { doRegister &&
+          <Field
+            name="passwordConfirm"
+            label="Confirm password: "
+            type="password"
+            component={renderTextField}
+          /> }
+        <Button type="submit">
+          { doRegister ? 'Sign up' : 'Sign in' }
+        </Button>
       </div>
     </fieldset>
   );

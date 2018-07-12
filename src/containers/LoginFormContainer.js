@@ -3,23 +3,11 @@ import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 
 import LoginForm from '../components/LoginPage/LoginForm';
-import RegistrationForm from '../components/LoginPage/RegistrationForm';
 
-/**
- * onSubmit function must be declared elsewhere &
- * passed to props of this component
- */
 function LoginFormContainer({ handleSubmit, isCurrentLogin }) {
-  const currentForm = (isCurrentLogin) ? (
-    // TODO: combine into single component
-    <LoginForm />
-  ) : (
-    <RegistrationForm />
-  );
-
   return (
     <form onSubmit={handleSubmit}>
-      {currentForm}
+      <LoginForm doRegister={!isCurrentLogin} />
     </form>
   );
 }
@@ -29,6 +17,7 @@ LoginFormContainer.propTypes = {
   isCurrentLogin: PropTypes.bool.isRequired,
 };
 
+// TODO: When do validation check on form instance Login of Register
 export default reduxForm({
   form: 'login',
 })(LoginFormContainer);

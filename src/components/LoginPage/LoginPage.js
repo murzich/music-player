@@ -3,9 +3,7 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { switchForm, updateCredentials } from '../../actions/login';
-// import LoginForm from './LoginForm';
-// import RegistrationForm from './RegistrationForm';
+import { switchForm } from '../../actions/login';
 import SocialLogin from './SocialLogin';
 
 import Button from '../common/Button';
@@ -16,48 +14,24 @@ import LoginFormContainer from '../../containers/LoginFormContainer';
 const propTypes = {
   isCurrentFormLogin: PropTypes.bool.isRequired,
   switchForm: PropTypes.func.isRequired,
-  // updateCredentials: PropTypes.func.isRequired,
-  // email: PropTypes.string,
-  // password: PropTypes.string,
-  // passwordConfirm: PropTypes.string,
-};
-const defaultProps = {
-  // email: '',
-  // password: '',
-  // passwordConfirm: '',
 };
 
 function LoginPage({
   isCurrentFormLogin,
   // eslint-disable-next-line no-shadow
   switchForm,
-  // eslint-disable-next-line no-shadow
-  // updateCredentials,
-  // email,
-  // password,
-  // passwordConfirm,
 }) {
   // TODO: Remove conosle.log after adding the Submitting.
   const submitCredentials = (values) => {
     // eslint-disable-next-line no-console
-    console.log(values);
+    if (isCurrentFormLogin) {
+      // TODO: Use registeredFields from the form store
+      // to determine what form is active.
+      console.log('Login ', values);
+    } else {
+      console.log('Register ', values);
+    }
   };
-  //
-  // const currentForm = (isCurrentFormLogin) ? (
-  //   // TODO: combine into single component
-  //   <LoginForm
-  //     handleFormData={updateCredentials}
-  //     email={email}
-  //     password={password}
-  //   />
-  // ) : (
-  //   <RegistrationForm
-  //     handleFormData={updateCredentials}
-  //     email={email}
-  //     password={password}
-  //     passwordConfirm={passwordConfirm}
-  //   />
-  // );
 
   return (
     <div className={style.LoginPage}>
@@ -71,15 +45,7 @@ function LoginPage({
               {isCurrentFormLogin ? 'Sign up' : 'Sign in'}
             </a>
           </div>
-          {/* START: To loginFormContainer */}
           <LoginFormContainer onSubmit={submitCredentials} isCurrentLogin={isCurrentFormLogin} />
-          {/* <form
-            onSubmit={handleSubmit}
-            isCurrentLogin={isCurrentFormLogin}
-          >
-            {currentForm}
-          </form> */}
-          {/* END: To loginFormContainer */}
         </div>
         <SocialLogin />
       </div>
@@ -88,21 +54,14 @@ function LoginPage({
 }
 
 LoginPage.propTypes = propTypes;
-LoginPage.defaultProps = defaultProps;
 
 const mapStateToProps = (store) => {
   const {
-    email,
-    password,
-    passwordConfirm,
     isCurrentFormLogin,
   } = store.login;
   return {
-    email,
-    password,
-    passwordConfirm,
     isCurrentFormLogin,
   };
 };
 
-export default connect(mapStateToProps, { switchForm, updateCredentials })(LoginPage);
+export default connect(mapStateToProps, { switchForm })(LoginPage);

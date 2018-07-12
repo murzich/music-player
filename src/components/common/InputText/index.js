@@ -5,36 +5,41 @@ import style from './InputText.css';
 
 function InputText(props) {
   const {
-    id,
+    name,
     type,
     value,
     label,
     className,
     children,
+    errorText,
     ...restProps
   } = props;
   return (
-    <label htmlFor={id} className={style.InputTextLabel}>
+    <label htmlFor={name} className={style.InputTextLabel}>
       {label}
       <input
-        id={id}
+        name={name}
         type={type}
         value={value}
         className={className}
         {...restProps}
       />
+      { errorText &&
+        <div>{errorText}</div>
+      }
       {children}
     </label>
   );
 }
 
 InputText.propTypes = {
-  id: PropTypes.string.isRequired,
+  name: PropTypes.string.isRequired,
   type: PropTypes.string,
   value: PropTypes.string,
   label: PropTypes.string,
   className: PropTypes.string,
   children: PropTypes.node,
+  errorText: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 InputText.defaultProps = {
   type: 'text',
@@ -42,6 +47,7 @@ InputText.defaultProps = {
   label: '',
   className: style.InputText,
   children: '',
+  errorText: '',
 };
 
 export default InputText;
