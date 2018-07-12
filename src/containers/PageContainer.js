@@ -4,7 +4,7 @@ import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
 import fetchSongs from '../actions';
-import { getCurrentCover } from '../reducers';
+import { getCurrentCover } from '../selectors';
 
 import Page from '../components/layout/Page';
 import Playlist from '../components/layout/Playlist';

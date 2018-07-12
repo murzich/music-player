@@ -13,3 +13,11 @@ export function formatTime(seconds) {
   }
   return `${mm}:${ss}`;
 }
+
+export const createReducer = (initState, handlers) => (state = initState, action) => {
+  // eslint-disable-next-line no-prototype-builtins
+  if (handlers.hasOwnProperty(action.type)) {
+    return handlers[action.type](state, action);
+  }
+  return state;
+};

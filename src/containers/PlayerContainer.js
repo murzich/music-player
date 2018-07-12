@@ -10,7 +10,7 @@ import Player from '../components/layout/Player';
 import SongInfo from '../components/player/SongInfo';
 import coverArt from '../assets/album.svg';
 import { gotoTrack, setDuration, setPlayStatus, updatePlayedTime } from '../actions';
-import { getCurrentSong } from '../reducers';
+import { getCurrentSong } from '../selectors';
 
 const propTypes = {
   updatePlayedTime: PropTypes.func.isRequired,

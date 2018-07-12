@@ -3,18 +3,18 @@ import {
   FETCH_SONGS_SUCCESS,
   FETCH_SONGS_FAILURE,
   FETCH_SONGS_REQUEST,
-} from '../actions/types';
-import {
-  SET_CURRENT_TRACK,
-  UPDATE_TIME_POSITION,
-  SET_DURATION,
   SET_SEARCH_QUERY,
-  SET_PLAY_STATUS,
-  TOGGLE_PLAY,
+} from '../types/playlist';
+import {
   GOTO_NEXT_TRACK,
   GOTO_PREV_TRACK,
+  SET_CURRENT_TRACK,
+  SET_DURATION,
+  SET_PLAY_STATUS,
   SET_SEEKING_STATUS,
-} from '../types/player';
+  TOGGLE_PLAY,
+  UPDATE_TIME_POSITION,
+} from '../types/playerControls';
 
 const deezerSearch = 'http://api.deezer.com/search/track';
 const corsAnywhere = 'https://cors-anywhere.herokuapp.com/';

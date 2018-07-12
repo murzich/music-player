@@ -7,10 +7,10 @@ import reduxThunk from 'redux-thunk';
 import PageContainer from './containers/PageContainer';
 import LoginPage from './components/LoginPage/LoginPage';
 
-import rootReducer from './reducers';
-import loginReducer from './reducers/login';
+import player from './reducers/player';
+import login from './reducers/login';
 
-const store = createStore(combineReducers({ player: rootReducer, login: loginReducer }), compose(
+const store = createStore(combineReducers({ player, login }), compose(
   applyMiddleware(reduxThunk),
   window.devToolsExtension ? window.devToolsExtension() : f => f,
 ));
