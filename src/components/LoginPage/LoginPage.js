@@ -4,26 +4,27 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
 import { switchForm, updateCredentials } from '../../actions/login';
-import LoginForm from './LoginForm';
-import RegistrationForm from './RegistrationForm';
+// import LoginForm from './LoginForm';
+// import RegistrationForm from './RegistrationForm';
 import SocialLogin from './SocialLogin';
 
 import Button from '../common/Button';
 
 import style from './LoginPage.css';
+import LoginFormContainer from '../../containers/LoginFormContainer';
 
 const propTypes = {
   isCurrentFormLogin: PropTypes.bool.isRequired,
   switchForm: PropTypes.func.isRequired,
-  updateCredentials: PropTypes.func.isRequired,
-  email: PropTypes.string,
-  password: PropTypes.string,
-  passwordConfirm: PropTypes.string,
+  // updateCredentials: PropTypes.func.isRequired,
+  // email: PropTypes.string,
+  // password: PropTypes.string,
+  // passwordConfirm: PropTypes.string,
 };
 const defaultProps = {
-  email: '',
-  password: '',
-  passwordConfirm: '',
+  // email: '',
+  // password: '',
+  // passwordConfirm: '',
 };
 
 function LoginPage({
@@ -31,56 +32,57 @@ function LoginPage({
   // eslint-disable-next-line no-shadow
   switchForm,
   // eslint-disable-next-line no-shadow
-  updateCredentials,
-  email,
-  password,
-  passwordConfirm,
+  // updateCredentials,
+  // email,
+  // password,
+  // passwordConfirm,
 }) {
   // TODO: Remove conosle.log after adding the Submitting.
-  const submitCredentials = (e) => {
-    e.preventDefault();
+  const submitCredentials = (values) => {
     // eslint-disable-next-line no-console
-    console.log({
-      email,
-      password,
-    });
+    console.log(values);
   };
-
-  const currentForm = (isCurrentFormLogin) ? (
-    // TODO: combine into single component
-    <LoginForm
-      handleFormData={updateCredentials}
-      email={email}
-      password={password}
-    />
-  ) : (
-    <RegistrationForm
-      handleFormData={updateCredentials}
-      email={email}
-      password={password}
-      passwordConfirm={passwordConfirm}
-    />
-  );
+  //
+  // const currentForm = (isCurrentFormLogin) ? (
+  //   // TODO: combine into single component
+  //   <LoginForm
+  //     handleFormData={updateCredentials}
+  //     email={email}
+  //     password={password}
+  //   />
+  // ) : (
+  //   <RegistrationForm
+  //     handleFormData={updateCredentials}
+  //     email={email}
+  //     password={password}
+  //     passwordConfirm={passwordConfirm}
+  //   />
+  // );
 
   return (
     <div className={style.LoginPage}>
       <Link to="/" className={style.LoginPageLink}>
         <Button>To Demo Player</Button>
       </Link>
-      <form
-        onSubmit={submitCredentials}
-        className={style.LoginPageForm}
-      >
+      <div className={style.LoginPageForm}>
         <div>
           <div className={style.LoginPageChangeForm}>
             <a href="/login" onClick={switchForm}>
               {isCurrentFormLogin ? 'Sign up' : 'Sign in'}
             </a>
           </div>
-          {currentForm}
+          {/* START: To loginFormContainer */}
+          <LoginFormContainer onSubmit={submitCredentials} isCurrentLogin={isCurrentFormLogin} />
+          {/* <form
+            onSubmit={handleSubmit}
+            isCurrentLogin={isCurrentFormLogin}
+          >
+            {currentForm}
+          </form> */}
+          {/* END: To loginFormContainer */}
         </div>
         <SocialLogin />
-      </form>
+      </div>
     </div>
   );
 }
