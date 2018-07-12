@@ -1,8 +1,8 @@
-.SocialLogin {
+.OAuthLogin {
   display: flex;
   flex-direction: column;
 }
-.SocialLoginTitle {
+.OAuthLoginTitle {
   font-size: 1.25rem;
   margin: .5rem;
   font-weight: 700;

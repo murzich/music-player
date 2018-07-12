@@ -3,8 +3,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { Field } from 'redux-form';
 
-import Button from '../common/Button';
-import InputText from '../common/InputText';
+import Button from '../../common/Button';
+import InputText from '../../common/InputText';
 
 import style from './LoginForm.css';
 

@@ -3,13 +3,13 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { switchForm } from '../../actions/login';
-import SocialLogin from './SocialLogin';
+import { switchForm } from '../../../actions/login';
+import SocialLogin from '../OAuthLogin';
 
-import Button from '../common/Button';
+import Button from '../../common/Button';
 
 import style from './LoginPage.css';
-import LoginFormContainer from '../../containers/LoginFormContainer';
+import LoginFormContainer from '../../../containers/LoginFormContainer';
 
 const propTypes = {
   isCurrentFormLogin: PropTypes.bool.isRequired,

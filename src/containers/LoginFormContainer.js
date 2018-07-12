@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { reduxForm } from 'redux-form';
 
-import LoginForm from '../components/LoginPage/LoginForm';
+import LoginForm from '../components/login/LoginForm';
 
 function LoginFormContainer({ handleSubmit, isCurrentLogin }) {
   return (
