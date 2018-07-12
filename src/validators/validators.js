@@ -8,6 +8,17 @@ export const email = (value) => {
 export const required = value => (
   value || typeof value === 'number' ? undefined : 'Required'
 );
-export const minLength = min => value => (
+
+// DO NOT pass the HoF straight into a validation prop of the Field component,
+// because a rendering loop error will occur.
+const minLength = min => value => (
   value && value.length < min ? `Must be ${min} characters or more` : undefined
 );
+
+export const minLength6 = minLength(6);
+
+const equalTo = comparableName => (value, allValues) => (
+  value !== allValues[comparableName] ? `Must be equal to ${comparableName} field` : undefined
+);
+
+export const equalToPassword = equalTo('password');
