@@ -21,11 +21,11 @@ function InputText(props) {
         name={name}
         type={type}
         value={value}
-        className={className}
+        className={errorText ? style.InputTextWarn : className}
         {...restProps}
       />
       { errorText &&
-        <div>{errorText}</div>
+        <div className={style.InputTextError}>{errorText}</div>
       }
       {children}
     </label>

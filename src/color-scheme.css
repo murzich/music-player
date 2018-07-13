@@ -1,5 +1,6 @@
 :root {
   --color-primary: #ffffff;
+  --color-alert: #d63717;
 
   --bg-body: #38363d;
   --bg-aside: rgba(30,30,30,0.8);

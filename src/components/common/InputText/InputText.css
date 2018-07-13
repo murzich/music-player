@@ -16,7 +16,19 @@
   outline: none;
   border-color: var(--song-active);
 }
+.InputTextWarn {
+  composes: InputText;
+  border-color: var(--color-alert);
+}
 .InputTextLabel {
   position: relative;
   font-size: .75rem;
+}
+.InputTextError {
+  text-align: right;
+  color: var(--color-alert);
+  width: 75%;
+  position: absolute;
+  top: 0;
+  right: 0;
 }

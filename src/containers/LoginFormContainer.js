@@ -14,7 +14,7 @@ function LoginFormContainer({ handleSubmit, submitting, isCurrentLogin }) {
 
 LoginFormContainer.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
-  submitting: PropTypes.func.isRequired,
+  submitting: PropTypes.bool.isRequired,
   isCurrentLogin: PropTypes.bool.isRequired,
 };
 
