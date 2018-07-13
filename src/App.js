@@ -1,12 +1,13 @@
 import React from 'react';
-import { BrowserRouter, Route } from 'react-router-dom';
-import { Provider } from 'react-redux';
+import { BrowserRouter, Route, Switch } from 'react-router-dom';
 import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
+import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk';
 import { reducer as form } from 'redux-form';
 
 import PageContainer from './containers/PageContainer';
 import LoginPage from './components/login/LoginPage';
+import LoginSuccess from './containers/LoginSuccess';
 
 import player from './reducers/player';
 import login from './reducers/login';
@@ -26,10 +27,11 @@ function App() {
   return (
     <Provider store={store}>
       <BrowserRouter>
-        <div>
-          <Route exact path="/" component={PageContainer} />
+        <Switch>
+          <Route path="/login-success" component={LoginSuccess} />
           <Route path="/login" component={LoginPage} />
-        </div>
+          <Route path="/" component={PageContainer} />
+        </Switch>
       </BrowserRouter>
     </Provider>
   );

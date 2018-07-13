@@ -17,9 +17,7 @@ export default (state = initialState, action) => {
         isAuthorized: true,
       };
     case UNAUTH:
-      return {
-        ...initialState,
-      };
+      return initialState;
     default:
       return state;
   }
