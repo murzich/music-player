@@ -8,6 +8,7 @@ import player from './reducers/player';
 import login from './reducers/login';
 import auth from './reducers/auth';
 import App from './App';
+import httpServer from './interceptor';
 
 const store = createStore(combineReducers({
   player,
@@ -28,3 +29,4 @@ function Root() {
 }
 
 export default Root;
+httpServer.setupInterceptors(store);
