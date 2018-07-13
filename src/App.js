@@ -1,40 +1,40 @@
 import React from 'react';
-import { BrowserRouter, Route, Switch } from 'react-router-dom';
-import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
-import { Provider } from 'react-redux';
-import reduxThunk from 'redux-thunk';
-import { reducer as form } from 'redux-form';
+import { BrowserRouter, Redirect, Route, Switch } from 'react-router-dom';
+import { connect } from 'react-redux';
+import PropTypes from 'prop-types';
 
 import PageContainer from './containers/PageContainer';
 import LoginPage from './components/login/LoginPage';
 import LoginSuccess from './containers/LoginSuccess';
 
-import player from './reducers/player';
-import login from './reducers/login';
-import auth from './reducers/auth';
-
-const store = createStore(combineReducers({
-  player,
-  login,
-  form,
-  auth,
-}), compose(
-  applyMiddleware(reduxThunk),
-  window.devToolsExtension ? window.devToolsExtension() : f => f,
-));
-
-function App() {
+function App({ isAuthorized }) {
   return (
-    <Provider store={store}>
-      <BrowserRouter>
-        <Switch>
-          <Route path="/login-success" component={LoginSuccess} />
-          <Route path="/login" component={LoginPage} />
-          <Route path="/" component={PageContainer} />
-        </Switch>
-      </BrowserRouter>
-    </Provider>
+    <BrowserRouter>
+      <Switch>
+        <Route path="/login-success" component={LoginSuccess} />
+        <Route path="/login" component={LoginPage} />
+        <Route
+          path="/"
+          render={props => (
+            (isAuthorized) ?
+              <PageContainer {...props} /> :
+              <Redirect to="/login" />
+            )}
+        />
+      </Switch>
+    </BrowserRouter>
   );
 }
 
-export default App;
+App.propTypes = {
+  isAuthorized: PropTypes.bool.isRequired,
+};
+
+const mapStateToProps = (state) => {
+  const { isAuthorized } = state.auth;
+  return {
+    isAuthorized,
+  };
+};
+
+export default connect(mapStateToProps)(App);
