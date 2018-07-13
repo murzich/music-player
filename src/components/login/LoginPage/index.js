@@ -10,6 +10,7 @@ import Button from '../../common/Button';
 
 import style from './LoginPage.css';
 import LoginFormContainer from '../../../containers/LoginFormContainer';
+import reqresApi from '../../../config/reqresApi';
 
 const propTypes = {
   isCurrentFormLogin: PropTypes.bool.isRequired,
@@ -28,8 +29,12 @@ function LoginPage({
       // TODO: Use registeredFields from the form store
       // to determine what form is active.
       console.log('Login ', values);
+      reqresApi.login(values)
+        .then(res => console.log(res.data));
     } else {
       console.log('Register ', values);
+      reqresApi.register(values)
+        .then(res => console.log(res.data));
     }
   };
 
