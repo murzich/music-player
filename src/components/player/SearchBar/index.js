@@ -18,7 +18,7 @@ function SearchBar({ value, onChange, isLoading }) {
   return (
     <header className={style.SearchBar}>
       <InputText
-        id="search"
+        name="search"
         label="Search songs on Deezer"
         type="search"
         value={value}
