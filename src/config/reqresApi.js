@@ -6,9 +6,9 @@ const reqresUrls = {
   register: `${reqresBaseUrl}api/register`,
 };
 
-const resreqApi = {
+const reqreqApi = {
   login: ({ email, password }) => axios.post(reqresUrls.login, { email, password }),
   register: ({ email, password }) => axios.post(reqresUrls.register, { email, password }),
 };
 
-export default resreqApi;
+export default reqreqApi;

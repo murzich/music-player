@@ -1,4 +1,5 @@
 import {
+  LOGIN_REQRES_SUCCESS,
   SAVE_DEEZER_TOKEN,
   UNAUTH,
 } from '../types/auth';
@@ -14,6 +15,12 @@ export default (state = initialState, action) => {
       return {
         ...state,
         deezerToken: action.payload,
+        isAuthorized: true,
+      };
+    case LOGIN_REQRES_SUCCESS:
+      return {
+        ...state,
+        reqresToken: action.payload,
         isAuthorized: true,
       };
     case UNAUTH:

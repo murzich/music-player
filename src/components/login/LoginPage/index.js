@@ -1,4 +1,4 @@
-/* eslint-disable no-console */
+/* eslint-disable no-console, no-shadow */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -13,23 +13,23 @@ import style from './LoginPage.css';
 import LoginFormContainer from '../../../containers/LoginFormContainer';
 import reqresApi from '../../../config/reqresApi';
 import throwingSubmitFn from '../../../validators/submitValidators';
+import { getReqresLoginToken } from '../../../actions/auth';
 
 const propTypes = {
   isCurrentFormLogin: PropTypes.bool.isRequired,
   switchForm: PropTypes.func.isRequired,
+  getReqresLoginToken: PropTypes.func.isRequired,
 };
 
 function LoginPage({
   isCurrentFormLogin,
-  // eslint-disable-next-line no-shadow
+  getReqresLoginToken,
   switchForm,
 }) {
   // TODO: Remove conosle.log after adding the Submitting.
   const submitCredentials = (values) => {
     if (isCurrentFormLogin) {
-      return reqresApi.login(values)
-        .then(res => console.log(res.data))
-        .catch(error => throwingSubmitFn(error, 'Login failed'));
+      return getReqresLoginToken(values);
     }
     return reqresApi.register(values)
       .then(res => console.log(res.data))
@@ -67,4 +67,4 @@ const mapStateToProps = (store) => {
   };
 };
 
-export default connect(mapStateToProps, { switchForm })(LoginPage);
+export default connect(mapStateToProps, { switchForm, getReqresLoginToken })(LoginPage);
