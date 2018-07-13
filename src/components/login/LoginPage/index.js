@@ -1,3 +1,4 @@
+/* eslint-disable no-console */
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
@@ -11,6 +12,7 @@ import Button from '../../common/Button';
 import style from './LoginPage.css';
 import LoginFormContainer from '../../../containers/LoginFormContainer';
 import reqresApi from '../../../config/reqresApi';
+import throwingSubmitFn from '../../../validators/submitValidators';
 
 const propTypes = {
   isCurrentFormLogin: PropTypes.bool.isRequired,
@@ -24,18 +26,14 @@ function LoginPage({
 }) {
   // TODO: Remove conosle.log after adding the Submitting.
   const submitCredentials = (values) => {
-    // eslint-disable-next-line no-console
     if (isCurrentFormLogin) {
-      // TODO: Use registeredFields from the form store
-      // to determine what form is active.
-      console.log('Login ', values);
-      reqresApi.login(values)
-        .then(res => console.log(res.data));
-    } else {
-      console.log('Register ', values);
-      reqresApi.register(values)
-        .then(res => console.log(res.data));
+      return reqresApi.login(values)
+        .then(res => console.log(res.data))
+        .catch(error => throwingSubmitFn(error, 'Login failed'));
     }
+    return reqresApi.register(values)
+      .then(res => console.log(res.data))
+      .catch(error => throwingSubmitFn(error, 'Registration failed'));
   };
 
   return (
