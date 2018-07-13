@@ -2,19 +2,17 @@ import React from 'react';
 
 import style from './OAuthLogin.css';
 import Button from '../../common/Button';
+import { oauthLink } from '../../../config/deezerApi';
 
 function OAuthLogin() {
-  const onClick = (e) => {
-    console.log(e.target.innerText);
-  };
-
   return (
     <div className={style.OAuthLogin}>
       <Button
         type="button"
-        onClick={onClick}
       >
-        Sign in by Deezer
+        <a href={oauthLink}>
+          Sign in by Deezer
+        </a>
       </Button>
     </div>
   );

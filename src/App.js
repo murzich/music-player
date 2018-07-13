@@ -10,8 +10,14 @@ import LoginPage from './components/login/LoginPage';
 
 import player from './reducers/player';
 import login from './reducers/login';
+import auth from './reducers/auth';
 
-const store = createStore(combineReducers({ player, login, form }), compose(
+const store = createStore(combineReducers({
+  player,
+  login,
+  form,
+  auth,
+}), compose(
   applyMiddleware(reduxThunk),
   window.devToolsExtension ? window.devToolsExtension() : f => f,
 ));
