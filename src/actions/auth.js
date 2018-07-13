@@ -2,7 +2,7 @@ import * as Auth from '../types/auth';
 import reqresApi from '../config/reqresApi';
 import throwingSubmitFn from '../validators/submitValidators';
 
-export const getReqresLoginToken = values => (dispatch) => {
+export const getReqresLoginToken = (values, callback) => (dispatch) => {
   dispatch({ type: Auth.LOGIN_REQRES_REQUEST });
 
   return reqresApi.login(values)
@@ -11,8 +11,8 @@ export const getReqresLoginToken = values => (dispatch) => {
         type: Auth.LOGIN_REQRES_SUCCESS,
         payload: response.data.token,
       });
-      return undefined;
     })
+    .then(() => callback())
     .catch((error) => {
       dispatch({
         type: Auth.LOGIN_REQRES_FAILURE,
@@ -22,20 +22,21 @@ export const getReqresLoginToken = values => (dispatch) => {
     });
 };
 
-export const getReqresRegiterToken = values => (dispatch) => {
-  dispatch({ type: Auth.LOGIN_REQRES_REQUEST });
+export const getReqresRegisterToken = (values, callback) => (dispatch) => {
+  dispatch({ type: Auth.REGISTER_REQRES_REQUEST });
 
+  // 'return' is specified to throw submit validation errors into redux-form.
   return reqresApi.register(values)
     .then((response) => {
       dispatch({
-        type: Auth.LOGIN_REQRES_SUCCESS,
+        type: Auth.REGISTER_REQRES_SUCCESS,
         payload: response.data.token,
       });
-      return undefined;
     })
+    .then(() => callback())
     .catch((error) => {
       dispatch({
-        type: Auth.LOGIN_REQRES_FAILURE,
+        type: Auth.REGISTER_REQRES_FAILURE,
         payload: error,
       });
       throwingSubmitFn(error, 'Register on ReqRes.in fails.');

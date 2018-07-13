@@ -11,29 +11,31 @@ import Button from '../../common/Button';
 
 import style from './LoginPage.css';
 import LoginFormContainer from '../../../containers/LoginFormContainer';
-import reqresApi from '../../../config/reqresApi';
-import throwingSubmitFn from '../../../validators/submitValidators';
-import { getReqresLoginToken } from '../../../actions/auth';
+import { getReqresLoginToken, getReqresRegisterToken } from '../../../actions/auth';
 
 const propTypes = {
   isCurrentFormLogin: PropTypes.bool.isRequired,
   switchForm: PropTypes.func.isRequired,
   getReqresLoginToken: PropTypes.func.isRequired,
+  getReqresRegisterToken: PropTypes.func.isRequired,
+  history: PropTypes.objectOf().isRequired,
 };
 
 function LoginPage({
   isCurrentFormLogin,
   getReqresLoginToken,
+  getReqresRegisterToken,
   switchForm,
+  history,
 }) {
-  // TODO: Remove conosle.log after adding the Submitting.
+  const redirectToPlayer = () => history.push('/');
+
   const submitCredentials = (values) => {
+    // 'return' is specified to throw submit validation errors into redux-form.
     if (isCurrentFormLogin) {
-      return getReqresLoginToken(values);
+      return getReqresLoginToken(values, redirectToPlayer);
     }
-    return reqresApi.register(values)
-      .then(res => console.log(res.data))
-      .catch(error => throwingSubmitFn(error, 'Registration failed'));
+    return getReqresRegisterToken(values, redirectToPlayer);
   };
 
   return (
@@ -58,13 +60,17 @@ function LoginPage({
 
 LoginPage.propTypes = propTypes;
 
-const mapStateToProps = (store) => {
+const mapStateToProps = (state) => {
   const {
     isCurrentFormLogin,
-  } = store.login;
+  } = state.login;
   return {
     isCurrentFormLogin,
   };
 };
 
-export default connect(mapStateToProps, { switchForm, getReqresLoginToken })(LoginPage);
+export default connect(mapStateToProps, {
+  switchForm,
+  getReqresLoginToken,
+  getReqresRegisterToken,
+})(LoginPage);

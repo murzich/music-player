@@ -13,6 +13,7 @@ import SongsListContainer from './SongsListContainer';
 import SearchBarContainer from './SearchBarContainer';
 import Button from '../components/common/Button';
 import { startQuery } from '../config';
+import { unAuth } from '../actions/auth';
 
 class PageContainer extends Component {
   componentDidMount() {
@@ -34,7 +35,7 @@ class PageContainer extends Component {
           to="/login"
           style={{ position: 'absolute', right: '10px', top: '10px' }}
         >
-          <Button>Login/Sign up</Button>
+          <Button onClick={this.props.unAuth}>Login/Sign up</Button>
         </Link>
       </Fragment>
     );
@@ -43,6 +44,7 @@ class PageContainer extends Component {
 
 PageContainer.propTypes = {
   fetchSongs: PropTypes.func.isRequired,
+  unAuth: PropTypes.func.isRequired,
   currentCover: PropTypes.string,
 };
 PageContainer.defaultProps = {
@@ -53,4 +55,4 @@ const mapStateToProps = state => ({
   currentCover: getCurrentCover(state.player),
 });
 
-export default connect(mapStateToProps, { fetchSongs })(PageContainer);
+export default connect(mapStateToProps, { fetchSongs, unAuth })(PageContainer);

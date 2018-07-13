@@ -1,5 +1,8 @@
 import {
+  LOGIN_REQRES_FAILURE,
   LOGIN_REQRES_SUCCESS,
+  REGISTER_REQRES_FAILURE,
+  REGISTER_REQRES_SUCCESS,
   SAVE_DEEZER_TOKEN,
   UNAUTH,
 } from '../types/auth';
@@ -18,10 +21,17 @@ export default (state = initialState, action) => {
         isAuthorized: true,
       };
     case LOGIN_REQRES_SUCCESS:
+    case REGISTER_REQRES_SUCCESS:
       return {
         ...state,
         reqresToken: action.payload,
         isAuthorized: true,
+      };
+    case LOGIN_REQRES_FAILURE:
+    case REGISTER_REQRES_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
       };
     case UNAUTH:
       return initialState;
