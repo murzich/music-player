@@ -18,7 +18,7 @@ const propTypes = {
   switchForm: PropTypes.func.isRequired,
   getReqresLoginToken: PropTypes.func.isRequired,
   getReqresRegisterToken: PropTypes.func.isRequired,
-  history: PropTypes.objectOf().isRequired,
+  history: PropTypes.objectOf(PropTypes.any).isRequired,
 };
 
 function LoginPage({
