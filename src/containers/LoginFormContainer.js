@@ -4,16 +4,17 @@ import { reduxForm } from 'redux-form';
 
 import LoginForm from '../components/login/LoginForm';
 
-function LoginFormContainer({ handleSubmit, isCurrentLogin }) {
+function LoginFormContainer({ handleSubmit, submitting, isCurrentLogin }) {
   return (
     <form onSubmit={handleSubmit}>
-      <LoginForm doRegister={!isCurrentLogin} />
+      <LoginForm doRegister={!isCurrentLogin} submitting={submitting} />
     </form>
   );
 }
 
 LoginFormContainer.propTypes = {
   handleSubmit: PropTypes.func.isRequired,
+  submitting: PropTypes.func.isRequired,
   isCurrentLogin: PropTypes.bool.isRequired,
 };
 

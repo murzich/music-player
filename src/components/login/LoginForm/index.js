@@ -43,13 +43,16 @@ renderTextField.defaultProps = {
 
 const propTypes = {
   doRegister: PropTypes.bool,
+  submitting: PropTypes.bool,
 };
 const defaultProps = {
   doRegister: false,
+  submitting: false,
 };
 
 function LoginForm({
   doRegister,
+  submitting,
 }) {
   return (
     <fieldset className={style.LoginFromFieldset}>
@@ -81,7 +84,7 @@ function LoginForm({
             component={renderTextField}
             validate={[required, minLength6, equalToPassword]}
           /> }
-        <Button type="submit">
+        <Button type="submit" disabled={submitting}>
           { doRegister ? 'Sign up' : 'Sign in' }
         </Button>
       </div>
