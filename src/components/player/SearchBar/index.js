@@ -6,6 +6,7 @@ import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import InputText from '../../common/InputText';
 import style from './SearchBar.css';
+import SongsListContainer from '../../../containers/SongsListContainer';
 
 const propTypes = {
   value: PropTypes.string,
@@ -19,14 +20,16 @@ const defaultProps = {
 
 function SearchBar({ value, onChange, isLoading }) {
   return (
-    <header className={style.SearchBar}>
+    <header className={style.SearchBarWrapper}>
+      <div className={style.SearchBar} >
         <label htmlFor="search" className={style.SearchBarIcon}>
           <FontAwesomeIcon icon={faSearch} />
         </label>
         <input type="search" id="search" className={style.SearchBarInput} onChange={onChange} />
         <div className={style.SearchBarResults}>
-          TEST
+          {isLoading ? 'Loading...' : <SongsListContainer/>}
         </div>
+      </div>
     </header>
   );
 }

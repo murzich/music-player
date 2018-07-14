@@ -3,7 +3,7 @@
   align-items: center;
   justify-content: space-between;
   padding: .75rem 1.25rem;
-  margin-top: .875rem;
+  margin: .875rem 0;
   border-radius: 2.5rem;
   background-color: var(--controls-bg);
 }

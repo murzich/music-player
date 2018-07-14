@@ -35,7 +35,7 @@ class PageContainer extends Component {
           to="/login"
           style={{ position: 'absolute', right: '10px', top: '10px' }}
         >
-          <Button onClick={this.props.unAuth}>Login/Sign up</Button>
+          <Button onClick={this.props.unAuth}>logout</Button>
         </Link>
       </Fragment>
     );

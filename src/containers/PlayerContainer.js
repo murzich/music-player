@@ -69,8 +69,8 @@ class PlayerContainer extends Component {
     } = this.props;
     return (
       <Fragment>
-        <SearchBarContainer />
         <Player>
+          <SearchBarContainer />
           <FilePlayer
             style={{ display: 'none' }}
             ref={this.ref}
