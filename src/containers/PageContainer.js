@@ -10,6 +10,7 @@ import Page from '../components/layout/Page';
 import Playlist from '../components/layout/Playlist';
 import PlayerContainer from './PlayerContainer';
 // import SongsListContainer from './SongsListContainer';
+import PlaylistContainer from './PlaylistContainer';
 // import SearchBarContainer from './SearchBarContainer';
 import Button from '../components/common/Button';
 // import { startQuery } from '../config';
@@ -27,6 +28,7 @@ class PageContainer extends Component {
         <Page coverArt={currentCover}>
           <Playlist>
             {/* <SearchBarContainer /> */}
+            <PlaylistContainer />
             {/* <SongsListContainer /> */}
           </Playlist>
           <PlayerContainer />

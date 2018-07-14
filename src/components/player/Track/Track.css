@@ -1,0 +1,61 @@
+.Track {
+  text-decoration: none;
+  color: var(--song-inactive);
+  transition: all 200ms ease;
+  /* `flex` in MS Edge creates an empty preceding line in a `li` when it contain block element. */
+  display: inline-flex;
+  width: 100%;
+  justify-content: space-between;
+  position: relative;
+}
+.Track:first-child {
+  flex: 1 1 auto;
+}
+.Track:hover {
+  text-shadow: 0 1px 0 var(--bg-body);
+}
+.TrackCurrent {
+  composes: Track;
+  color: var(--song-active);
+}
+.TrackPlaying {
+  composes: TrackCurrent;
+}
+.TrackPlaying::before {
+  display: inline-block;
+  position: absolute;
+  left: -0.875rem;
+  content: "\25BA";
+}
+.TrackItem {
+  display: flex;
+  align-items: center;
+  padding: .5rem;
+  color: var(--song-inactive);
+}
+.TrackItem::before {
+  counter-increment: id;
+  content: counter(id);
+  margin-right: 16px;
+  width: 20px;
+  text-align: right;
+}
+.TrackItem:hover .Track {
+  color: var(--color-primary);
+}
+.TrackRemove {
+  border: none;
+  background: none;
+  color: var(--song-inactive);
+  opacity: 0;
+  transition: all 200ms ease-in-out;
+}
+.TrackRemove:hover {
+  color: var(--song-active);
+}
+.TrackRemove:focus {
+  outline: none;
+}
+.TrackItem:hover .TrackRemove {
+  opacity: 1;
+}

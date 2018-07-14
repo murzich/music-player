@@ -12,6 +12,8 @@ function App() {
       <Switch>
         <Route path="/login-success" component={LoginSuccess} />
         <Route path="/login" component={LoginPage} />
+        {/* TODO: Remove after search bar implemented */}
+        <Route path="/" component={PageContainer} />
         <PrivateRoute path="/" component={PageContainer} />
       </Switch>
     </BrowserRouter>
