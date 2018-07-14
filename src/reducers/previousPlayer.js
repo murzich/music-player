@@ -10,7 +10,7 @@ import {
   FETCH_SONGS_REQUEST,
   FETCH_SONGS_SUCCESS,
   SET_SEARCH_QUERY,
-} from '../types/playlist';
+} from '../types/searchTracks';
 import {
   GOTO_NEXT_TRACK,
   GOTO_PREV_TRACK,

@@ -5,7 +5,7 @@ import {
   FETCH_SONGS_FAILURE,
   FETCH_SONGS_REQUEST,
   SET_SEARCH_QUERY,
-} from '../types/playlist';
+} from '../types/searchTracks';
 
 export const setSearchQuery = searchQuery => ({
   type: SET_SEARCH_QUERY,

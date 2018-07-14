@@ -3,7 +3,7 @@ import {
   FETCH_SONGS_REQUEST,
   FETCH_SONGS_SUCCESS,
   SET_SEARCH_QUERY,
-} from '../types/playlist';
+} from '../types/searchTracks';
 
 export default {
   [FETCH_SONGS_FAILURE]: (state, action) => ({

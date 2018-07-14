@@ -1,6 +1,6 @@
 import { createReducer } from '../utils';
 import playerControls from './playerControls';
-import playlist from './playlist';
+import searchTracks from './searchTracks';
 
 const initialState = {
   songsList: [],
@@ -16,7 +16,7 @@ const initialState = {
 
 const player = createReducer(initialState, {
   ...playerControls,
-  ...playlist,
+  ...searchTracks,
 });
 
 export default player;

@@ -3,21 +3,21 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 
-import { fetchSongs } from '../actions/playlist';
+import { fetchSongs } from '../actions/searchTracks';
 import { getCurrentCover } from '../selectors';
 
 import Page from '../components/layout/Page';
 import Playlist from '../components/layout/Playlist';
 import PlayerContainer from './PlayerContainer';
-import SongsListContainer from './SongsListContainer';
+// import SongsListContainer from './SongsListContainer';
 // import SearchBarContainer from './SearchBarContainer';
 import Button from '../components/common/Button';
-import { startQuery } from '../config';
+// import { startQuery } from '../config';
 import { unAuth } from '../actions/auth';
 
 class PageContainer extends Component {
   componentDidMount() {
-    this.props.fetchSongs(startQuery);
+    // this.props.fetchSongs(startQuery);
   }
 
   render() {
@@ -27,7 +27,7 @@ class PageContainer extends Component {
         <Page coverArt={currentCover}>
           <Playlist>
             {/* <SearchBarContainer /> */}
-            <SongsListContainer />
+            {/* <SongsListContainer /> */}
           </Playlist>
           <PlayerContainer />
         </Page>
@@ -43,7 +43,7 @@ class PageContainer extends Component {
 }
 
 PageContainer.propTypes = {
-  fetchSongs: PropTypes.func.isRequired,
+  // fetchSongs: PropTypes.func.isRequired,
   unAuth: PropTypes.func.isRequired,
   currentCover: PropTypes.string,
 };
