@@ -8,6 +8,7 @@ const propTypes = {
   title: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
+  handleButtonClick: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
 };
 
@@ -16,6 +17,7 @@ function Track({
   duration,
   onClick,
   className,
+  handleButtonClick,
 }) {
   return (
     <li className={style.TrackItem}>
@@ -30,8 +32,9 @@ function Track({
       <button
         type="button"
         className={style.TrackRemove}
+        onClick={handleButtonClick}
       >
-        x
+        &#x2715;
       </button>
     </li>
   );

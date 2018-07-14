@@ -7,6 +7,7 @@ import style from './TrackList.css';
 const propTypes = {
   songs: PropTypes.arrayOf(PropTypes.object).isRequired,
   setTrack: PropTypes.func.isRequired,
+  removeTrack: PropTypes.func.isRequired,
   currentTrack: PropTypes.number,
   isPlaying: PropTypes.bool,
 };
@@ -20,6 +21,7 @@ function TrackList({
   setTrack,
   currentTrack,
   isPlaying,
+  removeTrack,
 }) {
   const setClassName = (i) => {
     if (currentTrack === i) {
@@ -38,6 +40,7 @@ function TrackList({
       duration={duration}
       onClick={setTrack(i)}
       className={setClassName(i)}
+      handleButtonClick={removeTrack(i)}
     />
   ));
 
