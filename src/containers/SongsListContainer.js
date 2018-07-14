@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 
-import { gotoTrack } from '../actions/playerControls';
+import { addTrack } from '../actions/playlist';
 
 import SongsList from '../components/player/SongsList';
 
@@ -10,17 +10,17 @@ function SongsListContainer({
   songsList,
   currentTrack,
   isPlaying,
-  setCurrentTrack,
+  addNewTrack,
 }) {
-  const setCurrentFromPlaylist = i => (e) => {
+  const addToPlaylist = song => (e) => {
     e.preventDefault();
-    setCurrentTrack(i);
+    addNewTrack(song);
   };
 
   return (
     <SongsList
       songs={songsList}
-      setSong={setCurrentFromPlaylist}
+      addSong={addToPlaylist}
       currentTrack={currentTrack}
       isPlaying={isPlaying}
     />
@@ -39,7 +39,7 @@ const mapStateToProps = (state) => {
 SongsListContainer.propTypes = {
   currentTrack: PropTypes.number.isRequired,
   isPlaying: PropTypes.bool.isRequired,
-  setCurrentTrack: PropTypes.func.isRequired,
+  addNewTrack: PropTypes.func.isRequired,
   songsList: PropTypes.arrayOf(PropTypes.shape({
     album: PropTypes.shape({
       cover_medium: PropTypes.string,
@@ -48,5 +48,5 @@ SongsListContainer.propTypes = {
 };
 
 export default connect(mapStateToProps, {
-  setCurrentTrack: gotoTrack.id,
+  addNewTrack: addTrack,
 })(SongsListContainer);

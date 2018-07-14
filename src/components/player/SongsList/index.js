@@ -2,11 +2,11 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 import SongListItem from '../SongsListItem';
-import './SongsList.css';
+import style from './SongsList.css';
 
 const propTypes = {
   songs: PropTypes.arrayOf(PropTypes.object).isRequired,
-  setSong: PropTypes.func.isRequired,
+  addSong: PropTypes.func.isRequired,
   currentTrack: PropTypes.number,
   isPlaying: PropTypes.bool,
 };
@@ -17,7 +17,7 @@ const defaultProps = {
 
 function SongsList({
   songs,
-  setSong,
+  addSong,
   currentTrack,
   isPlaying,
 }) {
@@ -31,18 +31,27 @@ function SongsList({
     return 'Song';
   };
 
-  const songsElements = songs.map(({ id, title, duration }, i) => (
-    <SongListItem
-      key={id}
-      title={title}
-      duration={duration}
-      onClick={setSong(i)}
-      className={setClassName(i)}
-    />
-  ));
+  const songsElements = songs.map((song, i) => {
+    const {
+      id,
+      title,
+      duration,
+      artist: { name: artistName },
+    } = song;
+    return (
+      <SongListItem
+        key={id}
+        artistName={artistName}
+        title={title}
+        duration={duration}
+        onClick={addSong(song)}
+        className={setClassName(i)}
+      />
+    );
+  });
 
   return (
-    <ol className="SongsList">
+    <ol className={style.SongsList}>
       {songsElements}
     </ol>
   );

@@ -9,6 +9,7 @@ const propTypes = {
   duration: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
   className: PropTypes.string.isRequired,
+  artistName: PropTypes.string.isRequired,
 };
 
 function SongsListItem({
@@ -16,6 +17,7 @@ function SongsListItem({
   duration,
   onClick,
   className,
+  artistName,
 }) {
   return (
     <li className={style.SongItem}>
@@ -24,7 +26,7 @@ function SongsListItem({
         onClick={onClick}
         className={style[className]}
       >
-        <span>{title}</span>
+        <span>{artistName} - {title}</span>
         <span>{formatTime(duration)}</span>
       </a>
     </li>
