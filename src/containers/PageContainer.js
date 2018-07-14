@@ -10,7 +10,7 @@ import Page from '../components/layout/Page';
 import Playlist from '../components/layout/Playlist';
 import PlayerContainer from './PlayerContainer';
 import SongsListContainer from './SongsListContainer';
-import SearchBarContainer from './SearchBarContainer';
+// import SearchBarContainer from './SearchBarContainer';
 import Button from '../components/common/Button';
 import { startQuery } from '../config';
 import { unAuth } from '../actions/auth';
@@ -26,7 +26,7 @@ class PageContainer extends Component {
       <Fragment>
         <Page coverArt={currentCover}>
           <Playlist>
-            <SearchBarContainer />
+            {/* <SearchBarContainer /> */}
             <SongsListContainer />
           </Playlist>
           <PlayerContainer />

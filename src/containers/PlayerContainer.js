@@ -1,5 +1,5 @@
 /* eslint-disable no-shadow */
-import React, { Component } from 'react';
+import React, { Component, Fragment } from 'react';
 import PropTypes from 'prop-types';
 import { connect } from 'react-redux';
 import FilePlayer from 'react-player/lib/players/FilePlayer';
@@ -11,6 +11,7 @@ import SongInfo from '../components/player/SongInfo';
 import coverArt from '../assets/album.svg';
 import { gotoTrack, setDuration, setPlayStatus, updatePlayedTime } from '../actions/playerControls';
 import { getCurrentSong } from '../selectors';
+import SearchBarContainer from './SearchBarContainer';
 
 const propTypes = {
   updatePlayedTime: PropTypes.func.isRequired,
@@ -67,27 +68,30 @@ class PlayerContainer extends Component {
       setDuration,
     } = this.props;
     return (
-      <Player>
-        <FilePlayer
-          style={{ display: 'none' }}
-          ref={this.ref}
-          url={currentSong.preview}
-          playing={isPlaying}
-          onProgress={this.onChangeProgress}
-          onDuration={setDuration}
-          onEnded={this.onSongEnded}
-          onPlay={() => setPlayStatus(true)}
-        />
-        <SongInfo
-          cover={currentSong.album.cover_medium}
-          title={currentSong.title}
-          artist={currentSong.artist.name}
-        />
-        <div>
-          <SeekbarContainer playerRef={this.player} />
-          <ControlsBarContainer playerRef={this.player} />
-        </div>
-      </Player>
+      <Fragment>
+        <SearchBarContainer />
+        <Player>
+          <FilePlayer
+            style={{ display: 'none' }}
+            ref={this.ref}
+            url={currentSong.preview}
+            playing={isPlaying}
+            onProgress={this.onChangeProgress}
+            onDuration={setDuration}
+            onEnded={this.onSongEnded}
+            onPlay={() => setPlayStatus(true)}
+          />
+          <SongInfo
+            cover={currentSong.album.cover_medium}
+            title={currentSong.title}
+            artist={currentSong.artist.name}
+          />
+          <div>
+            <SeekbarContainer playerRef={this.player} />
+            <ControlsBarContainer playerRef={this.player} />
+          </div>
+        </Player>
+      </Fragment>
     );
   }
 }

@@ -1,5 +1,8 @@
+/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faSearch } from '@fortawesome/free-solid-svg-icons';
 
 import InputText from '../../common/InputText';
 import style from './SearchBar.css';
@@ -17,16 +20,13 @@ const defaultProps = {
 function SearchBar({ value, onChange, isLoading }) {
   return (
     <header className={style.SearchBar}>
-      <InputText
-        name="search"
-        label="Search songs on Deezer"
-        type="search"
-        value={value}
-        onChange={onChange}
-      >
-        {isLoading && (<div className={style.SearchBarHelper}>Loading...</div>)}
-      </InputText>
-
+        <label htmlFor="search" className={style.SearchBarIcon}>
+          <FontAwesomeIcon icon={faSearch} />
+        </label>
+        <input type="search" id="search" className={style.SearchBarInput} onChange={onChange} />
+        <div className={style.SearchBarResults}>
+          TEST
+        </div>
     </header>
   );
 }

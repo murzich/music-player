@@ -1,14 +1,48 @@
 .SearchBar {
-  position: sticky;
+  position: absolute;
+  top: 15px;
+  right: 15px;
+  z-index: 100;
+  width: calc(60% - 30px);
+  transition: all 200ms ease;
+}
+@media screen and (max-width: 568px) {
+  .SearchBar {
+    width: calc(100% - 30px);
+  }
+}
+.SearchBarIcon {
+  position: absolute;
   top: 0;
+  right: 0;
+  height: 100%;
+  padding: 6px;
+  color: var(--color-primary);
+}
+.SearchBar:hover .SearchBarIcon {
+  color: var(--song-active);
 }
 .SearchBarInput {
   display: block;
-  width: 100%;
+  margin-left: auto;
+  width: 28px;
   border: none;
   background-color: var(--bg-body);
-  padding: 0.25rem;
+  padding: 0.5rem;
   color: var(--color-primary);
+  transition: all 200ms ease;
+}
+.SearchBarInput:hover,
+.SearchBarInput:focus {
+  width: 100%;
+}
+.SearchBarResults {
+  display: none;
+  height: 250px;
+}
+.SearchBarInput:hover + .SearchBarResults,
+.SearchBarInput:focus + .SearchBarResults {
+  display: block;
 }
 .SearchBarLabel {
   position: relative;
