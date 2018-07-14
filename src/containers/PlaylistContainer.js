@@ -13,9 +13,7 @@ const propTypes = {
   isPlaying: PropTypes.bool.isRequired,
   setCurrentTrack: PropTypes.func.isRequired,
   removeTrack: PropTypes.func.isRequired,
-  trackList: PropTypes.arrayOf(PropTypes.shape({
-    cover: PropTypes.string,
-  })).isRequired,
+  trackList: PropTypes.arrayOf(PropTypes.object).isRequired,
 };
 
 function PlaylistContainer({
@@ -31,6 +29,7 @@ function PlaylistContainer({
   };
 
   const handleRemoveTrack = i => () => removeTrack(i);
+
   return (
     <TrackList
       songs={trackList}

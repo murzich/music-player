@@ -30,7 +30,7 @@
 .TrackItem {
   display: flex;
   align-items: center;
-  padding: .5rem;
+  padding: .5rem 0;
   color: var(--song-inactive);
 }
 .TrackItem::before {

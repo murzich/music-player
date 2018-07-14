@@ -3,7 +3,7 @@
   position: relative;
   flex: 0 1 40%;
   background-color: var(--bg-aside);
-  padding: 15px;
+  padding: 10px 10px 40px;
   overflow-y: auto;
   font-size: .75rem;
 }

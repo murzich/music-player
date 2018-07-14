@@ -2,19 +2,18 @@ import React, { Component, Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index.es';
+import { faTrashAlt } from '@fortawesome/free-solid-svg-icons/index';
 
-import { fetchSongs } from '../actions/searchTracks';
 import { getCurrentCover } from '../selectors';
+import { clearPlaylist } from '../actions/playlist';
+import { unAuth } from '../actions/auth';
 
 import Page from '../components/layout/Page';
 import Playlist from '../components/layout/Playlist';
 import PlayerContainer from './PlayerContainer';
-// import SongsListContainer from './SongsListContainer';
 import PlaylistContainer from './PlaylistContainer';
-// import SearchBarContainer from './SearchBarContainer';
 import Button from '../components/common/Button';
-// import { startQuery } from '../config';
-import { unAuth } from '../actions/auth';
 
 class PageContainer extends Component {
   componentDidMount() {
@@ -27,10 +26,14 @@ class PageContainer extends Component {
       <Fragment>
         <Page coverArt={currentCover}>
           <Playlist>
-            {/* <SearchBarContainer /> */}
             <PlaylistContainer />
-            {/* <SongsListContainer /> */}
           </Playlist>
+          <Button
+            onClick={this.props.clearPlaylist}
+            style={{ position: 'absolute', bottom: '5px', left: '10px' }}
+          >
+            <FontAwesomeIcon icon={faTrashAlt} />
+          </Button>
           <PlayerContainer />
         </Page>
         <Link
@@ -45,8 +48,8 @@ class PageContainer extends Component {
 }
 
 PageContainer.propTypes = {
-  // fetchSongs: PropTypes.func.isRequired,
   unAuth: PropTypes.func.isRequired,
+  clearPlaylist: PropTypes.func.isRequired,
   currentCover: PropTypes.string,
 };
 PageContainer.defaultProps = {
@@ -57,4 +60,4 @@ const mapStateToProps = state => ({
   currentCover: getCurrentCover(state.player),
 });
 
-export default connect(mapStateToProps, { fetchSongs, unAuth })(PageContainer);
+export default connect(mapStateToProps, { unAuth, clearPlaylist })(PageContainer);
