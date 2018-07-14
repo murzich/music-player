@@ -3,7 +3,7 @@ import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index.es';
-import { faTrashAlt } from '@fortawesome/free-solid-svg-icons/index';
+import { faTrashAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons/index';
 
 import { getCurrentCover } from '../selectors';
 import { clearPlaylist } from '../actions/playlist';
@@ -40,7 +40,9 @@ class PageContainer extends Component {
           to="/login"
           style={{ position: 'absolute', right: '10px', top: '10px' }}
         >
-          <Button onClick={this.props.unAuth}>logout</Button>
+          <Button onClick={this.props.unAuth}>
+            <FontAwesomeIcon icon={faSignOutAlt} />
+          </Button>
         </Link>
       </Fragment>
     );

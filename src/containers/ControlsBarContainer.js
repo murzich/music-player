@@ -28,12 +28,16 @@ function ControlsBarContainer({
   updatePlayedTime,
 }) {
   const onStep = step => () => {
-    let currentTime = (playerRef.getCurrentTime() + step);
-    if (currentTime < 1) {
-      currentTime = 0;
+    try {
+      let currentTime = (playerRef.getCurrentTime() + step);
+      if (currentTime < 1) {
+        currentTime = 0;
+      }
+      playerRef.seekTo(currentTime);
+      updatePlayedTime(currentTime);
+    } catch (e) {
+      togglePlay();
     }
-    playerRef.seekTo(currentTime);
-    updatePlayedTime(currentTime);
   };
 
   // In the icon prop use a correct icon name of the FontAwesome free icon set.
