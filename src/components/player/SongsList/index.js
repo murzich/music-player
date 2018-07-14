@@ -7,31 +7,13 @@ import style from './SongsList.css';
 const propTypes = {
   songs: PropTypes.arrayOf(PropTypes.object).isRequired,
   addSong: PropTypes.func.isRequired,
-  currentTrack: PropTypes.number,
-  isPlaying: PropTypes.bool,
-};
-const defaultProps = {
-  currentTrack: 0,
-  isPlaying: false,
 };
 
 function SongsList({
   songs,
   addSong,
-  currentTrack,
-  isPlaying,
 }) {
-  const setClassName = (i) => {
-    if (currentTrack === i) {
-      if (isPlaying) {
-        return 'SongPlaying';
-      }
-      return 'SongCurrent';
-    }
-    return 'Song';
-  };
-
-  const songsElements = songs.map((song, i) => {
+  const songsElements = songs.map((song) => {
     const {
       id,
       title,
@@ -45,7 +27,6 @@ function SongsList({
         title={title}
         duration={duration}
         onClick={addSong(song)}
-        className={setClassName(i)}
       />
     );
   });
@@ -58,6 +39,5 @@ function SongsList({
 }
 
 SongsList.propTypes = propTypes;
-SongsList.defaultProps = defaultProps;
 
 export default SongsList;

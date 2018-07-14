@@ -1,22 +1,12 @@
-import { createReducer } from '../utils';
-import playerControls from './playerControls';
-import searchTracks from './searchTracks';
+import { combineReducers } from 'redux';
+import search from './searchTracks';
+import playlist from './playlist';
+import status from './playerControls';
 
-const initialState = {
-  songsList: [],
-  isLoading: false,
-  searchQuery: '',
-  error: '',
-  currentTrack: 0,
-  isPlaying: false,
-  playedSeconds: 0,
-  duration: 0,
-  seeking: false,
-};
-
-const player = createReducer(initialState, {
-  ...playerControls,
-  ...searchTracks,
+const player = combineReducers({
+  search,
+  playlist,
+  status,
 });
 
 export default player;

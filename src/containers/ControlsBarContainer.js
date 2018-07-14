@@ -76,7 +76,7 @@ ControlsBarContainer.propTypes = propTypes;
 ControlsBarContainer.defaultProps = defaultProps;
 
 const mapStateToProps = state => ({
-  isPlaying: state.player.isPlaying,
+  isPlaying: state.player.status.isPlaying,
 });
 
 const mapDispatchToProps = {

@@ -9,57 +9,77 @@ import {
   UPDATE_TIME_POSITION,
 } from '../types/playerControls';
 
-const next = (state) => {
-  const count = state.songsList.length;
-  const nextTrack = state.currentTrack + 1;
-  return (nextTrack < count) ? nextTrack : 0;
+const initialState = {
+  currentTrack: 0,
+  isPlaying: false,
+  playedSeconds: 0,
+  duration: 0,
+  seeking: false,
 };
-// eslint-disable-next-line arrow-body-style
-const prev = (state) => { return (state.currentTrack <= 0) ? 0 : state.currentTrack - 1; };
-const id = (_, action) => action.payload;
-const skipNewToStart = (state, action) => (
-  (action.payload !== state.currentTrack) ? 0 : state.playedSeconds
-);
 
-const setPlayStatus = (state, action) => ({
-  ...state,
-  isPlaying: action.payload,
-});
+const setPlayStatus = (state = false, action) => {
+  switch (action.type) {
+    case SET_PLAY_STATUS:
+      return action.payload;
+    case TOGGLE_PLAY:
+      return !state;
+    default:
+      return state;
+  }
+};
 
-const togglePlay = state => ({
-  ...state,
-  isPlaying: !state.isPlaying,
-});
+const setTrack = (state = 0, action) => {
+  switch (action.type) {
+    case GOTO_NEXT_TRACK:
+      if (state + 1 < action.payload) {
+        return state + 1;
+      }
+      return 0;
+    case GOTO_PREV_TRACK:
+      return (state <= 0) ? 0 : state - 1;
+    case SET_CURRENT_TRACK:
+      return action.payload;
+    default:
+      return state;
+  }
+};
 
-const setTrack = funcNextTrack => (state, action) => ({
-  ...state,
-  isPlaying: true,
-  playedSeconds: skipNewToStart(state, action),
-  currentTrack: funcNextTrack(state, action),
-});
-
-const setDuration = (state, action) => ({
-  ...state,
-  duration: action.payload,
-});
-
-const updateTimePosition = (state, action) => ({
-  ...state,
-  playedSeconds: action.payload,
-});
-
-const setSeekingStatus = (state, action) => ({
-  ...state,
-  seeking: action.payload,
-});
-
-export default {
-  [GOTO_NEXT_TRACK]: setTrack(next),
-  [GOTO_PREV_TRACK]: setTrack(prev),
-  [SET_CURRENT_TRACK]: setTrack(id),
-  [SET_DURATION]: setDuration,
-  [SET_PLAY_STATUS]: setPlayStatus,
-  [SET_SEEKING_STATUS]: setSeekingStatus,
-  [TOGGLE_PLAY]: togglePlay,
-  [UPDATE_TIME_POSITION]: updateTimePosition,
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case TOGGLE_PLAY:
+    case SET_PLAY_STATUS:
+      return {
+        ...state,
+        isPlaying: setPlayStatus(state.isPlaying, action),
+      };
+    case GOTO_NEXT_TRACK:
+    case GOTO_PREV_TRACK:
+    case SET_CURRENT_TRACK:
+      return {
+        ...state,
+        currentTrack: setTrack(
+          state.currentTrack,
+          action,
+        ),
+        isPlaying: true,
+        playedSeconds: (action.payload !== state.currentTrack) ? 0 : state.playedSeconds,
+      };
+    case SET_DURATION:
+      return {
+        ...state,
+        duration: action.payload,
+      };
+    case UPDATE_TIME_POSITION:
+      return {
+        ...state,
+        playedSeconds: action.payload,
+      };
+    case SET_SEEKING_STATUS:
+      return {
+        ...state,
+        seeking: action.payload,
+      };
+    default:
+      return state;
+  }
 };

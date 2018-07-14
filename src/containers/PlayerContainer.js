@@ -103,7 +103,7 @@ const mapStateToProps = (state) => {
   const {
     isPlaying,
     seeking,
-  } = state.player;
+  } = state.player.status;
   return {
     isPlaying,
     seeking,

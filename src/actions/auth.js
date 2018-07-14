@@ -51,3 +51,10 @@ export const saveDeezerToken = token => ({
 export const unAuth = () => ({
   type: Auth.UNAUTH,
 });
+
+export const switchForm = (e) => {
+  e.preventDefault();
+  return {
+    type: Auth.SWITCH_FORM,
+  };
+};

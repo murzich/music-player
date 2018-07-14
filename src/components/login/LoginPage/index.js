@@ -4,14 +4,13 @@ import { Link } from 'react-router-dom';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 
-import { switchForm } from '../../../actions/login';
 import SocialLogin from '../OAuthLogin';
 
 import Button from '../../common/Button';
 
 import style from './LoginPage.css';
 import LoginFormContainer from '../../../containers/LoginFormContainer';
-import { getReqresLoginToken, getReqresRegisterToken } from '../../../actions/auth';
+import { getReqresLoginToken, getReqresRegisterToken, switchForm } from '../../../actions/auth';
 
 const propTypes = {
   isCurrentFormLogin: PropTypes.bool.isRequired,
@@ -63,7 +62,7 @@ LoginPage.propTypes = propTypes;
 const mapStateToProps = (state) => {
   const {
     isCurrentFormLogin,
-  } = state.login;
+  } = state.auth;
   return {
     isCurrentFormLogin,
   };

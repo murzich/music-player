@@ -7,9 +7,7 @@ import { addTrack } from '../actions/playlist';
 import SongsList from '../components/player/SongsList';
 
 function SongsListContainer({
-  songsList,
-  currentTrack,
-  isPlaying,
+  tracks,
   addNewTrack,
 }) {
   const addToPlaylist = song => (e) => {
@@ -19,28 +17,22 @@ function SongsListContainer({
 
   return (
     <SongsList
-      songs={songsList}
+      songs={tracks}
       addSong={addToPlaylist}
-      currentTrack={currentTrack}
-      isPlaying={isPlaying}
     />
   );
 }
 
 const mapStateToProps = (state) => {
-  const { songsList, isPlaying, currentTrack } = state.player;
+  const { tracks } = state.player.search;
   return {
-    songsList,
-    isPlaying,
-    currentTrack,
+    tracks,
   };
 };
 
 SongsListContainer.propTypes = {
-  currentTrack: PropTypes.number.isRequired,
-  isPlaying: PropTypes.bool.isRequired,
   addNewTrack: PropTypes.func.isRequired,
-  songsList: PropTypes.arrayOf(PropTypes.shape({
+  tracks: PropTypes.arrayOf(PropTypes.shape({
     album: PropTypes.shape({
       cover_medium: PropTypes.string,
     }),

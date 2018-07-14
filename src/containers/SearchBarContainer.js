@@ -33,7 +33,7 @@ const mapStateToProps = (state) => {
     isLoading,
     error,
     searchQuery,
-  } = state.player;
+  } = state.player.search;
   return {
     isLoading,
     error,

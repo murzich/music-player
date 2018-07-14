@@ -1,6 +1,6 @@
 export const getCurrentSong = (state) => {
-  const { songsList, currentTrack } = state;
-  return songsList[currentTrack];
+  const { playlist, status: { currentTrack } } = state;
+  return playlist[currentTrack];
 };
 
 export const getCurrentCover = (state) => {
@@ -12,3 +12,6 @@ export const getCurrentCover = (state) => {
     return undefined;
   }
 };
+
+// TODO: Use memoization through reselect.
+export const getPlaylistLength = state => state.player.playlist.length;

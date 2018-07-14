@@ -7,3 +7,9 @@
   overflow-y: auto;
   font-size: .75rem;
 }
+.Playlist::-webkit-scrollbar {
+  width: 5px;
+}
+.Playlist::-webkit-scrollbar-thumb {
+  background: var(--bg-body);
+}

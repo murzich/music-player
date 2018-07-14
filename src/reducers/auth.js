@@ -5,11 +5,13 @@ import {
   REGISTER_REQRES_SUCCESS,
   SAVE_DEEZER_TOKEN,
   UNAUTH,
+  SWITCH_FORM,
 } from '../types/auth';
 
 const initialState = {
   deezerToken: undefined,
   isAuthorized: false,
+  isCurrentFormLogin: true,
 };
 
 export default (state = initialState, action) => {
@@ -35,6 +37,11 @@ export default (state = initialState, action) => {
       };
     case UNAUTH:
       return initialState;
+    case SWITCH_FORM:
+      return {
+        ...state,
+        isCurrentFormLogin: !state.isCurrentFormLogin,
+      };
     default:
       return state;
   }

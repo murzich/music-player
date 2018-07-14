@@ -8,6 +8,7 @@ import {
   TOGGLE_PLAY,
   UPDATE_TIME_POSITION,
 } from '../types/playerControls';
+import { getPlaylistLength } from '../selectors';
 
 export const togglePlay = () => ({
   type: TOGGLE_PLAY,
@@ -18,8 +19,17 @@ export const setPlayStatus = status => ({
   payload: status,
 });
 
+export const gotoNextTrack = () => (dispatch, getState) => {
+  const state = getState();
+  const tracklistLength = getPlaylistLength(state);
+  dispatch({
+    type: GOTO_NEXT_TRACK,
+    payload: tracklistLength,
+  });
+};
+
 export const gotoTrack = {
-  next: () => ({ type: GOTO_NEXT_TRACK }),
+  next: gotoNextTrack,
   prev: () => ({ type: GOTO_PREV_TRACK }),
   id: id => ({
     type: SET_CURRENT_TRACK,

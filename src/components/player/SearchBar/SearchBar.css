@@ -10,6 +10,7 @@
   width: 100%;
   margin-left: auto;
   background-color: var(--bg-body);
+  border: thin solid var(--song-inactive);
 }
 .SearchBarIcon {
   position: absolute;

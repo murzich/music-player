@@ -33,7 +33,6 @@ function PlaylistContainer({
   };
 
   const handleRemoveTrack = i => () => removeTrack(i);
-
   return (
     <TrackList
       songs={trackList}
@@ -48,9 +47,9 @@ function PlaylistContainer({
 PlaylistContainer.propTypes = propTypes;
 
 const mapStateToProps = (state) => {
-  const { isPlaying, currentTrack } = state.player;
+  const { isPlaying, currentTrack } = state.player.status;
   return {
-    trackList: state.playlist,
+    trackList: state.player.playlist,
     isPlaying,
     currentTrack,
   };

@@ -8,23 +8,21 @@ const propTypes = {
   title: PropTypes.string.isRequired,
   duration: PropTypes.number.isRequired,
   onClick: PropTypes.func.isRequired,
-  className: PropTypes.string.isRequired,
   artistName: PropTypes.string.isRequired,
 };
 
 function SongsListItem({
+  artistName,
   title,
   duration,
   onClick,
-  className,
-  artistName,
 }) {
   return (
     <li className={style.SongItem}>
       <a
-        href={`play: ${title}`}
+        href={`add to playlist ${title}`}
         onClick={onClick}
-        className={style[className]}
+        className={style.Song}
       >
         <span>{artistName} - {title}</span>
         <span>{formatTime(duration)}</span>

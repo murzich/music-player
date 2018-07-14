@@ -37,7 +37,7 @@ function TrackList({
     <Track
       key={id}
       title={title}
-      duration={duration}
+      duration={parseInt(duration, 10)}
       onClick={setTrack(i)}
       className={setClassName(i)}
       handleButtonClick={removeTrack(i)}

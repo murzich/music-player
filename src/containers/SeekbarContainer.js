@@ -54,7 +54,7 @@ const mapStateToProps = (state) => {
   const {
     duration,
     playedSeconds,
-  } = state.player;
+  } = state.player.status;
   return {
     duration,
     playedSeconds,

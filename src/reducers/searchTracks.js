@@ -5,25 +5,37 @@ import {
   SET_SEARCH_QUERY,
 } from '../types/searchTracks';
 
-export default {
-  [FETCH_SONGS_FAILURE]: (state, action) => ({
-    ...state,
-    isLoading: false,
-    error: action.payload,
-  }),
-  [FETCH_SONGS_REQUEST]: state => ({
-    ...state,
-    isLoading: true,
-  }),
-  [FETCH_SONGS_SUCCESS]: (state, action) => ({
-    ...state,
-    currentTrack: 0,
-    isLoading: false,
-    isPlaying: false,
-    songsList: action.payload,
-  }),
-  [SET_SEARCH_QUERY]: (state, action) => ({
-    ...state,
-    searchQuery: action.payload,
-  }),
+const initialState = {
+  isLoading: false,
+  error: undefined,
+  searchQuery: '',
+  tracks: [],
+};
+
+export default (state = initialState, action) => {
+  switch (action.type) {
+    case FETCH_SONGS_REQUEST:
+      return {
+        ...state,
+        isLoading: true,
+      };
+    case FETCH_SONGS_SUCCESS:
+      return {
+        ...state,
+        tracks: action.payload,
+        isLoading: false,
+      };
+    case FETCH_SONGS_FAILURE:
+      return {
+        ...state,
+        error: action.payload,
+      };
+    case SET_SEARCH_QUERY:
+      return {
+        ...state,
+        searchQuery: action.payload,
+      };
+    default:
+      return state;
+  }
 };
