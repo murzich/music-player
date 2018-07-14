@@ -14,9 +14,7 @@ const propTypes = {
   setCurrentTrack: PropTypes.func.isRequired,
   removeTrack: PropTypes.func.isRequired,
   trackList: PropTypes.arrayOf(PropTypes.shape({
-    album: PropTypes.shape({
-      cover_medium: PropTypes.string,
-    }),
+    cover: PropTypes.string,
   })).isRequired,
 };
 

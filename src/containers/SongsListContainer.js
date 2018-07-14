@@ -33,9 +33,7 @@ const mapStateToProps = (state) => {
 SongsListContainer.propTypes = {
   addNewTrack: PropTypes.func.isRequired,
   tracks: PropTypes.arrayOf(PropTypes.shape({
-    album: PropTypes.shape({
-      cover_medium: PropTypes.string,
-    }),
+    cover: PropTypes.string,
   })).isRequired,
 };
 

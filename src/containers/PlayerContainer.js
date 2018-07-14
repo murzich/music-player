@@ -23,24 +23,16 @@ const propTypes = {
   currentSong: PropTypes.shape({
     title: PropTypes.string,
     preview: PropTypes.string,
-    artist: PropTypes.shape({
-      name: PropTypes.string,
-    }),
-    album: PropTypes.shape({
-      cover_medium: PropTypes.string,
-    }),
+    artistName: PropTypes.string,
+    cover: PropTypes.string,
   }),
 };
 const defaultProps = {
   currentSong: {
     title: 'Title',
     preview: '',
-    artist: {
-      name: 'Artist name',
-    },
-    album: {
-      cover_medium: coverArt,
-    },
+    artistName: 'Artist name',
+    cover: coverArt,
   },
 };
 
@@ -82,9 +74,9 @@ class PlayerContainer extends Component {
             onPlay={() => setPlayStatus(true)}
           />
           <SongInfo
-            cover={currentSong.album.cover_medium}
+            cover={currentSong.cover}
             title={currentSong.title}
-            artist={currentSong.artist.name}
+            artist={currentSong.artistName}
           />
           <div>
             <SeekbarContainer playerRef={this.player} />

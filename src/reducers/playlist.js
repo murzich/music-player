@@ -5,7 +5,7 @@ import {
 } from '../types/playlist';
 import mockPlaylist from '../mock.json';
 
-const initialState = mockPlaylist.data;
+const initialState = mockPlaylist;
 
 export default (state = initialState, action) => {
   switch (action.type) {
