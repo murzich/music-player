@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 
-import SongListItem from '../SongsListItem';
+import SearchListItem from '../SearchListItem';
 import style from './SongsList.css';
 
 const propTypes = {
@@ -21,7 +21,7 @@ function SongsList({
       artist: { name: artistName },
     } = song;
     return (
-      <SongListItem
+      <SearchListItem
         key={id}
         artistName={artistName}
         title={title}

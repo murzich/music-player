@@ -8,29 +8,21 @@
 .SearchBar {
   position: relative;
   width: 100%;
-  margin-left: auto;
-  background-color: var(--bg-body);
-  border: thin solid var(--song-inactive);
 }
 .SearchBarIcon {
   position: absolute;
   top: 0;
-  right: 0;
-  padding: 6px;
+  left: 0;
+  padding: 3px 6px;
   color: var(--color-primary);
+  z-index: 1;
 }
 .SearchBarIcon:hover {
   color: var(--song-active);
 }
 .SearchBarInput {
-  display: inline;
-  margin-left: auto;
-  width: 100%;
-  border: none;
-  background-color: var(--bg-body);
-  padding: 0.5rem;
-  color: var(--color-primary);
-  transition: all 200ms ease;
+  composes: InputText from '../../common/InputText/InputText.css';
+  padding-left: 30px;
 }
 .SearchBarResults {
   display: none;

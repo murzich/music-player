@@ -1,5 +1,8 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import PropTypes from 'prop-types';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index.es';
+import { faPlusSquare } from '@fortawesome/free-solid-svg-icons';
 
 import style from './Song.css';
 import { formatTime } from '../../../utils';
@@ -20,11 +23,13 @@ function SongsListItem({
   return (
     <li className={style.SongItem}>
       <a
-        href={`add to playlist ${title}`}
+        href=""
         onClick={onClick}
         className={style.Song}
       >
-        <span>{artistName} - {title}</span>
+        <span>
+          <FontAwesomeIcon icon={faPlusSquare} /> {artistName} - {title}
+        </span>
         <span>{formatTime(duration)}</span>
       </a>
     </li>

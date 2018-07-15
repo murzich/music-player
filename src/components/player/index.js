@@ -5,6 +5,6 @@ export { default as PlaybackControlsBar } from './ControlsBar';
 export { default as SearchBar } from './SearchBar';
 export { default as Seekbar } from './Seekbar';
 export { default as SongInfo } from './SongInfo';
-export { default as SongsList } from './SongsList';
-export { default as SongsListItem } from './SongsListItem';
+export { default as SearchList } from './SearchList';
+export { default as SearchListItem } from './SearchListItem';
 export { default as TimeDisplay } from './TimeDisplay';

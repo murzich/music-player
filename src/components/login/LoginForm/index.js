@@ -58,7 +58,7 @@ function LoginForm({
     <fieldset className={style.LoginFromFieldset}>
       <legend>
         <h1 className={style.LoginFormTitle}>
-          { doRegister ? 'Register on Deezer.com' : 'Login to Deezer.com' }
+          { doRegister ? 'Register on Reqres.in' : 'Login to Reqres.in' }
         </h1>
       </legend>
       <div className={style.LoginFrom}>

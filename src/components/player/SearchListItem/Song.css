@@ -1,6 +1,6 @@
 .Song {
   text-decoration: none;
-  color: var(--song-inactive);
+  color: var(--color-primary);
   transition: all 200ms ease;
   /* `flex` in MS Edge creates an empty preceding line in a `li` when it contain block element. */
   display: inline-flex;
@@ -13,7 +13,7 @@
 }
 .Song:hover {
   text-shadow: 0 1px 0 var(--bg-body);
-  color: var(--color-primary);
+  color: var(--song-active);
 }
 .SongCurrent {
   composes: Song;

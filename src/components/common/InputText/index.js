@@ -6,8 +6,6 @@ import style from './InputText.css';
 function InputText(props) {
   const {
     name,
-    type,
-    value,
     label,
     className,
     children,
@@ -19,8 +17,6 @@ function InputText(props) {
       {label}
       <input
         name={name}
-        type={type}
-        value={value}
         className={errorText ? style.InputTextWarn : className}
         {...restProps}
       />
@@ -33,7 +29,7 @@ function InputText(props) {
 }
 
 InputText.propTypes = {
-  name: PropTypes.string.isRequired,
+  name: PropTypes.string,
   type: PropTypes.string,
   value: PropTypes.string,
   label: PropTypes.string,
@@ -42,6 +38,7 @@ InputText.propTypes = {
   errorText: PropTypes.oneOfType([PropTypes.bool, PropTypes.string]),
 };
 InputText.defaultProps = {
+  name: undefined,
   type: 'text',
   value: '',
   label: '',

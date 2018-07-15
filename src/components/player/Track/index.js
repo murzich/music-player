@@ -1,3 +1,4 @@
+/* eslint-disable jsx-a11y/anchor-is-valid */
 import React from 'react';
 import PropTypes from 'prop-types';
 
@@ -22,7 +23,7 @@ function Track({
   return (
     <li className={style.TrackItem}>
       <a
-        href={`play: ${title}`}
+        href=""
         onClick={onClick}
         className={style[className]}
       >

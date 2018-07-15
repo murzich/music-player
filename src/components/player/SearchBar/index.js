@@ -3,38 +3,43 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faSearch } from '@fortawesome/free-solid-svg-icons';
+import { DebounceInput } from 'react-debounce-input';
 
 import InputText from '../../common/InputText';
 import style from './SearchBar.css';
-import SongsListContainer from '../../../containers/SongsListContainer';
+import SearchListContainer from '../../../containers/SearchListContainer';
 
 const propTypes = {
-  value: PropTypes.string,
   onChange: PropTypes.func.isRequired,
-  isLoading: PropTypes.bool,
-};
-const defaultProps = {
-  value: '',
-  isLoading: false,
 };
 
-function SearchBar({ value, onChange, isLoading }) {
+function SearchBar({ onChange }) {
+
   return (
     <header className={style.SearchBarWrapper}>
       <div className={style.SearchBar} >
         <label htmlFor="search" className={style.SearchBarIcon}>
           <FontAwesomeIcon icon={faSearch} />
         </label>
-        <input type="search" id="search" className={style.SearchBarInput} onChange={onChange} />
-        <div className={style.SearchBarResults}>
-          {isLoading ? 'Loading...' : <SongsListContainer/>}
-        </div>
+        <DebounceInput
+          id="search"
+          type="search"
+          element={InputText}
+          onChange={onChange}
+          minLength={3}
+          debounceTimeout={500}
+          className={style.SearchBarInput}
+          placeholder='Search tracks on Deezer.com'
+        >
+          <div className={style.SearchBarResults}>
+            <SearchListContainer />
+          </div>
+        </DebounceInput>
       </div>
     </header>
   );
 }
 
 SearchBar.propTypes = propTypes;
-SearchBar.defaultProps = defaultProps;
 
 export default SearchBar;
