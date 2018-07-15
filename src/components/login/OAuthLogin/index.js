@@ -9,10 +9,9 @@ function OAuthLogin() {
     <div className={style.OAuthLogin}>
       <Button
         type="button"
+        onClick={() => { window.location.href = oauthLink; }}
       >
-        <a href={oauthLink}>
           Sign in by Deezer
-        </a>
       </Button>
     </div>
   );
