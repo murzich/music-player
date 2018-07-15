@@ -1,27 +1,27 @@
 import React from 'react';
-import { applyMiddleware, compose, createStore, combineReducers } from 'redux';
+import { applyMiddleware, compose, createStore } from 'redux';
 import { Provider } from 'react-redux';
 import reduxThunk from 'redux-thunk';
-import { reducer as form } from 'redux-form';
+import { persistStore } from 'redux-persist';
+import { PersistGate } from 'redux-persist/lib/integration/react';
 
-import player from './reducers/player';
-import auth from './reducers/auth';
 import App from './containers/App';
 import httpServer from './interceptor';
+import persistedReducer from './reducers';
 
-const store = createStore(combineReducers({
-  player,
-  form,
-  auth,
-}), compose(
+const store = createStore(persistedReducer, compose(
   applyMiddleware(reduxThunk),
   window.devToolsExtension ? window.devToolsExtension() : f => f,
 ));
 
+const persistor = persistStore(store);
+
 function Root() {
   return (
     <Provider store={store}>
-      <App />
+      <PersistGate persistor={persistor}>
+        <App />
+      </PersistGate>
     </Provider>
   );
 }
