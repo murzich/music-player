@@ -44,12 +44,13 @@
 }
 
 .LoginPageChangeForm {
-  text-align: right;
-}
-.LoginPageChangeForm > a {
+  margin-left: auto;
+  display: block;
+  background: none;
+  border: none;
   text-decoration: none;
   color: var(--color-primary);
 }
-.LoginPageChangeForm > a:hover {
+.LoginPageChangeForm:hover {
   color: var(--song-active);
 }

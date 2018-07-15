@@ -1,4 +1,3 @@
-/* eslint-disable */
 import React from 'react';
 import PropTypes from 'prop-types';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
@@ -14,7 +13,6 @@ const propTypes = {
 };
 
 function SearchBar({ onChange }) {
-
   return (
     <header className={style.SearchBarWrapper}>
       <div className={style.SearchBar} >
@@ -29,7 +27,7 @@ function SearchBar({ onChange }) {
           minLength={3}
           debounceTimeout={500}
           className={style.SearchBarInput}
-          placeholder='Search tracks on Deezer.com'
+          placeholder="Search tracks on Deezer.com"
         >
           <div className={style.SearchBarResults}>
             <SearchListContainer />
