@@ -3,7 +3,7 @@ import {
   CLEAR_PLAYLIST,
   REMOVE_TRACK,
 } from '../types/playlist';
-import mockPlaylist from '../mock.json';
+import mockPlaylist from '../assets/mock.json';
 
 const initialState = mockPlaylist;
 

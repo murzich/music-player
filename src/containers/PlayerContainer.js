@@ -44,7 +44,6 @@ class PlayerContainer extends Component {
   };
 
   onSongEnded = () => {
-    // TODO: Add conditions to play next if loop will be implemented.
     this.props.onNext();
   };
 

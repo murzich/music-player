@@ -16,7 +16,6 @@ function SongInfo({
 }) {
   return (
     <Fragment>
-      {/* TODO: Extract cover image component. */}
       <img src={cover} alt="album-art" className={style.SongInfoAlbumArt} />
       <div className={style.SongInfoTrack}>
         <h2 className={style.SongInfoTrackName}>{title}</h2>

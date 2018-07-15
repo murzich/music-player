@@ -6,7 +6,7 @@ import {
   deezerOAuthUrl,
   deezerOAuthRedirect,
   deezerAppId,
-  deezerAppPremissions,
+  deezerAppPermissions,
 } from '../config';
 
 const deezerBaseUrl = corsAnywhere + deezerUrl;
@@ -25,4 +25,4 @@ const search = method => (query, limit = searchResultLimit, advSearch) => {
 export const searchTracks = search('track');
 
 export const oauthLink = `${deezerOAuthUrl}?app_id=${deezerAppId}` +
-  `&redirect_uri=${deezerOAuthRedirect}&perms=${deezerAppPremissions.toString()}&response_type=token`;
+  `&redirect_uri=${deezerOAuthRedirect}&perms=${deezerAppPermissions.toString()}&response_type=token`;

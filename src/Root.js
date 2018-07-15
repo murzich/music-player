@@ -6,7 +6,7 @@ import { reducer as form } from 'redux-form';
 
 import player from './reducers/player';
 import auth from './reducers/auth';
-import App from './App';
+import App from './containers/App';
 import httpServer from './interceptor';
 
 const store = createStore(combineReducers({

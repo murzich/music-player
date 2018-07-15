@@ -19,7 +19,9 @@ function PrivateRoute({ component: Component, isAuthorized, ...rest }) {
 
 PrivateRoute.propTypes = {
   isAuthorized: PropTypes.bool,
-  component: PropTypes.node.isRequired,
+  component: PropTypes.oneOfType([
+    PropTypes.node, PropTypes.element, PropTypes.func,
+  ]).isRequired,
 };
 PrivateRoute.defaultProps = {
   isAuthorized: false,

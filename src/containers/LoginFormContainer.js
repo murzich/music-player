@@ -18,7 +18,6 @@ LoginFormContainer.propTypes = {
   isCurrentLogin: PropTypes.bool.isRequired,
 };
 
-// TODO: When do validation check on form instance Login of Register
 export default reduxForm({
   form: 'login',
 })(LoginFormContainer);
