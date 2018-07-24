@@ -2,7 +2,9 @@ import {
   ADD_TRACK,
   CLEAR_PLAYLIST,
   REMOVE_TRACK,
+  REMOVE_PREV_TRACK,
 } from '../types/playlist';
+import { getPositionPlaylist } from '../selectors';
 
 // Map song object to store only needed data.
 export const addTrack = (song) => {
@@ -26,7 +28,12 @@ export const clearPlaylist = () => ({
   type: CLEAR_PLAYLIST,
 });
 
-export const removeTrack = id => ({
-  type: REMOVE_TRACK,
-  payload: id,
-});
+export const removeTrack = id => (dispatch, getState) => {
+  const state = getState();
+  const currentTrack = getPositionPlaylist(state);
+  const type = (id >= currentTrack) ? REMOVE_TRACK : REMOVE_PREV_TRACK;
+  dispatch({
+    type,
+    payload: id,
+  });
+};

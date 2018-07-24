@@ -8,6 +8,7 @@ import {
   TOGGLE_PLAY,
   UPDATE_TIME_POSITION,
 } from '../types/playerControls';
+import { REMOVE_PREV_TRACK } from '../types/playlist';
 
 const initialState = {
   currentTrack: 0,
@@ -78,6 +79,11 @@ export default (state = initialState, action) => {
       return {
         ...state,
         seeking: action.payload,
+      };
+    case REMOVE_PREV_TRACK:
+      return {
+        ...state,
+        currentTrack: state.currentTrack - 1,
       };
     default:
       return state;

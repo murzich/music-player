@@ -14,3 +14,5 @@ export const getCurrentCover = (state) => {
 
 // TODO: Use memoization through reselect.
 export const getPlaylistLength = state => state.player.playlist.length;
+
+export const getPositionPlaylist = state => state.player.status.currentTrack;
