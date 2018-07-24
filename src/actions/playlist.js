@@ -1,3 +1,4 @@
+import uuidv1 from 'uuid/v1';
 import {
   ADD_TRACK,
   CLEAR_PLAYLIST,
@@ -19,7 +20,14 @@ export const addTrack = (song) => {
   return {
     type: ADD_TRACK,
     payload: {
-      id: parseInt(id, 10), title, preview, duration: parseInt(duration, 10), artistName, cover,
+      // uuid added to assign a React's key in Array.map;
+      key: uuidv1(),
+      id: parseInt(id, 10),
+      title,
+      preview,
+      duration: parseInt(duration, 10),
+      artistName,
+      cover,
     },
   };
 };

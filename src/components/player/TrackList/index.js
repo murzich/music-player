@@ -33,9 +33,9 @@ function TrackList({
     return 'Track';
   };
 
-  const songsElements = songs.map(({ id, title, duration }, i) => (
+  const songsElements = songs.map(({ key, title, duration }, i) => (
     <Track
-      key={id}
+      key={key}
       title={title}
       duration={parseInt(duration, 10)}
       onClick={setTrack(i)}
