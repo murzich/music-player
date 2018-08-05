@@ -1,4 +1,3 @@
-/* eslint-disable function-paren-newline */
 import React from 'react';
 import * as renderer from 'react-test-renderer';
 import Button from './index';
@@ -12,7 +11,7 @@ describe('Button component', () => {
     expect(tree.type).toBe('button');
     expect(tree.children).toContain('default button');
     expect(tree.props.type).toBe('button');
-  //  TODO: test for default className;
+    expect(tree.props.className).toBe('Button');
   });
 
   test('should render with given props', () => {
