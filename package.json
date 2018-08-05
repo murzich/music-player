@@ -64,6 +64,9 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {
+    "enzyme": "^3.3.0",
+    "enzyme-adapter-react-16": "^1.1.1",
+    "enzyme-to-json": "^3.3.4",
     "eslint-config-airbnb": "16.1.0",
     "identity-obj-proxy": "^3.0.0",
     "react-test-renderer": "^16.4.2"
@@ -73,8 +76,10 @@
       "src/**/*.{js,jsx,mjs}"
     ],
     "setupFiles": [
+      "<rootDir>/config/jest/jestsetup.js",
       "<rootDir>/config/polyfills.js"
     ],
+    "snapshotSerializers": ["enzyme-to-json/serializer"],
     "testMatch": [
       "<rootDir>/src/**/__tests__/**/*.{js,jsx,mjs}",
       "<rootDir>/src/**/?(*.)(spec|test).{js,jsx,mjs}"
