@@ -64,7 +64,8 @@
     "test": "node scripts/test.js --env=jsdom"
   },
   "devDependencies": {
-    "eslint-config-airbnb": "16.1.0"
+    "eslint-config-airbnb": "16.1.0",
+    "react-test-renderer": "^16.4.2"
   },
   "jest": {
     "collectCoverageFrom": [
@@ -102,6 +103,7 @@
   },
   "babel": {
     "presets": [
+      "env",
       "react-app"
     ]
   },
