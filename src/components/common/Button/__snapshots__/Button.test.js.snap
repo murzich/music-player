@@ -25,3 +25,29 @@ exports[`Button component should render with given props 1`] = `
   childrenText
 </button>
 `;
+
+exports[`Button component testing by enzyme default render 1`] = `
+<button
+  className="Button"
+  type="button"
+>
+  default button
+</button>
+`;
+
+exports[`Button component testing by enzyme with props 1`] = `
+<button
+  anotherProps={
+    Array [
+      1,
+      2,
+      3,
+    ]
+  }
+  className="test__className"
+  otherProps="otherProps"
+  type="submit"
+>
+  childrenText
+</button>
+`;
