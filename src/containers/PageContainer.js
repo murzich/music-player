@@ -3,8 +3,8 @@ import React, { Fragment } from 'react';
 import { connect } from 'react-redux';
 import PropTypes from 'prop-types';
 import { Link } from 'react-router-dom';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome/index.es';
-import { faTrashAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons/index';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { faTrashAlt, faSignOutAlt } from '@fortawesome/free-solid-svg-icons';
 
 import { getCurrentCover } from '../selectors';
 import { clearPlaylist } from '../actions/playlist';
